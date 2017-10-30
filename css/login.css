@@ -26,14 +26,6 @@ h2{
   margin-left: 20px;
 }
 
-#submit{
-        display: inline-block;
-        background-color: Transparent;
-        background-repeat: no-repeat;
-        border: none;
-        cursor: pointer;
-        overflow: hidden;
-}
 #pass{
   margin-right: 20px;
   margin-left: 86px;
