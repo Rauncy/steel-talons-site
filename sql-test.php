@@ -19,7 +19,7 @@
     $result = $conn->query("select * from members");
     if($result->num_rows > 0){
       while($row = $result->fetch_assoc()){
-        echo "<br>ID: " . $row["MemberID"] . " Name: " . $row["FirstName"] . " " . $row["LastName"];
+        echo "<br>ID: " . $row["MemberID"] . " Username: " . $row["Username"];
       }
     }
     $conn->close();
