@@ -1,6 +1,5 @@
-formLabel<?php
+<?php
 function register(){
-  echo "KYS";
   if(isset($_POST["registerUsername"]) && isset($_POST["registerEmail"])){
     //Use database for user validation and creation
     $servername = "localhost";
@@ -10,22 +9,17 @@ function register(){
     $conn = new mysqli($servername, $username, $password, "robotics");
 
     if($conn->connect_error){
-      die("DED");
+      die();
     }
 
     $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
     if($result->num_rows == 0){
-      echo "<br>insert into members (Username, Email, Pass) values (\"" . $_POST["registerUsername"] ."\", \"" . $_POST["registerEmail"] . "\", \"" . $_POST["registerPassword"] . "\");";
       $conn->query("insert into members (Username, Email, Pass) values (\"" . $_POST["registerUsername"] ."\", \"" . $_POST["registerEmail"] . "\", \"" . $_POST["registerPassword"] . "\");");
-    }else{
-      echo "BED";
     }
   }
 }
 
-echo "DED";
 if(isset($_POST["registerUsername"])){
-  echo "LMO";
   switch($_POST["submit"]){
     case "Register": register(); break;
     default: $message = $_POST["submit"]; break;
