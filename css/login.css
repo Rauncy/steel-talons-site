@@ -1,27 +1,24 @@
-.logIn{
+.infoForm{
   text-align: center;
   padding: 2px;
 }
-#sub{
-   text-align: center;
-    font-size: 1.2em;
-}
 
-h2{
-  color: crimson;
-  text-align: center;
-  font-size: 2em;
-}
-
-.labelLog{
+.formLabel{
   font-family: 'Oswald', sans-serif;
   display: block;
+  font-size: 20px;
+}
+
+.expandable{
+  color: black;
+  font-family: 'Oswald', sans-serif;
   font-size: 20px;
 }
 
 #logInEmail, #registerEmail, #recoveryEmail{
   margin-left: 20px;
 }
+
 #logInPassword, #registerPassword, #confirmPassword{
   margin-left: 20px;
 }
@@ -32,12 +29,15 @@ h2{
   display: inline-block;
 
 }
+
 #register{
   margin-right: 15px;
 }
+
 #confirm{
   margin-right: 60px;
 }
+
 #email{
   margin-left: 10px;
 }

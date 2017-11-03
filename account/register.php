@@ -1,4 +1,4 @@
-<?php
+formLabel<?php
 function register(){
   echo "KYS";
   if(isset($_POST["registerUsername"]) && isset($_POST["registerEmail"])){
@@ -36,11 +36,11 @@ if(isset($_POST["registerUsername"])){
 <link rel = "stylesheet"  href = "/css/login.css">
 <script src = "/js/account.js"></script>
 <div id="content">
-  <form class="logIn" onsubmit="register();" action="/account/register.php" method="post">
-    <p class = "labelLog" id = "username">Username: <input type = "text" id = "registerUsername" name = "registerUsername"></p>
-    <p class = "labelLog" id = "email">E - Mail: <input type = "text" id = "registerEmail" name = "registerEmail" placeholder="johnappleseed@gmail.com"></p>
-    <p class = "labelLog" >Password: <input type="password" id= "registerPassword" name = "registerPassword" placeholder="******"></p>
-    <p class = "labelLog" id = "confirm">Confirm Password: <input type="password" id="confirmPassword" name="confirmPassword" placeholder="******"></p>
+  <form class="infoForm" onsubmit="register();" action="/account/register.php" method="post">
+    <p class = "formLabel" id = "username">Username: <input type = "text" id = "registerUsername" name = "registerUsername"></p>
+    <p class = "formLabel" id = "email">E - Mail: <input type = "text" id = "registerEmail" name = "registerEmail" placeholder="johnappleseed@gmail.com"></p>
+    <p class = "formLabel" >Password: <input type="password" id= "registerPassword" name = "registerPassword" placeholder="******"></p>
+    <p class = "formLabel" id = "confirm">Confirm Password: <input type="password" id="confirmPassword" name="confirmPassword" placeholder="******"></p>
     <input type="submit" value = "Register" name="submit"></input>
     <br>
     <br>
