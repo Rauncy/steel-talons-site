@@ -7,37 +7,11 @@
   font-family: 'Oswald', sans-serif;
   display: block;
   font-size: 20px;
-}
-
-.expandable{
-  color: black;
-  font-family: 'Oswald', sans-serif;
-  font-size: 20px;
-}
-
-#logInEmail, #registerEmail, #recoveryEmail{
-  margin-left: 20px;
-}
-
-#logInPassword, #registerPassword, #confirmPassword{
-  margin-left: 20px;
-}
-
-#pass{
-  margin-right: 20px;
-  margin-left: 86px;
-  display: inline-block;
-
-}
-
-#register{
-  margin-right: 15px;
-}
-
-#confirm{
-  margin-right: 60px;
-}
-
-#email{
   margin-left: 10px;
+}
+
+.flatLink{
+  color: black;
+  color: crimson;
+  text-decoration: none;
 }
