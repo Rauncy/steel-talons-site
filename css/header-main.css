@@ -70,20 +70,22 @@ header{
   margin:0;
   font-size: 24px;
 }
+
 body{
   margin:0;
 }
-a{
-  font-family: 'Anton', sans-serif;
-  color: crimson;
+
+.title{
+  font-size: 40px;
+  color: black;
+  margin-left: 10px;
 }
-a:hover{
-  color: #DDDDFF;
-}
+
 .tab, .horizm{
   font-family: 'Anton', sans-serif;
   color: white;
 }
+
 .horizm > a:hover{
   color: #DDDDFF;
 }
