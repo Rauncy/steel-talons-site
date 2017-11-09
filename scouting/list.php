@@ -1,11 +1,24 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
+<body onload = "pageReload()">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+var pageNum = 1;
+function next(){
+  pageNum++;
+  document.getElementById('page').innerHTML = pageNum;
+  pageReload();
+}
+function prev(){
+  pageNum--;
+  document.getElementById('page').innerHTML = pageNum;
+  pageReload();
+}
 function pageReload() {
-
-  var pageNum = document.getElementById('page').value;
-    console.log(pageNum);
+  //
+  // var pageNum = document.getElementById('page').value;
+  //   console.log(pageNum);
       document.getElementById('tba').innerHTML = ""
   $.ajax({
     url: 'https://www.thebluealliance.com/api/v3/teams/' + pageNum,
@@ -15,10 +28,9 @@ function pageReload() {
     method: 'GET',
     dataType: 'json',
     success: function(data){
-    console.log("hi "+data.length);
       for (var i = 0; i < data.length; i++) {
         if(data[i].nickname!=''){
-             document.getElementById('tba').innerHTML=  document.getElementById('tba').innerHTML +  data[i].nickname + " " +data[i].country +"<br>";
+             document.getElementById('tba').innerHTML=  document.getElementById('tba').innerHTML +  data[i].nickname + "<br>City: " +data[i].city +"<br><br>";
         }
       }
     }
@@ -27,10 +39,13 @@ function pageReload() {
 }
 </script>
 
-<h1>TBA</h1>
-<!-- <form> -->
-  <input type="text" name="page" id = "page" value="1">
-  <input type="button" name="sub" onclick="pageReload()" value="Submit">
+<h1>The Blue Alliance Teams</h1>
+
+  <button type="button" name="prev" onclick="prev()">Prev</button>
+  <p style = "display: inline;"id = "page">1</p>
+  <button type="button" name="next" onclick="next()">Next</button>
+
 <!-- </form> -->
 
 <div id="tba" style="width:100%;height:400px;"></div>
+</body>
