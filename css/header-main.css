@@ -79,6 +79,8 @@ body{
   font-size: 40px;
   color: black;
   margin-left: 10px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
 .tab, .horizm{
