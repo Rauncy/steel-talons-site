@@ -6,12 +6,13 @@
 .formLabel{
   font-family: 'Oswald', sans-serif;
   display: block;
+  text-align: right;
   font-size: 20px;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .flatLink{
-  color: black;
   color: crimson;
   text-decoration: none;
+  font-family: 'Poppins'
 }

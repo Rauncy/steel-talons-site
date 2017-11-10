@@ -1,3 +1,4 @@
+<?php echo "SID: " . session_id() ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,7 +24,13 @@
         <li class ="horizm"><a href = "/schedule">Schedule</a></li>
       	<li class ="horizm"><a href = "/account">Events</a></li>
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
-        <li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>
+        <?php
+        if(session_id()){
+          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>' . session_id() . '</a></li>';
+        }else{
+          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';
+        }
+        ?>
       </ul>
     </nav>
     <main>

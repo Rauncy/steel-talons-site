@@ -1,20 +1,50 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
-<link rel = "stylesheet"  href = "/css/login.css">
-<h2><i>Log in</i></h2>
-<hr>
-<div id="content">
-  <form class="infoForm" action="login.php" method="post">
-    <center>
-      <p class = "formLabel" id = "email">E - Mail: <input type = "text" id = "logInEmail" placeholder="johnappleseed@gmail.com"></p>
-      <p class = "formLabel" id = "pass">Password: <input type="password" id="logInPassword" placeholder="******"></p>
-      <br>
-      <input type="submit" value = "Login" name="submit"></input>
-    </center>
-    <br>
-    <br>
-    <a href = "register" class = "flatLink" style = "margin-right:20px;">Register?</a>
-    <a href = "recovery" class = "flatLink" style = "margin-left:20px;">Forgot your password?</a>
+<?php
+if(isset($_POST["submit"])){
+  switch($_POST["submit"]){
+    case "Login":
+      if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
+        //Use database for user validation and creation
+        $servername = "localhost";
+        $username = "root";
+        $password = "admin";
 
-  </form>
-</div>
+        $conn = new mysqli($servername, $username, $password, "robotics");
+
+        if($conn->connect_error){
+          die();
+        }
+
+        $result = $conn->query("select * from members where Email = \"" . $_POST["loginEmail"] . "\" and Pass = \"" . $_POST["loginPassword"] . "\";");
+        if($result->num_rows > 0){
+          if(!session_id()) session_start();
+        }
+      }
+      break;
+    default:
+      break;
+  }
+}
+ ?>
+<link rel = "stylesheet"  href = "/css/login.css">
+<h1 class = "title">Login</h1>
+<form class="infoForm" action="login.php" method="post">
+  <center>
+    <table>
+      <tr>
+        <td class="formLabel">E-Mail</td>
+        <td><input type = "text" name = "loginEmail" placeholder="johnappleseed@gmail.com"></td>
+      </tr>
+      <tr>
+        <td class="formLabel">Password</td>
+        <td><input type="password" name="loginPassword" placeholder="******"></td>
+      </tr>
+    </table>
+    <input type="submit" value = "Login" name="submit"></input>
+    <p>
+      <a href = "register" class = "flatLink" style = "margin-right:10px">Register?</a>
+      <a href = "recovery" class = "flatLink" stlye = "margin-left:10px">Forgot your password?</a>
+    </p>
+  </center>
+</form>
 <?php include($dir . "/footer.php") ?>
