@@ -1,10 +1,21 @@
 <?php echo "SID: " . session_id() ?>
 <!DOCTYPE HTML>
 <html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <head>
     <meta name = "keywords" content ="Tompkins,Robotics,Obra,D,Steel,Talons">
     <meta charset = "UTF-8">
     <meta name = "description" content ="Homepage for the Tompkins Steel Talons Robotics Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- linking in external files-->
     <link href="https://fonts.googleapis.com/css?family=Anton|Josefin+Sans|Open+Sans|Oswald|Poppins|Princess+Sofia|Titillium+Web" rel="stylesheet">
     <link rel = "stylesheet"  href = <?php echo $dir . "/css/header-main.css"?>>
@@ -19,7 +30,7 @@
     <nav id = "tabs">
       <ul id="list">
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
-      	<li class ="horizm"><a href = "/archive/teams">Teams</a></li>
+      	<li class ="horizm"><a href = "/teams">Teams</a></li>
       	<li class ="horizm"><a href = "/members">Members</a></li>
         <li class ="horizm"><a href = "/schedule">Schedule</a></li>
       	<li class ="horizm"><a href = "/account">Events</a></li>
