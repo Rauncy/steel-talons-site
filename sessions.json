@@ -1,0 +1,26 @@
+{
+  "createSession" :
+  "function(ip, id){
+    this.ip = ip;
+    this.id = id;
+
+    return this;
+  }",
+
+  "sessions" : [],
+  "ipMap" : {
+
+  },
+
+  "idMap" : {
+
+  },
+
+  "uidMap" : {
+
+  },
+
+  "findByUser" : "function(){
+    
+  }"
+}
