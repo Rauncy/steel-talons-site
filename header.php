@@ -1,4 +1,3 @@
-<?php echo "SID: " . session_id() ?>
 <!DOCTYPE HTML>
 <html>
 
