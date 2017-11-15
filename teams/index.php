@@ -38,8 +38,6 @@ function pageReload() {
               team_state = data[i].state_prov,
               team_country = data[i].country;
 
-
-
               //manually set conveniences
               if(team_name.length>20){
                 team_name = team_name.substring(0,20)+"..."
@@ -48,6 +46,9 @@ function pageReload() {
               if(team_number == "5427"){
                 team_motto = "Building a Legacy"
               }
+			  if(team_number == "7281"){
+				  team_motto = "China numba one!"
+			  }
               if(team_motto!=null)
                 team_motto = team_motto.replace("'","");
 
@@ -64,9 +65,6 @@ function pageReload() {
               if(team_country == null){
                 team_country = notAvailable;
               }
-
-
-
 
             var $htmlCodeForTeam =
             // '<a href="/teams/team_profile.php?team_number=' + team_number + '&team_name='+ team_name +'&team_city='+ team_city +'&team_rook='+ team_rook +'&team_motto='+ team_motto +'&team_state='+ team_state +'&team_country='+ team_country +'" title = "hovering">'+team_name+'</a> '+
@@ -87,6 +85,8 @@ function pageReload() {
 
 <h1 style = "display: inline;">The Blue Alliance Teams</h1>
 <div style = "display: inline; margin-left: 500px; ">
+
+	<input type="text" name="search" placeholder="Search..">
   <button type="button" name="prev" onclick="prev()">Prev</button>
   <p style = "display: inline;padding: 20px;"id = "page">1</p>
   <button type="button" name="next" onclick="next()">Next</button>
