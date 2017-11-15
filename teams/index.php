@@ -67,10 +67,9 @@ function pageReload() {
 
 
 
-
+            var info = 'Info:<br><br>Number - '+team_number + '<br>Name - ' + team_name + '<br>City - ' + team_city + '<br>Rookie Year - ' + team_rook + '<br>Motto - ' + team_motto + '<br>State - ' + team_state + '<br>Country - ' +team_country;
             var $htmlCodeForTeam =
-            // '<a href="/teams/team_profile.php?team_number=' + team_number + '&team_name='+ team_name +'&team_city='+ team_city +'&team_rook='+ team_rook +'&team_motto='+ team_motto +'&team_state='+ team_state +'&team_country='+ team_country +'" title = "hovering">'+team_name+'</a> '+
-            '<p style = "display: inline" title = "Info:\n\nNumber - '+team_number + '\nName - ' + team_name + '\nCity - ' + team_city + '\nRookie Year - ' + team_rook + '\nMotto - ' + team_motto + '\nState - ' + team_state + '\nCountry - ' +team_country+'">'+team_name+'</p>'+
+            '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+
             '- ('+team_number+')<br><br>';
             $('#tba').append($htmlCodeForTeam);
         }
@@ -86,6 +85,10 @@ function pageReload() {
 </script>
 
 <h1 style = "display: inline;">The Blue Alliance Teams</h1>
+
+
+
+</script>
 <div style = "display: inline; margin-left: 500px; ">
   <button type="button" name="prev" onclick="prev()">Prev</button>
   <p style = "display: inline;padding: 20px;"id = "page">1</p>

@@ -8,31 +8,36 @@
 </div>
 
 <script type="text/javascript" defer>
-  function createProfile(num, name, city, rook, motto, state, country){
+  function createProfile(num){
 
-    var htmlCode = (num + "<br>" + name + "<br>" + city + "<br>" + rook + "<br>" + motto + "<br>" + state + "<br>" +country);
 
-     $('.profile').append(htmlCode);
+    $.ajax({
+      url: 'https://www.thebluealliance.com/api/v3/team/frc' +num ,
+      headers: {
+          'X-TBA-Auth-Key':'38wgMXShpksmFpPKfB8BLgT5kq8EajYkVlgnfT45FtL66TdI2agNuWllA8Nrzizx'
+      },
+      method: 'GET',
+      dataType: 'json',
+      success: function(data){
+
+            var htmlCode = "Number: "+num +"<br>Name: "+data.nickname+"<br />Website: <a target = '_blank'href = '"+data.website+"'>"+data.website+"</a>";
+            $('.profile').append(htmlCode);
+
+
+        }
+    });
+
+    return false;
   }
+
   <?php
   $team_number =  $_GET['team_number'];
-  // echo "<br>";
-  $team_name =  $_GET['team_name'];
-  // echo "<br>";
-  $team_city = $_GET['team_city'];
-  // echo "<br>";
-  $team_rook =  $_GET['team_rook'];
-  // echo "<br>";
-  $team_motto =  $_GET['team_motto'];
-  // echo "<br>";
-  $team_state =  $_GET['team_state'];
-  // echo "<br>";
-  $team_country =  $_GET['team_country'];
+
 
   // echo "alert('hi');";
   // echo "alert('".$team_number."');"
   echo "createProfile('";
-  echo $team_number."','".$team_name."','". $team_city."','".$team_rook."','". $team_motto."','" .$team_state."','".$team_country."');";
+  echo $team_number."');";
 
 
   ?>
