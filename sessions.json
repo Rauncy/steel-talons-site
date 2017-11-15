@@ -9,18 +9,33 @@
 
   "sessions" : [],
   "ipMap" : {
-
+    "keys" : [],
+    "values" : []
   },
 
   "idMap" : {
-
+    "keys" : [],
+    "values" : []
   },
 
   "uidMap" : {
-
+    "keys" : [],
+    "values" : []
   },
 
-  "findByUser" : "function(){
-    
+  "findByID" : "function(let data){
+
+  }",
+
+  "findByIP" : "function(let data){
+
+  }",
+
+  "findByUID" : "function(let data){
+
+  }",
+
+  "sort" : "function(){
+
   }"
 }
