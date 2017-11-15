@@ -5,7 +5,6 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
 <head>
     <meta name = "keywords" content ="Tompkins,Robotics,Obra,D,Steel,Talons">
     <meta charset = "UTF-8">

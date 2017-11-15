@@ -38,8 +38,6 @@ function pageReload() {
               team_state = data[i].state_prov,
               team_country = data[i].country;
 
-
-
               //manually set conveniences
               if(team_name.length>20){
                 team_name = team_name.substring(0,20)+"..."
@@ -48,6 +46,9 @@ function pageReload() {
               if(team_number == "5427"){
                 team_motto = "Building a Legacy"
               }
+			  if(team_number == "7281"){
+				  team_motto = "China numba one!"
+			  }
               if(team_motto!=null)
                 team_motto = team_motto.replace("'","");
 
@@ -65,9 +66,6 @@ function pageReload() {
                 team_country = notAvailable;
               }
 
-
-
-            var info = 'Info:<br><br>Number - '+team_number + '<br>Name - ' + team_name + '<br>City - ' + team_city + '<br>Rookie Year - ' + team_rook + '<br>Motto - ' + team_motto + '<br>State - ' + team_state + '<br>Country - ' +team_country;
             var $htmlCodeForTeam =
             '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+
             '- ('+team_number+')<br><br>';
@@ -90,6 +88,8 @@ function pageReload() {
 
 </script>
 <div style = "display: inline; margin-left: 500px; ">
+
+	<input type="text" name="search" placeholder="Search..">
   <button type="button" name="prev" onclick="prev()">Prev</button>
   <p style = "display: inline;padding: 20px;"id = "page">1</p>
   <button type="button" name="next" onclick="next()">Next</button>
