@@ -20,8 +20,25 @@
       dataType: 'json',
       success: function(data){
 
-            var htmlCode = "Number: "+num +"<br>Name: "+data.nickname+"<br />Website: <a target = '_blank'href = '"+data.website+"'>"+data.website+"</a>";
-            $('.profile').append(htmlCode);
+            var general ="<h3>General</h3>"
+            general+="<p id = 'general_info'>"
+            general+="Number: "+num +"<br>Name: "+data.nickname
+            if(data.website !=null) {
+              general+="<br />Website: <a target = '_blank'href = '"+data.website+"'>"+data.website+"</a>";
+            }
+            general+="<br> Location: "+data.city+", "+data.state_prov+", "+data.country;
+            general+="<br>RookieYear: "+data.rookie_year
+            if(data.motto !=null){
+              general += "<br>Motto: <i>"+data.motto+"</i>";
+            }
+            else {
+              general +="<br>Motto: None";
+            }
+            general+="</p>"
+            $('.profile').append(general);
+
+            
+
 
 
         }

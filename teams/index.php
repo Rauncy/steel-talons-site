@@ -29,7 +29,7 @@ function pageReload() {
     success: function(data){
 
       for (var i = 0; i < data.length; i++) {
-        if(data[i].nickname!=''){
+        if(data[i].nickname!='' && data[i].nickname!="Team "+data[i].team_number){
             var team_name = data[i].nickname,
               team_city = data[i].city,
               team_number = data[i].team_number,
@@ -46,9 +46,9 @@ function pageReload() {
               if(team_number == "5427"){
                 team_motto = "Building a Legacy"
               }
-			  if(team_number == "7281"){
-				  team_motto = "China numba one!"
-			  }
+      			  if(team_number == "7281"){
+      				  team_motto = "China numba one!"
+      			  }
               if(team_motto!=null)
                 team_motto = team_motto.replace("'","");
 
