@@ -1,5 +1,6 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <body onload = "pageReload()">
+
 	<script type="text/javascript">
 	const upperBound = 17;
 	var pageNum = 1;
