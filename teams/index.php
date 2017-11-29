@@ -35,7 +35,9 @@
 				for (var i = 0; i < data.length; i++) {
 					if(searchData!='')
 					{
-						if(data[i].nickname!=''&&data[i].nickname&&data[i].nickname.includes(searchData)){
+						var searchRegex = new RegExp(searchData, 'i');
+						console.log(data[i].team_number);
+						if(searchRegex.test(data[i].nickname) || searchData==data[i].team_number){
 							var team_name = data[i].nickname,
 									team_city = data[i].city,
 									team_number = data[i].team_number,
