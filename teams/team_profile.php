@@ -32,12 +32,12 @@
               general += "<br>Motto: <i>"+data.motto+"</i>";
             }
             else {
-              general +="<br>Motto: None";
+              general +="<br>Motto: no";
             }
             general+="</p>"
             $('.profile').append(general);
 
-            
+
 
 
 
