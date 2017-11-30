@@ -2,6 +2,7 @@
 <body onload = "pageReload()">
 
 	<script type="text/javascript">
+	var tbaPageNum =1;
 	const upperBound = 17;
 	var pageNum = 1;
 	var xhr;
@@ -24,14 +25,20 @@
 		}
 	}
 	function pageData(pageNum,searchData) {
-		xhr = $.ajax({
-			url: 'https://www.thebluealliance.com/api/v3/teams/' + (pageNum-1),
+		alert(searchData+" :se")
+		const RESULTLIMIT = 5;
+		var resultCount=0;
+		 while(resultCount<RESULTLIMIT){
+
+			xhr = $.ajax({
+			url: 'https://www.thebluealliance.com/api/v3/teams/' + (tbaPageNum-1),
 			headers: {
 			'X-TBA-Auth-Key':'38wgMXShpksmFpPKfB8BLgT5kq8EajYkVlgnfT45FtL66TdI2agNuWllA8Nrzizx'
 			},
 			method: 'GET',
 			dataType: 'json',
 			success: function(data){
+
 				for (var i = 0; i < data.length; i++) {
 					if(searchData!='')
 					{
@@ -74,6 +81,9 @@
 							}
 							var $htmlCodeForTeam = '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+'- ('+team_number+')<br><br>';
 							$('#tba').append($htmlCodeForTeam);
+							resultCount++;
+							if(resultCount==RESULTLIMIT)
+								xhr.abort();
 						}
 					}
 					else {
@@ -114,11 +124,17 @@
 							}
 							var $htmlCodeForTeam = '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+'- ('+team_number+')<br><br>';
 							$('#tba').append($htmlCodeForTeam);
+							resultCount++;
+							if(resultCount==RESULTLIMIT)
+								xhr.abort();
+
 						}
-					}
-				}
-			}
-		})
+					}//else for checking if search data
+				}//ajax for
+				tbaPageNum++;
+			}//ajax success
+		})//end ajax request
+	}//end while loop
 	}
 	function pageReload() {
 		var url = new URL(window.location.href);
