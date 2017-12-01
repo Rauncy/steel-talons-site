@@ -2,10 +2,11 @@
 <body onload = "pageReload()">
 
 	<script type="text/javascript">
-	var tbaPageNum =1;
+
 	const upperBound = 17;
 	var pageNum = 1;
 	var xhr;
+	var currentTeamNumber=1;
 	function next(){
 		if(pageNum<upperBound)
 		{
@@ -25,33 +26,32 @@
 		}
 	}
 	function pageData(pageNum,searchData) {
-		alert(searchData+" :se")
-		const RESULTLIMIT = 5;
+		const RESULTLIMIT = 500;
 		var resultCount=0;
 		 while(resultCount<RESULTLIMIT){
 
 			xhr = $.ajax({
-			url: 'https://www.thebluealliance.com/api/v3/teams/' + (tbaPageNum-1),
+			url: 'https://www.thebluealliance.com/api/v3/team/frc' +currentTeamNumber ,
 			headers: {
 			'X-TBA-Auth-Key':'38wgMXShpksmFpPKfB8BLgT5kq8EajYkVlgnfT45FtL66TdI2agNuWllA8Nrzizx'
 			},
 			method: 'GET',
+			async: false,
 			dataType: 'json',
 			success: function(data){
 
-				for (var i = 0; i < data.length; i++) {
-					if(searchData!='')
+					if(!(searchData.length==0))
 					{
+
 						var searchRegex = new RegExp(searchData, 'i');
-						console.log(data[i].team_number);
-						if(searchRegex.test(data[i].nickname) || searchData==data[i].team_number){
-							var team_name = data[i].nickname,
-									team_city = data[i].city,
-									team_number = data[i].team_number,
-									team_rook = data[i].rookie_year,
-									team_motto = data[i].motto,
-									team_state = data[i].state_prov,
-									team_country = data[i].country;
+						if(searchRegex.test(data.nickname) || searchData==data.team_number){
+							var team_name = data.nickname,
+									team_city = data.city,
+									team_number = data.team_number,
+									team_rook = data.rookie_year,
+									team_motto = data.motto,
+									team_state = data.state_prov,
+									team_country = data.country;
 
 							//manually set conveniences
 							if(team_name.length>20){
@@ -82,19 +82,18 @@
 							var $htmlCodeForTeam = '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+'- ('+team_number+')<br><br>';
 							$('#tba').append($htmlCodeForTeam);
 							resultCount++;
-							if(resultCount==RESULTLIMIT)
-								xhr.abort();
 						}
 					}
 					else {
-						if(data[i].nickname!=''&&data[i].nickname){
-							var team_name = data[i].nickname,
-									team_city = data[i].city,
-									team_number = data[i].team_number,
-									team_rook = data[i].rookie_year,
-									team_motto = data[i].motto,
-									team_state = data[i].state_prov,
-									team_country = data[i].country;
+
+						if(data.nickname!=''&&data.nickname){
+							var team_name = data.nickname,
+									team_city = data.city,
+									team_number = data.team_number,
+									team_rook = data.rookie_year,
+									team_motto = data.motto,
+									team_state = data.state_prov,
+									team_country = data.country;
 
 							//manually set conveniences
 							if(team_name.length>20){
@@ -125,15 +124,11 @@
 							var $htmlCodeForTeam = '<a href="/teams/team_profile.php?team_number=' + team_number + '" title = "hovering">'+team_name+'</a> '+'- ('+team_number+')<br><br>';
 							$('#tba').append($htmlCodeForTeam);
 							resultCount++;
-							if(resultCount==RESULTLIMIT)
-								xhr.abort();
-
 						}
 					}//else for checking if search data
-				}//ajax for
-				tbaPageNum++;
 			}//ajax success
 		})//end ajax request
+		currentTeamNumber++;
 	}//end while loop
 	}
 	function pageReload() {
@@ -141,6 +136,7 @@
 		var searchData = url.searchParams.get("search");
 		document.getElementById('tba').innerHTML = "";
 		var pN = pageNum;
+
 		pageData(pageNum,searchData);
 		return false;
 	}
