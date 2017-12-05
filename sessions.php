@@ -12,16 +12,6 @@ class Session{
   }
 }
 
-class MapEntry{
-  $key;
-  $value;
-
-  __construct($key, $value){
-    $this->key = $key;
-    $this->value = $value;
-  }
-}
-
 class SessionMap{
   //Keys is sorted binarily and values coorelates to keys indexically
   $keys;
@@ -39,7 +29,7 @@ class SessionMap{
     $bot = 0;
     while($top>=$bot){
       //String compare = strcmp
-      $res = strcmp($key,$keys[floor(($top+$bot)/2)]);
+      $res = $key <=> $keys[floor(($top+$bot)/2)]);
       if($res<0){
         $top = floor(($top+$bot)/2)-1;
       }elseif($res>0){
@@ -51,37 +41,70 @@ class SessionMap{
     return -1;
   }
 
-  function get($key){
+  function find($key){
     $i = $this->indexOf($key);
-    return ($i==-1 ? null : $keys[$i]));
+    return ($i==-1 ? null : $values[$i]));
+  }
+
+  function get($index){
+    return $value[$index];
+  }
+
+  function insert($val){
+    $top = count($array);
+    $bot = 0;
+    while($top>$bot){
+      $res = $val <=> $keys[floor(($top+$bot)/2)]);
+      if($res<0){
+        $top = floor(($top+$bot)/2)-1;
+      }elseif($res>0){
+        $bot = floor(($top+$bot)/2)+1;
+      }
+    }
+    array_splice($array, floor(($top+$bot)/2), 0, $val);
+  }
+
+  function getKeys(){
+    return $keys;
+  }
+
+  function getValues(){
+    return $values;
   }
 }
 
+//Session modification functions
+function createSession($id, $ip){
+  $rand = "";
+  for($i = 0; $i<16; $i++){
+    $t = floor(rand(0,16));
+    if($t>9) $rand .= chr($t+87);
+    else $rand .= $t;
+  }
+  $i = count($GLOBALS['sessions']);
+  array_push($GLOBALS['sessions'], new Session($ip, $id, $rand));
+  $GLOBALS['sessionHashes']->insert($rand);
+  $GLOBALS['sessionIPs']->insert($ip);
+  $GLOBALS['sessionIDs']->insert($id);
+}
+
+
 function initialize(){
-  $GLOBALS['sessions'] = new SessionMap();
-  $GLOBALS['sessionHashes'] = new array();
-  $GLOBALS['sessionIPs'] = new array();
-  $GLOBALS['sessionIDs'] = new array();
+  $GLOBALS['sessions'] = new array();
+  $GLOBALS['sessionHashes'] = new SessionMap();
+  $GLOBALS['sessionIPs'] = new SessionMap();
+  $GLOBALS['sessionIDs'] = new SessionMap();
 }
 
-function validateIP($hash, $ip){
-
-}
-
-//Only works for MapEntry arrays that are sorted
-function find($value, $array){
-
-}
-
-//Only works for MapEntry arrays that are sorted
-function insert($value, $array){
-
-}
-
-//Sorts a MapEntry array by key
-function sort($array){
-
-}
-
-if(isset($GLOBALS['sessions'])) initialize();
+if(!isset($GLOBALS['sessions'])) initialize();
+createSession(1, $_SERVER['REMOTE_ADDR']);
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+  <h1 id="testText"><?php echo $GLOBALS['sessionIDs']->keys; ?></h1>
+</body>
+</html>
