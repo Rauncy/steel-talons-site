@@ -26,7 +26,7 @@
 		}
 	}
 	function pageData(pageNum,searchData) {
-		const RESULTLIMIT = 500;
+		const RESULTLIMIT = 5;
 		var resultCount=0;
 		 while(resultCount<RESULTLIMIT){
 
