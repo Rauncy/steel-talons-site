@@ -49,18 +49,20 @@ class SessionMap{
     return $value[$index];
   }
 
-  function insert($val){
+  //TODO use maps instead of arrays
+  function insert($key, $value){
     $top = count($this->keys);
     $bot = 0;
     while($top>$bot){
-      $res = (strcmp($val, $this->keys[floor(($top+$bot)/2)]));
+      $res = (strcmp($key, $this->keys[floor(($top+$bot)/2)]));
       if($res<0){
         $top = floor(($top+$bot)/2)-1;
       }elseif($res>0){
         $bot = floor(($top+$bot)/2)+1;
       }
     }
-    array_splice($this->keys, floor(($top+$bot)/2), 0, $val);
+    array_splice($this->keys, floor(($top+$bot)/2), 0, $key);
+    array_splice($this->values, floor(($top+$bot)/2), 0, $value);
   }
 
   function getKeys(){
@@ -103,6 +105,6 @@ if(!isset($GLOBALS['sessions'])) initialize();
   <title>Test</title>
 </head>
 <body>
-  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo implode(", ", $GLOBALS['sessions']);?></h1>
+  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo count($GLOBALS['sessions']);?></h1>
 </body>
 </html>
