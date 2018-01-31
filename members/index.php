@@ -17,13 +17,12 @@ $sql = "SELECT * FROM Members";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    <table><tr><th>MemberID</th><th>Name</th><th>Grade</th><th>Year</th><th>Permission</th><th>Roles</th><th>Username</th><th>Password</th><th>Email</th><th>Phone Number</th></tr>;
+    echo "<table><tr><th>MemberID</th><h>Name</th><th>Grade</th><th>Year</th><th>Permission</th><th>Roles</th><th>Username</th><th>Password</th><th>Email</th><th>Phone Number</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        <tr><td>$row["MemberID"]</td><td>$row["FirstName"]$row["LastName"]</td><td>$row["Grade"]</td><td>$row["Year"]</td><td>$row["Permission"]</td><td>$row["Roles"]</td><td>$row
-				["Username"]</td><td>$row["Password"]</td><td>$row["Email"]</td><td>$row["Picture"]</td><td>$row["Description"]</td><td>$row["Phone"]</td><td></tr>;
+        echo "<tr><td>".$row["MemberID"]."</td><td>".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Year"]"</td><td>".$row["Permission"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]."</td><td>".$row["Password"]."</td><td>".$row["Email"]."</td><td>".$row["Picture"]."</td><td>".$row["Description"]."</td><td>".$row["Phone"]."</td><td>"."</tr>";
     }
-    </table>;
+    echo "</table>";
 } else {
     echo "0 results";
 }
