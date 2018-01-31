@@ -26,9 +26,10 @@
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
       	<li class ="horizm"><a href = "/teams">Teams</a></li>
       	<li class ="horizm"><a href = "/members">Members</a></li>
-        <li class ="horizm"><a href = "/schedule">Schedule</a></li>
+        <li class ="horizm"><a href = "/schedule.php">Schedule</a></li>
       	<li class ="horizm"><a href = "/account">Events</a></li>
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
+				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
         if(session_id()){
           echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>' . session_id() . '</a></li>';

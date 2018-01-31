@@ -6,7 +6,10 @@
 	const upperBound = 17;
 	var pageNum = 1;
 	var xhr;
-	var currentTeamNumber=1;
+	var lastTeamNum;
+	lastTeamNum[0] = 0;
+	var resultsUsed;
+
 	function next(){
 		if(pageNum<upperBound)
 		{
@@ -26,32 +29,34 @@
 		}
 	}
 	function pageData(pageNum,searchData) {
-		const RESULTLIMIT = 5;
+		document.getElementById('srch').value = new URL(window.location.href).searchParams.get("search");
 		var resultCount=0;
-		 while(resultCount<RESULTLIMIT){
+		var pageToSearch = pageNum-1;
 
+		while(resultCount<=500)
+		{
 			xhr = $.ajax({
-			url: 'https://www.thebluealliance.com/api/v3/team/frc' +currentTeamNumber ,
-			headers: {
-			'X-TBA-Auth-Key':'38wgMXShpksmFpPKfB8BLgT5kq8EajYkVlgnfT45FtL66TdI2agNuWllA8Nrzizx'
-			},
-			method: 'GET',
-			async: false,
-			dataType: 'json',
-			success: function(data){
-
-					if(!(searchData.length==0))
+				url: 'https://www.thebluealliance.com/api/v3/teams/' + (pageToSearch++),
+				headers: {
+				'X-TBA-Auth-Key':'38wgMXShpksmFpPKfB8BLgT5kq8EajYkVlgnfT45FtL66TdI2agNuWllA8Nrzizx'
+				},
+				method: 'GET',
+				dataType: 'json',
+				success: function(data[]){
+					if(searchData&&searchData!='')
 					{
 
 						var searchRegex = new RegExp(searchData, 'i');
-						if(searchRegex.test(data.nickname) || searchData==data.team_number){
-							var team_name = data.nickname,
-									team_city = data.city,
-									team_number = data.team_number,
-									team_rook = data.rookie_year,
-									team_motto = data.motto,
-									team_state = data.state_prov,
-									team_country = data.country;
+						if(searchRegex.test(data[].nickname) || searchData==data[].team_number){
+							resultCount++;
+							resultsUsed++;
+							var team_name = data[].nickname,
+									team_city = data[].city,
+									team_number = data[].team_number,
+									team_rook = data[].rookie_year,
+									team_motto = data[].motto,
+									team_state = data[].state_prov,
+									team_country = data[].country;
 
 							//manually set conveniences
 							if(team_name.length>20){
@@ -85,15 +90,16 @@
 						}
 					}
 					else {
-
-						if(data.nickname!=''&&data.nickname){
-							var team_name = data.nickname,
-									team_city = data.city,
-									team_number = data.team_number,
-									team_rook = data.rookie_year,
-									team_motto = data.motto,
-									team_state = data.state_prov,
-									team_country = data.country;
+						if(data[].nickname!=''&&data[].nickname){
+							resultCount++;
+							resultsUsed++;
+							var team_name = data[].nickname,
+									team_city = data[].city,
+									team_number = data[].team_number,
+									team_rook = data[].rookie_year,
+									team_motto = data[].motto,
+									team_state = data[].state_prov,
+									team_country = data[].country;
 
 							//manually set conveniences
 							if(team_name.length>20){
@@ -125,11 +131,7 @@
 							$('#tba').append($htmlCodeForTeam);
 							resultCount++;
 						}
-					}//else for checking if search data
-			}//ajax success
-		})//end ajax request
-		currentTeamNumber++;
-	}//end while loop
+		}
 	}
 	function pageReload() {
 		var url = new URL(window.location.href);
