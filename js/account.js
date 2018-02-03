@@ -1,4 +1,6 @@
 function register(){
+  
+
   var email = document.getElementById('registerEmail').value;
   var pass = document.getElementById('registerPassword').value;
   var confirmPass = document.getElementById('confirmPassword').value;
