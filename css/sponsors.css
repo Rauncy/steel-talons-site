@@ -1,4 +1,4 @@
-.info{
+.title{
   font-family: "Roboto";
   font-weight: 400;
   font-style: normal;
@@ -41,8 +41,8 @@
     border-radius: 6px;
     padding: 8px 0;
     position: absolute;
-    z-index: 99;
-    bottom: -25%;
+    z-index: 1;
+    bottom: 4%;
     left: 47%;
     margin-left: -80px;
 }
@@ -71,15 +71,22 @@
     max-width: 300px;
     margin: auto;
     text-align: center;
-    background-color: white;
+}
+.name{
+  font-style: oblique;
+  font-size: 24px;
+  font-weight: 200;
+}
+.info {
+    color: #CCCCCC;
+    font: 18px Maison Neue Regular;
+    margin-bottom: -40px;
+}
+.name{
+  margin: -20px;
 }
 
-.title {
-    color: grey;
-    font-size: 18px;
-}
-
-button {
+/* button {
     border: none;
     outline: 0;
     display: inline-block;
@@ -90,14 +97,15 @@ button {
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-}
+} */
 
-a {
+.card > a {
     text-decoration: none;
     font-size: 22px;
     color: black;
+
 }
 
-button:hover, a:hover {
+button:hover, .card > a:hover {
     opacity: 0.7;
 }
