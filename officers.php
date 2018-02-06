@@ -98,7 +98,7 @@
       <td>12th</td></center>
     </tr>
     <tr>
-      <th><img src="images/colin.jpg" alt="Colin's Picture"  class = "officerPic"></th>
+      <th><img src="images/colin1.jpg" alt="Colin's Picture"  class = "officerPic"></th>
       <center><td>Colin</td>
       <td>Weil</td>
       <td>Head of Marketing</td>
