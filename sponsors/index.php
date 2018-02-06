@@ -2,11 +2,19 @@
 <link rel="stylesheet" type = "text/css" href=<?php echo $dir . "/css/sponsors.css" ?>>
 <h2 class = "title">Building a new robot every year and competing costs a lot of money.  Each regional competition costs the team $5,000 for first one and $4,000 for each additional one.  We are very thankful for all the organizations who have sponsored Tompkins Robotics in the past.</h2>
 <script defer>
+
+$("h3").hover(function(){
+    alert("function");
+    $('#rockwell').classList.toggle("show");
+},function(){
+  $('#rockwell').classList.toggle("show");
+});
+
+
 // When the user clicks on <div>, open the popup
 function pop(id) {
     var popup = document.getElementById(id);
     popup.classList.toggle("show");
-
 }
 </script>
 
@@ -15,9 +23,9 @@ function pop(id) {
 
 <h2 class="title"><u><strong>2018 Season Sponsors:</strong></u></h2>
 <div class = "sponsor_list">
-  <h3 class = "sponsor  first" onclick="pop('rockwell')">Rockwell Automation<span class="popuptext" id="rockwell">
+  <h3 class = "sponsor  first" id = "rock" onclick="pop('rockwell')">Rockwell Automation<span class="popuptext" id="rockwell">
     <div class="card">
-      <img src=<?php echo $dir . "/images/rockwell.png" ?> alt="Rockwell Logo"  height="150px"style="width:100%">
+      <img src=<?php echo $dir . "/imagess/rockwell.png" ?> alt="Rockwell Logo"  height="150px"style="width:100%">
       <h1 class = "name">Rockwell Automation</h1>
       <p class="info">Rockwell Automation, Inc., is an American provider of industrial automation and titlermation products. Brands include Allen-Bradley and Rockwell Software.</p>
       <br>
