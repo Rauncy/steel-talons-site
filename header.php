@@ -28,7 +28,7 @@
       	<li class ="horizm"><a href = "/teams">Teams</a></li>
       	<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>
         <li class ="horizm"><a href = "/schedule.php">Schedule</a></li>
-      	<li class ="horizm"><a href = "/account">Events</a></li>
+      	<!-- <li class ="horizm"><a href = "/account">Events</a></li> -->
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
 				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
