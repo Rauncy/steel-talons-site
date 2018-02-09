@@ -38,13 +38,13 @@
     background-color: #555;
     color: #fff;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 15%;
     padding: 8px 0;
+    /* position: auto; */
     position: absolute;
     z-index: 1;
-    bottom: 4%;
-    left: 47%;
-    margin-left: -80px;
+    /* bottom: 4%; */
+    /* left: 47%; */
 }
 
 
@@ -71,6 +71,7 @@
     max-width: 300px;
     margin: auto;
     text-align: center;
+    border-radius: 15%;
 }
 .name{
   font-style: oblique;
@@ -96,7 +97,7 @@
 button:hover, .card > a:hover {
     opacity: 0.7;
 }
-
-/* #rockwell:hover{
-  visibility: visible;
-} */
+img{
+   width:100%;
+   border-radius: 15%;
+}
