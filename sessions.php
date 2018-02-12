@@ -1,22 +1,8 @@
 <?php
-//file name is first two digits of the hash
-class Session{
-
-  function __construct($ip, $id, $hash){
-    $this->ip = $ip;
-    $this->id = $id;
-    $this->hash = $hash;
-  }
-
-  function __toString(){
-    return "\nIP: " . $this->ip . " ID: " . $this->id . " Hash: " . $this->hash;
-  }
-}
-
 class SessionMap{
   //Keys is sorted binarily and values coorelates to keys indexically
 
-  function __construct(){
+  public function __construct(){
     $this->keys = array();
     $this->values = array();
   }
@@ -45,7 +31,7 @@ class SessionMap{
     return ($i==-1 ? null : $values[$i]);
   }
 
-  function get($index){
+  public function get($index){
     return $value[$index];
   }
 
@@ -65,12 +51,34 @@ class SessionMap{
     array_splice($this->values, floor(($top+$bot)/2), 0, $value);
   }
 
-  function getKeys(){
+  public function getKeys(){
     return $keys;
   }
 
   function getValues(){
     return $values;
+  }
+}
+
+//file name is first two digits of the hash
+class Session{
+
+  static $sessions=array();
+  static $hashes, $ips, $ids;
+
+  function __construct($ip, $id, $hash){
+    $this->ip = $ip;
+    $this->id = $id;
+    $this->hash = $hash;
+    if(!isset($sessions)){
+      self::$hashes = new SessionMap;
+      self::$ips = new SessionMap;
+      self::$ids = new SessionMap;
+    }
+  }
+
+  function __toString(){
+    return "\nIP: " . $this->ip . " ID: " . $this->id . " Hash: " . $this->hash;
   }
 }
 
@@ -82,22 +90,17 @@ function createSession($id, $ip){
     if($t>9) $rand .= chr($t+87);
     else $rand .= $t;
   }
-  $i = count($GLOBALS['sessions']);
-  array_push($GLOBALS['sessions'], new Session($ip, $id, $rand));
-  $GLOBALS['sessionHashes']->insert($rand);
-  $GLOBALS['sessionIPs']->insert($ip);
-  $GLOBALS['sessionIDs']->insert($id);
+  $i = count(Session::$sessions);
+  array_push(Session::$sessions, new Session($ip, $id, $rand));
+  Session::$hashes->insert($rand, $i);
+  Session::$ips->insert($ip, $i);
+  Session::$ids->insert($id, $i);
 }
-
 
 function initialize(){
-  $GLOBALS['sessions'] = array();
-  $GLOBALS['sessionHashes'] = new SessionMap();
-  $GLOBALS['sessionIPs'] = new SessionMap();
-  $GLOBALS['sessionIDs'] = new SessionMap();
 }
 
-if(!isset($GLOBALS['sessions'])) initialize();
+if(!isset($sessions)) initialize();
 ?>
 <!DOCTYPE html>
 <html>
@@ -105,6 +108,6 @@ if(!isset($GLOBALS['sessions'])) initialize();
   <title>Test</title>
 </head>
 <body>
-  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo count($GLOBALS['sessions']);?></h1>
+  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo Session::$sessions[0]->hash; setcookie("?", ";)")?></h1>
 </body>
 </html>

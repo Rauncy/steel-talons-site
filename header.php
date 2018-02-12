@@ -13,6 +13,7 @@
     <!-- linking in external files-->
     <link href="https://fonts.googleapis.com/css?family=Anton|Josefin+Sans|Open+Sans|Oswald|Poppins|Princess+Sofia|Titillium+Web" rel="stylesheet">
     <link rel = "stylesheet"  href = <?php echo $dir . "/css/header-main.css"?>>
+    <link rel="icon" type="image/png" sizes="16x16" href=<?php echo $dir . "/images/favicon-16x16.png"?>>
     <script src = <?php echo $dir . "/js/header-main.js"?> defer></script>
     <title>Tompkins Robotics</title>
   </head>
@@ -25,9 +26,9 @@
       <ul id="list">
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
       	<li class ="horizm"><a href = "/teams">Teams</a></li>
-      	<li class ="horizm"><a href = "/members">Members</a></li>
+      	<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>
         <li class ="horizm"><a href = "/schedule.php">Schedule</a></li>
-      	<li class ="horizm"><a href = "/account">Events</a></li>
+      	<!-- <li class ="horizm"><a href = "/account">Events</a></li> -->
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
 				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
