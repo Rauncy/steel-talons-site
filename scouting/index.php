@@ -14,8 +14,9 @@ if(isset($_POST["submit"])){
         if($conn->connect_error){
           die();
         }
-				$result = $conn->query("insert into scouting_2017 values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
-        $result = $conn->query("insert into scouting_2017 (\"ScoutingReport\",\"Shooting\",\"GearsDelivered\",\"GearsGathered\",\"Climb\",\"HumanPlayer\",\"values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
+				
+				$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"AutoAbilities\",\"Abilities\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"] . "\", \"" . $_POST["Competition"] . "\";");
+        $result = $conn->query("insert into Scouting2017 (\"ScoutingReport\",\"Shooting\",\"GearsDelivered\",\"GearsGathered\",\"Climb\",\"HumanPlayer\",\"Penalties\",\"DriverAbility\",\"MechanicalError\",\"ClimbingDifficulties\",\"Defense\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
         if($result->num_rows > 0){
           if(!session_id()) session_start();
         }
