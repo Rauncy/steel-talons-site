@@ -53,7 +53,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "admin";
 $dbname = "robotics";
 
 // Create connection
