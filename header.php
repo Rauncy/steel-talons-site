@@ -19,13 +19,13 @@
   </head>
   <body>
     <header role = "banner">
-      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 50px" href="/">Tompkins&nbsp;Robotics</a>
+      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
     </header>
 
     <nav id = "tabs">
       <ul id="list">
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
-      	<li class ="horizm"><a href = "/teams">Teams</a></li>
+      	<li class ="horizm"><a href = "/teams?search=">Teams</a></li>
       	<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>
         <li class ="horizm"><a href = "/schedule.php">Schedule</a></li>
       	<!-- <li class ="horizm"><a href = "/account">Events</a></li> -->

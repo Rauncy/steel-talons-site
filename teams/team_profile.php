@@ -49,7 +49,28 @@
 
   <?php
   $team_number =  $_GET['team_number'];
+  $team_name =  $_GET['team_name'];
 
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "root";
+  // $dbname = "robotics";
+  //
+  // // Create connection
+  // $conn = new mysqli($servername, $username, $password, $dbname);
+  // // Check connection
+  // if ($conn->connect_error) {
+  //     die("Connection failed: " . $conn->connect_error);
+  // }
+  //
+  //
+  //   $sql = "INSERT INTO teams VALUES(".$team_number.",'".$team_name."');";
+  //   $result = $conn->query($sql);
+
+
+
+
+  // $conn->close();
 
   // echo "alert('hi');";
   // echo "alert('".$team_number."');"
@@ -59,3 +80,29 @@
 
   ?>
 </script>
+
+<?php   $team_number =  $_GET['team_number'];
+  $team_name =  $_GET['team_name'];
+
+  $servername = "localhost";
+  $username = "root";
+  $password = "root";
+  $dbname = "robotics";
+
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  // Check connection
+  if ($conn->connect_error) {
+      echo ("Connection failed: " . $conn->connect_error);
+  }
+
+
+    $sql = "INSERT INTO teams VALUES(".$team_number.",'".$team_name."');";
+    $result = $conn->query($sql);
+
+    // echo "Result: ".$result;
+
+    $conn->close();
+
+
+    ?>
