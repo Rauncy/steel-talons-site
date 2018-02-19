@@ -23,6 +23,7 @@ header{
   position: sticky;
   top: 0px;
   width : 100%;
+   z-index: 99;
 }
 
 #list{
@@ -33,7 +34,7 @@ header{
      margin-top:0;
      padding-top:10px;
      padding-left:5px;
-     min-width: 535px;
+     min-width: 33.44em;
      text-align: left;
 
 }
@@ -43,7 +44,7 @@ header{
   font-family: 'Oswald', sans-serif;
   color: white;
   font-size: 1.5em;
-  padding: 3px;
+  padding: .1em;
   text-decoration: none;
 }
 
