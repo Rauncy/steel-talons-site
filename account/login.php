@@ -17,7 +17,12 @@ if(isset($_POST["submit"])){
 
         $result = $conn->query("select * from members where Email = \"" . $_POST["loginEmail"] . "\" and Pass = \"" . $_POST["loginPassword"] . "\";");
         if($result->num_rows > 0){
-          if(!session_id()) session_start();
+          if(session_status()!=PHP_SESSION_ACTIVE){
+            session_start();
+            $data = $result->fetch_assoc()["MemberID"];
+            $_SESSION["dbid"] = $data;
+            echo $data;
+          }
         }
       }
       break;

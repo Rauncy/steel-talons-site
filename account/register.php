@@ -15,7 +15,8 @@ function register(){
     $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
     if($result->num_rows == 0){
       $conn->query("insert into members (Username, Email, Pass) values (\"" . $_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
-      if(!session_id()) session_start();
+      //Post to login on new acct
+      header("Location: /account/login/");
     }
   }
 }

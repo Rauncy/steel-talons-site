@@ -97,9 +97,6 @@ function createSession($id, $ip){
   Session::$ids->insert($id, $i);
 }
 
-function initialize(){
-}
-
 if(!isset($sessions)) initialize();
 ?>
 <!DOCTYPE html>
@@ -108,6 +105,6 @@ if(!isset($sessions)) initialize();
   <title>Test</title>
 </head>
 <body>
-  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo Session::$sessions[0]->hash; setcookie("?", ";)")?></h1>
+  <h1 id="testText"><?php createSession(1, $_SERVER['REMOTE_ADDR']); echo Session::$sessions[0]->hash;?></h1>
 </body>
 </html>
