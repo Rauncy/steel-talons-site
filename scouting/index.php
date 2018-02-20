@@ -16,7 +16,7 @@ if(isset($_POST["submit"])){
         }
 
 				$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"AutoAbilities\",\"Abilities\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"] . "\", \"yes\", \"no\", \"" . $_POST["MatchNumber"]
-				. "\",
+				. "\",");
         $result = $conn->query("insert into Scouting2017 (\"ScoutingReport\",\"Shooting\",\"GearsDelivered\",\"GearsGathered\",\"Climb\",\"HumanPlayer\",\"Penalties\",\"DriverAbility\",\"MechanicalError\",\"ClimbingDifficulties\",\"Defense\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
         if($result->num_rows > 0){
           if(!session_id()) session_start();
