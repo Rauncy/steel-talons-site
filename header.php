@@ -1,3 +1,4 @@
+<?php if(isset($_COOKIE["PHPSESSID"])) session_start() ?>
 <!DOCTYPE HTML>
 <html>
 
@@ -19,7 +20,7 @@
   </head>
   <body>
     <header role = "banner">
-      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics&nbsp;<?php echo session_status()?></a>
+      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
     </header>
 
     <nav id = "tabs">
@@ -32,8 +33,8 @@
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
 				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
-        if(isset($_COOKIES["hasSession"])){
-          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>' . $_SESSION["name"] . '</a></li>';
+        if(session_status()===2){
+          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>'.$_SESSION["name"].'</a></li>';
         }else{
           echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';
         }

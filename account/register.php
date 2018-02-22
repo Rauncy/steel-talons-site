@@ -16,7 +16,7 @@ function register(){
     if($result->num_rows == 0){
       $conn->query("insert into members (Username, Email, Pass) values (\"" . $_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
       //Post to login on new acct
-      header("Location: /account/login/");
+      header("Location: /account/login?loginEmail=".$_POST["registerEmail"]."&loginPassword=".$_POST["registerPassword"]."&submit=Login");
     }
   }
 }
@@ -29,7 +29,7 @@ if(isset($_POST["registerUsername"])){
 }
 ?>
 <?php $dir = ".."; include($dir . "/header.php"); ?>
-<link rel = "stylesheet"  href = "/css/login.css">
+<link rel = "stylesheet" href = "/css/login.css">
 <script src = "/js/account.js"></script>
 <h1 class="title">Register</h1>
 <form class="infoForm" onsubmit="register();" action="/account/register.php" method="post">

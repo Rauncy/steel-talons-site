@@ -43,7 +43,7 @@ if(isset($_POST["submit"])){
 				$auto_abilities_dec = bindec($auto_abilities_bin);
 
 				$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"AutoAbilities\",\"Abilities\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"] . "\", \"" . $member_id
-				. "\", \"" . $date . "\", \"" . $_POST["MatchNumber"] . "\", \"" . );
+				. "\", \"" . $date . "\", \"" . $_POST["MatchNumber"] . "\", \"");
         $result = $conn->query("insert into Scouting2017 (\"ScoutingReport\",\"Shooting\",\"GearsDelivered\",\"GearsGathered\",\"Climb\",\"HumanPlayer\",\"Penalties\",\"DriverAbility\",\"MechanicalError\",\"ClimbingDifficulties\",\"Defense\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
         if($result->num_rows > 0){
           if(!session_id()) session_start();
