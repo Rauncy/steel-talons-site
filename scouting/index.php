@@ -15,8 +15,35 @@ if(isset($_POST["submit"])){
           die();
         }
 
-				$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"AutoAbilities\",\"Abilities\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"] . "\", \"yes\", \"no\", \"" . $_POST["MatchNumber"]
-				. "\",");
+				$author = split(" ", $_SESSION["name"]);
+				$member_id = $conn->query("SELECT MemberID FROM Members WHERE FirstName=\"".$author[0]."\" AND LastName=\"".$author[1]."\";");
+				$date = date("h:i:sa");
+
+				$auto_abilities_bin = "";
+
+				if($_POST["AutoBase"]) {
+					$auto_abilities . "1";
+				}
+				else {
+					$auto_abilities . "0";
+				}
+				if($_POST["AutoGear"]) {
+					$auto_abilities . "1";
+				}
+				else {
+					$auto_abilities . "0";
+				}
+				if($_POST["AutoShoot"]) {
+					$auto_abilities . "1";
+				}
+				else {
+					$auto_abilities . "0";
+				}
+
+				$auto_abilities_dec = bindec($auto_abilities_bin);
+
+				$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"AutoAbilities\",\"Abilities\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"] . "\", \"" . $member_id
+				. "\", \"" . $date . "\", \"" . $_POST["MatchNumber"] . "\", \"");
         $result = $conn->query("insert into Scouting2017 (\"ScoutingReport\",\"Shooting\",\"GearsDelivered\",\"GearsGathered\",\"Climb\",\"HumanPlayer\",\"Penalties\",\"DriverAbility\",\"MechanicalError\",\"ClimbingDifficulties\",\"Defense\") values (\"" . $_POST["TeamNumber"] . "\", \"" . $_POST["Competition"] . "\", \"" . $_POST["Competition"] . "\";");
         if($result->num_rows > 0){
           if(!session_id()) session_start();

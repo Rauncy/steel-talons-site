@@ -1,4 +1,3 @@
-<?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
 if(isset($_POST["submit"])){
   switch($_POST["submit"]){
@@ -17,12 +16,13 @@ if(isset($_POST["submit"])){
 
         $result = $conn->query("select * from members where Email = \"" . $_POST["loginEmail"] . "\" and Pass = \"" . $_POST["loginPassword"] . "\";");
         if($result->num_rows > 0){
-          if(session_status()!=PHP_SESSION_ACTIVE){
-            session_start();
-            $data = $result->fetch_assoc()["MemberID"];
-            $_SESSION["dbid"] = $data;
-            echo $data;
-          }
+          if(session_status()!==2) session_start();
+          
+          $data = $result->fetch_assoc();
+          $_SESSION["dbid"] = $data["MemberID"];
+          $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
+          header("Location: /");
+          exit();
         }
       }
       break;
@@ -31,8 +31,9 @@ if(isset($_POST["submit"])){
   }
 }
  ?>
+<?php $dir = ".."; include($dir . "/header.php"); ?>
 <link rel = "stylesheet"  href = "/css/login.css">
-<h1 class = "title">Login</h1>
+<h1 class = "header">Login</h1>
 <form class="infoForm" action="login.php" method="post">
   <center>
     <table>

@@ -1,3 +1,4 @@
+<?php if(isset($_COOKIE["PHPSESSID"])) session_start() ?>
 <!DOCTYPE HTML>
 <html>
 
@@ -32,8 +33,8 @@
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
 				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
-        if(session_status()===PHP_SESSION_ACTIVE){
-          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>' . $_SESSION["dbid"] . '</a></li>';
+        if(session_status()===2){
+          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>'.$_SESSION["name"].'</a></li>';
         }else{
           echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';
         }
