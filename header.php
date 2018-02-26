@@ -28,13 +28,21 @@
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
       	<li class ="horizm"><a href = "/teams?search=&page=1">Teams</a></li>
       	<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>
-        <li class ="horizm"><a href = "/schedule.php">Schedule</a></li>
-      	<!-- <li class ="horizm"><a href = "/account">Events</a></li> -->
+        <li class ="horizm"><a href = "/schedule">Schedule</a></li>
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
-				<li class ="horizm"><a href = "/scouting">Scouting</a></li>
         <?php
         if(session_status()===2){
-          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a>'.$_SESSION["name"].'</a></li>';
+          echo '<li class ="horizm"><a href = "/scouting">Scouting</a></li>';
+          if($_SESSION["perm"]>=2) echo '<li class ="horizm"><a href = "/admin">Administration</a></li>';
+          echo '<div class ="account-dropdown">
+            <li class ="horizm dropbtn" style="padding:0; padding-right:10px; padding-left:10px;">
+              <a>'. $_SESSION["name"] .'</a>
+            </li>
+            <div class ="dropdown horizm">
+              <a>Filler</a>
+              <a href = "/account/logout">Logout</a>
+            </div>
+          </div>';
         }else{
           echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';
         }

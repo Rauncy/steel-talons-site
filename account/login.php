@@ -1,8 +1,44 @@
 <?php
+function register(){
+
+}
+
+function login($email, $pass){
+  //Use database for user validation and creation
+  $servername = "localhost";
+  $username = "root";
+  $password = "admin";
+
+  $conn = new mysqli($servername, $username, $password, "robotics");
+
+  if($conn->connect_error){
+    die();
+  }
+
+  $result = $conn->query("select * from members where Email = \"" . $email . "\" and Pass = \"" . $pass . "\";");
+  if($result->num_rows > 0){
+    if(session_status()!==2){
+      session_start();
+    }
+
+    $data = $result->fetch_assoc();
+    $_SESSION["dbid"] = $data["MemberID"];
+    $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
+    $_SESSION["perm"] = isset($data["Permission"]) ? $data["Permission"] : 100;
+    header("Location: /");
+    exit();
+  }
+}
+
 if(isset($_POST["submit"])){
   switch($_POST["submit"]){
     case "Login":
       if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
+        login($_POST["loginEmail"], $_POST["loginPassword"]);
+      }
+      break;
+    case "Register":
+      if(isset($_POST["registerUsername"]) && isset($_POST["registerEmail"])){
         //Use database for user validation and creation
         $servername = "localhost";
         $username = "root";
@@ -14,15 +50,13 @@ if(isset($_POST["submit"])){
           die();
         }
 
-        $result = $conn->query("select * from members where Email = \"" . $_POST["loginEmail"] . "\" and Pass = \"" . $_POST["loginPassword"] . "\";");
-        if($result->num_rows > 0){
-          if(session_status()!==2) session_start();
-
-          $data = $result->fetch_assoc();
-          $_SESSION["dbid"] = $data["MemberID"];
-          $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
+        $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
+        if($result->num_rows == 0){
+          $conn->query("insert into members (Username, Email, Pass) values (\"" . $_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
+          login($_POST["registerEmail"], $_POST["registerPassword"]);
           header("Location: /");
-          exit();
+        }else{
+
         }
       }
       break;
