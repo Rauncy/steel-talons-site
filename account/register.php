@@ -4,7 +4,7 @@ function register(){
     //Use database for user validation and creation
     $servername = "localhost";
     $username = "root";
-    $password = "admin";
+    $password = "root";
 
     $conn = new mysqli($servername, $username, $password, "robotics");
 

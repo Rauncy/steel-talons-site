@@ -6,7 +6,7 @@ if(isset($_POST["submit"])){
         //Use database for user validation and creation
         $servername = "localhost";
         $username = "root";
-        $password = "admin";
+        $password = "root";
 
         $conn = new mysqli($servername, $username, $password, "robotics");
 
@@ -17,7 +17,7 @@ if(isset($_POST["submit"])){
         $result = $conn->query("select * from members where Email = \"" . $_POST["loginEmail"] . "\" and Pass = \"" . $_POST["loginPassword"] . "\";");
         if($result->num_rows > 0){
           if(session_status()!==2) session_start();
-          
+
           $data = $result->fetch_assoc();
           $_SESSION["dbid"] = $data["MemberID"];
           $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];

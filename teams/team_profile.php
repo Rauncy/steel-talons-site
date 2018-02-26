@@ -62,6 +62,9 @@
             dataType: 'json',
             success: function(data){
               var robots = '<div class = "listInfo" id = "robots_list"><ul style = "margin-left: 200px;"><h3>Robots</h3>';
+              if(data.length==0){
+                robots+="<li> No Robot Names :(</li>";
+              }
               for(var i=0;i<data.length;i++){
                   robots+="<li>"+data[i].robot_name+" - "+data[i].year+"</li>";
               }
@@ -78,7 +81,9 @@
                 dataType: 'json',
                 success: function(data){
                     var media = '<div class = "listInfo" id = "media_list"><ul style = "margin-left: 200px;"><h3>Social Media</h3>';
-                    console.log(data);
+                    if(data.length==0){
+                      media+="<li>No Social Media :(</li>"
+                    }
                     for(var i=0;i<data.length;i++){
                         var type = data[i].type;
                         media+="<li>";

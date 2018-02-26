@@ -2,6 +2,7 @@
 <!-- <body onload = "pageReload()"> -->
 <body>
 
+
 <script type="text/javascript">
 function pageReload(event) {
 		if(event.keyCode==13){
@@ -55,7 +56,7 @@ function pageReload(event) {
 
 
 	<i style = "display: block"> --Click on Teams to Learn More--</i>
-	<div id="tba" style="column-count: 6;font-size:12px;padding: 40px;">
+	<div id="tba" style="column-count: 5;font-size:10px;padding: 100px;line-height:20px;">
 	<?php
 	$servername = "localhost";
 	$username = "root";
@@ -89,7 +90,7 @@ while($row = $result->fetch_assoc()) {
 	}
 	// echo $row["key"];
 	if ($globals['count']>=$startNum && $globals['count']-$startNum<$teamsOnEachPage) {
-		echo '<a target = "_blank" style="color: black;font-size: 14px;" id = "'.$row["key"].'"href="/teams/team_profile.php?team_number=' .$row["key"]. '&team_name='.$row["name"].'" title = "'.$row["name"].'">'.$teamShort.'</a> '.'- ('.$row["key"].')<br><br>';
+		echo '<a target = "_blank" style="color: black;font-size: 14px;font-family: monospace;"  id = "'.$row["key"].'"href="/teams/team_profile.php?team_number=' .$row["key"]. '&team_name='.$row["name"].'" title = "'.$row["name"].'">'.$teamShort.'</a> '.'- ('.$row["key"].')<br><br>';
 	}
 	$globals['count']=$globals['count']+1;
 
