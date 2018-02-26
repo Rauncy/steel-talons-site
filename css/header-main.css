@@ -48,14 +48,48 @@ header{
   text-decoration: none;
 }
 
-.horizm > a{
+.horizm a{
   text-decoration: inherit;
   color: inherit;
 }
 
-.dropbtn{
-
+.account-dropdown:hover .dropdown{
+  display: block;
+  width: inherit;
 }
+
+.account-dropdown:hover{
+  background: linear-gradient(#333 0%, #333 36%, #bb2235 100%);
+}
+
+.dropdown{
+  display: none;
+  position: relative;
+  top: 12px;
+  padding: 0;
+}
+
+.dropdown > a{
+  display: inherit;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.account-dropdown{
+  position: relative;
+  display: inline-grid;
+  text-align: center;
+  background-color: #333;
+  float: right;
+  min-width: 85px;
+  padding-bottom: 12px;
+}
+
+/*
+.dropdown a:hover{
+  color: #DDDDFF;
+}
+*/
 
 .active{
   background-color: crimson;
@@ -89,6 +123,10 @@ body{
   color: white;
 }
 
-.horizm > a:hover{
+.horizm a:hover{
   color: #DDDDFF;
+}
+
+main{
+  position: fixed;
 }
