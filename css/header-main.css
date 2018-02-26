@@ -54,7 +54,7 @@ header{
 }
 
 .account-dropdown:hover .dropdown{
-  display: block;
+  display: table-caption;
   width: inherit;
 }
 
@@ -77,7 +77,7 @@ header{
 
 .account-dropdown{
   position: relative;
-  display: inline-grid;
+  display: inline-block;
   text-align: center;
   background-color: #333;
   float: right;
@@ -128,5 +128,4 @@ body{
 }
 
 main{
-  position: fixed;
 }
