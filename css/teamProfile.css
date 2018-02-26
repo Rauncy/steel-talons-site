@@ -1,0 +1,39 @@
+#events {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    /* margin:auto; */
+}
+
+#events td, #events th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#events tr:nth-child(even){background-color: #f2f2f2;}
+
+#events tr:hover {background-color: #ddd;}
+
+#events th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #00009d;
+    color: white;
+}
+.award{
+  font-size: 14px;
+  width: 250px;
+}
+/* LIST #3 */
+.listInfo{
+  display: inline;
+}
+/* h3{
+  display: inline;
+  margin: inherit;
+   margin-left: 20px;
+}
+ */
+.profile ul { list-style-image: url("../images/arrow.png"); color:black; font-size:18px; float: left;}
+.profile ul li { line-height:30px; }
