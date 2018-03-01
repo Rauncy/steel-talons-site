@@ -9,13 +9,14 @@
   }
 </script>
 
+<body>
 <div class="topnav">
   <div class="search-container">
    <form action="" method = "GET">
      <input type="text" id = "search" placeholder="Search.." name="search">
      <br>
      <button type="submit" onclick="reload('user')"><h3>Username</h3></button>
-     <button type="submit" onclick="reload('first')"><h3>FirstName</h3></button>
+     <button type="submit" onclick="reload('first')"><h3>First Name</h3></button>
      <button type="submit" onclick="reload('last')"><h3>Last Name</h3></button>
    </form>
  </div>
@@ -40,7 +41,7 @@
 //
 // $x =0;
 // while($x<=49){
-//   $sql = "INSERT INTO members (MemberID, FirstName, LastName, Username) VALUES('".$x."','".generateRandomString(6)."','".generateRandomString(12)."','".generateRandomString(18)."');";
+//   $sql = "INSERT INTO members (FirstName, LastName, Username) VALUES('".generateRandomString(6)."','".generateRandomString(12)."','".generateRandomString(18)."');";
 //   $result = $conn->query($sql);
 //   $x++;
 // }
@@ -55,7 +56,6 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "robotics";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -69,7 +69,6 @@ if ( ! empty( $_COOKIE['type'] ) ){
 else{
   $type = "user";
 }
-
 if($searchParam == "") {
   $sql = "SELECT * FROM Members";
 }
@@ -84,29 +83,24 @@ else {
     $sql = "SELECT * FROM Members WHERE LastName LIKE '%".$searchParam."%'";
   }
 }
-
 $result = $conn->query($sql);
 // echo $result;
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>MemberID</th><th>Name</th><th>Grade</th><th>Year</th><th>Permission</th><th>Roles</th><th>Username</th><th>Password</th><th>Email</th><th>Phone Number</th></tr>";
+    echo "<table><tr><th>Name</th><th>Grade</th><th>Roles</th><th>Username</th><th>Password</th><th>Email</th><th>Phone Number</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo"<tr><td>".$row["MemberID"]."</td><td>".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Year"]."</td><td>".$row["Permission"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]
-				."</td><td>".$row["Password"]."</td><td>".$row["Email"]."</td><td>".$row["Picture"]."</td><td>".$row["Description"]."</td><td>".$row["Phone"]."</td><td></tr>";
+        echo "<tr><td>".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]."</td><td>".$row["Pass"]."</td><td>".$row["Email"].
+        "</td><td>(".substr($row["Phone"],0,3).") ".substr($row["Phone"],3,3)." - ".substr($row["Phone"],6,4)."</td></tr>";
     }
     echo "</table>";
 } else {
-    echo "<center>No results<center>";
+    echo "<h1><center>No results</center><h1>";
 }
 $conn->close();
 ?>
-<script>
-  for (i = 0; i < document.getElementsByTagName('th').length; i++) {
-    document.getElementsByTagName('th')[i].style = 'padding: 45px;'
-  }
-  for (i = 0; i < document.getElementsByTagName('td').length; i++) {
-    document.getElementsByTagName('td')[i].style = 'padding: 45px;'
-  }
-</script>
+<div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/membersBackground.jpg"?> alt="image"></div>
+
+
+</body>
 
 <?php include($dir . "/footer.php") ?>

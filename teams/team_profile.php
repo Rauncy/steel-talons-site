@@ -4,6 +4,7 @@
 
 </div>
 
+</body>
 
 <table id="events">
   <!-- <h3>Events</h3> -->
@@ -30,7 +31,7 @@
       dataType: 'json',
       success: function(data){
 
-            var general ="<h2 style = 'padding: 30px;'><center><i>"+data.nickname+"</i></center></h2>"
+            var general ="<h2 style = 'padding: 30px;'><center><i>"+data.nickname+"</i></center></h2><div id = 'info'>"
 
             general+="<div class = 'listInfo' id = 'general_info'><ul><h3>General</h3>"
             // general+="Number: "+num +"<br>Name: "+data.nickname
@@ -41,11 +42,14 @@
             if(data.motto !=null){
               general += "<li>Motto: <i>"+data.motto+"</i>"+"</li>";
             }
+            else if(num=='5427'){
+              general +="<li>Motto: <i>Building a Legacy</i></li>"
+            }
             else {
-              general +="<li>Motto: none"+"</li>";
+              general +="<li>Motto: N/A"+"</li>";
             }
             if(data.website !=null) {
-              general+="<li>Website: <a target = '_blank'href = '"+data.website+"'>"+data.website+"</li>";
+              general+="<li>Website: <a class = 'square' target = '_blank'href = '"+data.website+"'>"+data.website+"</a></li>";
             }
             general+="</ul></div>"
             $('.profile').append(general);
@@ -62,7 +66,14 @@
             dataType: 'json',
             success: function(data){
               var robots = '<div class = "listInfo" id = "robots_list"><ul style = "margin-left: 200px;"><h3>Robots</h3>';
-              if(data.length==0){
+              if(num=='5427'){
+                robots+="<li>Falcon 1 - 2015</li>";
+                robots+="<li>Falcon 2 - 2016</li>";
+                robots+="<li>Falcon 3 - 2017</li>";
+                robots+="<li>Falcon Light - 2018</li>";
+
+              }
+              else if(data.length==0){
                 robots+="<li> No Robot Names :(</li>";
               }
               for(var i=0;i<data.length;i++){
@@ -81,6 +92,10 @@
                 dataType: 'json',
                 success: function(data){
                     var media = '<div class = "listInfo" id = "media_list"><ul style = "margin-left: 200px;"><h3>Social Media</h3>';
+                    if(num=='5427'){
+                      media+="<li><a class = 'square' target = '_blank' href = 'https://github.com/Team5427'>GitHub</a></li>"
+                      media+="<li><a class = 'square' target = '_blank' href = 'https://www.youtube.com/channel/UCCafmXtkUxY_oBQZ5h8ObcQ'>YouTube</a></li>"
+                    }
                     if(data.length==0){
                       media+="<li>No Social Media :(</li>"
                     }
@@ -89,40 +104,41 @@
                         media+="<li>";
                         var link="none";
                         if(type == "facebook-profile"){
-                          link = "<a target = '_blank' href = 'https://www.facebook.com/"+data[i].foreign_key+"'>Facebook</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.facebook.com/"+data[i].foreign_key+"'>Facebook</a>";
                         }
                         if(type == "youtube-channel"){
-                          link = "<a target = '_blank' href = 'https://www.youtube.com/user/"+data[i].foreign_key+"'>Youtube</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.youtube.com/user/"+data[i].foreign_key+"'>YouTube</a>";
                         }
                         if(type == "cdphotothread"){
-                          link = "<a target = '_blank' href ='"+data[i].foreign_key+"'>CDPhotoThread</a>";
+                          link = "<a class = 'square' target = '_blank' href ='"+data[i].foreign_key+"'>CDPhotoThread</a>";
                         }
                         if(type == "imgur"){
-                          link = "<a target = '_blank' href = 'https://www.facebook.com/"+data[i].foreign_key+"'>Imgur</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.facebook.com/"+data[i].foreign_key+"'>Imgur</a>";
                         }
                         if(type == "twitter-profile"){
-                          link = "<a target = '_blank' href = 'https://www.twitter.com/"+data[i].foreign_key+"'>Twitter</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.twitter.com/"+data[i].foreign_key+"'>Twitter</a>";
                         }
                         if(type == "github-profile"){
-                          link = "<a target = '_blank' href = 'https://www.github.com/"+data[i].foreign_key+"'>GitHub</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.github.com/"+data[i].foreign_key+"'>GitHub</a>";
                         }
                         if(type == "instagram-profile"){
-                          link = "<a target = '_blank' href = 'https://www.instagram.com/"+data[i].foreign_key+"'>Instagram</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.instagram.com/"+data[i].foreign_key+"'>Instagram</a>";
                         }
                         if(type == "periscope-profile"){
-                          link = "<a target = '_blank' href = 'https://www.periscope.com/"+data[i].foreign_key+"'>Periscope</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.periscope.com/"+data[i].foreign_key+"'>Periscope</a>";
                         }
                         if(type == "grabcad"){
-                          link = "<a target = '_blank' href = 'https://www.grabcad.com/library/"+data[i].foreign_key+"'>GrabCAD</a>";
+                          link = "<a class = 'square' target = '_blank' href = 'https://www.grabcad.com/library/"+data[i].foreign_key+"'>GrabCAD</a>";
                         }
                         if(type == "external-link"){
-                          link = "<a target = '_blank' href = '"+data[i].foreign_key+"'>Link</a>";
+                          link = "<a class = 'square' target = '_blank' href = '"+data[i].foreign_key+"'>Link</a>";
                         }
 
                         media += link + "</li>"
                     }
-                    media+="</ul></div>"
+                    media+="</ul></div></div>"
                     $('.profile').append(media);
+
                   }
               });
             }
@@ -215,7 +231,6 @@
 
   <?php
   $team_number =  $_GET['team_number'];
-  $team_name =  $_GET['team_name'];
 
 
   echo "createProfile('";
@@ -223,4 +238,22 @@
 
 
   ?>
+
 </script>
+<div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/teamProfileBackground.jpg"?> alt="image"></div>
+<style media="screen">
+/*  to span image above across page, background image*/
+#background {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		z-index: -999;
+}
+
+.stretch {
+		width:100%;
+		height:100%;
+}
+</style>

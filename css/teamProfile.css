@@ -1,3 +1,10 @@
+body:not(table){
+  /* background-color: blue;
+  z-index: 99; */
+  /* background-image: url("../images/backgroundProfile.jpg"); */
+  height: 100%;
+}
+
 #events {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -37,3 +44,90 @@
  */
 .profile ul { list-style-image: url("../images/arrow.png"); color:black; font-size:18px; float: left;}
 .profile ul li { line-height:30px; }
+
+.profile a,.profile a:visited,.profile a:hover,.profile a:active{
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+	position:relative;
+  transition:0.5s color ease;
+	text-decoration:none;
+	color:#81b3d2;
+	font-size:18px;
+}
+.profile a:hover{
+	color:#d73444;
+}
+.profile a.before:before,.profile a.after:after{
+  content: "";
+  transition:0.5s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+}
+.profile a.before:before{
+  top:-0.25em;
+}
+.profile a.after:after{
+  bottom:-0.25em;
+}
+.profile a.before:before,.profile a.after:after{
+  height:2px;
+  height:0.35rem;
+  width:0;
+  background:#d73444;
+}
+.square{
+  box-sizing:border-box;
+  margin-left:0.4em;
+  position:relative;
+  font-size:18px;
+  overflow:hidden;
+}
+.square a{
+  position:static;
+  font-size:100%;
+  padding:0.2em 0.4em;
+}
+.square:before,.square:after{
+  content: "";
+  box-sizing:border-box;
+  transition:0.25s all ease;
+  -webkit-backface-visibility:hidden;
+          backface-visibility:hidden;
+  position:absolute;
+  width:2px;
+  width:0.1rem;
+  height:0;
+  background:#d73444;
+}
+.square:before{
+  left:-.2em;
+  bottom:-0.2em;
+}
+.square.individual:before{
+  transition-delay:0.6s;
+}
+.square:after{
+  right: -.2em ;
+  top:-0.2em;
+}
+.square.individual:after{
+  transition-delay:0.2s;
+}
+.square a:before{
+  left:0;
+  transition:0.25s all ease;
+}
+.square a:after{
+  right: 2em;
+  transition:0.25s all ease;
+}
+.square.individual a:after{
+  transition:0.25s all ease 0.4s;
+}
+.square:hover:before,.square:hover:after{
+  height:calc(100% + 0.4em);
+}
+.square:hover a:before,.square:hover a:after{
+  width:100%;
+}

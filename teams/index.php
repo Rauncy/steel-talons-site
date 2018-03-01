@@ -90,7 +90,7 @@ while($row = $result->fetch_assoc()) {
 	}
 	// echo $row["key"];
 	if ($globals['count']>=$startNum && $globals['count']-$startNum<$teamsOnEachPage) {
-		echo '<a target = "_blank" style="color: black;font-size: 14px;font-family: monospace;"  id = "'.$row["key"].'"href="/teams/team_profile.php?team_number=' .$row["key"]. '&team_name='.$row["name"].'" title = "'.$row["name"].'">'.$teamShort.'</a> '.'- ('.$row["key"].')<br><br>';
+		echo '<a target = "_blank" style="color: black;font-size: 14px;font-family: monospace;"  id = "'.$row["key"].'"href="/teams/team_profile.php?team_number=' .$row["key"].'" title = "'.$row["name"].'">'.$teamShort.'</a> '.'- ('.$row["key"].')<br><br>';
 	}
 	$globals['count']=$globals['count']+1;
 
@@ -102,7 +102,22 @@ while($row = $result->fetch_assoc()) {
 
  </div>
 
+<div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/teamsBackground.jpg"?> alt="image"></div>
+<style media="screen">
+/*  to span image above across page, background image*/
+#background {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		z-index: -999;
+}
 
-
+.stretch {
+		width:100%;
+		height:100%;
+}
+</style>
 
 </body>

@@ -5,4 +5,25 @@
   <center>
 </div>
 
+
+
+
+<div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/scheduleBackground.jpg"?> alt="image"></div>
+<style media="screen">
+/*  to span image above across page, background image*/
+#background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: -999;
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+</style>
+
 <?php include($dir . "/footer.php") ?>

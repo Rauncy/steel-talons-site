@@ -440,4 +440,24 @@ $(document).ready(function(){
 <hr>
 <br>
 <p><center><i>**Tompkins Robotics thanks all their sponsors throughout the years for helping students build a functioning robot and expose them to professional engineering practices. All information about the sponsors was either paraphrased from the sponsor's wikipedia page or accured from the sponsor's website's "about" page**</i></center><p>
+
+
+
+  <div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/sponsorsBackground.jpg"?> alt="image"></div>
+  <style media="screen">
+  /*  to span image above across page, background image*/
+  #background {
+  		width: 100%;
+  		height: 100%;
+  		position: fixed;
+  		left: 0px;
+  		top: 0px;
+  		z-index: -999;
+  }
+
+  .stretch {
+  		width:100%;
+  		height:100%;
+  }
+  </style>
 <?php$dir = ".."; include($dir . "/footer.php"); ?>
