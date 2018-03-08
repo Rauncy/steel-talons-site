@@ -78,13 +78,15 @@ header{
 }
 
 .account-dropdown{
-  position: relative;
+  position: absolute;
   display: inline-block;
   text-align: center;
   background-color: #333;
   float: right;
   min-width: 85px;
+  right: 0em;
   padding-bottom: 12px;
+    z-index: 10000000;
 }
 
 /*

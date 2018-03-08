@@ -77,26 +77,26 @@ if(isset($_POST["submit"])){
 	<table style = "border: 2px solid black; padding: 4px;">
 		<tr>
 			<td class = "formLabel">Position: </td>
-			<td><input type="checkbox" name = "AutoLeft" value="left">Left <input type="checkbox" name = "AutoMiddle" value="middle">Middle <input type="checkbox" name = "AutoRight" value="right">Right </td>
+			<td><input type="checkbox" name = "position[]" value="left">Left <input type="checkbox" name = "position[]" value="middle">Middle <input type="checkbox" name = "position[]" value="right">Right </td>
 		</tr>
 		<tr>
 			<td class = "formLabel">Baseline: </td>
-			<td><input type="radio" name = "AutoBase" value="autobaseline"></td>
+			<td><input type="checkbox" name = "AutoBase" value="autobaseline"></td>
 		</tr>
 		<tr>
 			<td class = "formLabel">Gear: </td>
-			<td><input type="radio" name = "AutoGear" value="autogear"></td>
+			<td><input type="checkbox" name = "AutoGear" value="autogear"></td>
 		</tr>
 		<tr>
 			<td class = "formLabel">Shooting: </td>
-			<td><input type="radio" name = "AutoShoot" value="autoshoot"></td>
+			<td><input type="checkbox" name = "AutoShoot" value="autoshoot"></td>
 		</tr>
 	</table>
 	<span class = "formTitle">General</span>
 	<table style = "border: 2px solid black; padding: 4px;">
 		<tr>
 			<td class = "formLabel">Shooting:</td>
-			<td><input type="checkbox" name = "ShootingFast" value="fast">Fast <input type="checkbox" name = "ShootingAccurate" value="accurate">Accurate</td>
+			<td><input type="checkbox" name = "shooting[]" value="fast">Fast <input type="checkbox" name = "shooting[]" value="accurate">Accurate</td>
 		</tr>
 		<tr>
 			<td class = "formLabel">Gears Delivered: </td>

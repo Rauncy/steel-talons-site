@@ -81,9 +81,10 @@ $(document).ready(function(){
       <div class="card">
         <!-- <img src=<?php echo $dir . "/images/rockwell.png" ?> alt="Dupont Family"  height="150px"style="width:100%"> -->
         <h1 class = "name">DuPont Family</h1>
-        <p class="info">Rockwell Automation, Inc., is an American provider of industrial automation and titlermation products. Brands include Allen-Bradley and Rockwell Software.</p>
+        <p class="info">Much thanks to the DuPont family! Phillip DuPont has been an integrated member for the past three years and is currently the Vice President of the club. The DuPonts decided to donate becuase of the immense impact that robotics has had on Phillip's life.</p>
+        </p>
         <br>
-        <!-- <a href="https://www.rockwellautomation.com/" target="_blank"><i class="fa fa-dribbble"></i></a> -->
+        <a href="https://www.instagram.com/phillipdupont/" target="_blank"><i class="fa fa-instagram"></i></a>
         <!-- <a href="https://twitter.com/ROKAutomation" target="_blank"><i class="fa fa-twitter"></i></a> -->
         <!-- <a href="https://www.linkedin.com/company/rockwell-automation" target="_blank"><i class="fa fa-linkedin"></i></a> -->
         <!-- <a href="https://www.facebook.com/ROKAutomation/" target="_blank"><i class="fa fa-facebook"></i></a> -->
