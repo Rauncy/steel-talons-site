@@ -16,7 +16,7 @@ if(isset($_POST["submit"])){
         }
 
 				$author = split(" ", $_SESSION["name"]);
-				$member_id = $conn->query("SELECT MemberID FROM Members WHERE FirstName=\"".$author[0]."\" AND LastName=\"".$author[1]."\";");
+				// $member_id = $conn->query("SELECT MemberID FROM Members WHERE FirstName=\"".$author[0]."\" AND LastName=\"".$author[1]."\";");
 				$date = date("h:i:sa");
 
 				$auto_abilities_bin = "";
