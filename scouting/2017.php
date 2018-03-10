@@ -56,7 +56,7 @@ if(isset($_POST["submit"])){
 }
  ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
-<form class="scouting" action="index.php" method="post">
+<form class="scouting" action="2017.php" method="post">
 <center>
 	<span class = "formTitle">Scouting 2017</span>
 	<table style = "border: 2px solid black; padding: 4px;">
