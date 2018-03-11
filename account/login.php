@@ -6,8 +6,8 @@
   <center>
     <table>
       <tr>
-        <td class="formLabel">E-Mail</td>
-        <td><input type = "text" name = "loginEmail" placeholder="johnappleseed@gmail.com"></td>
+        <td class="formLabel">Username</td>
+        <td><input type = "text" name = "loginEmail" placeholder="johnappleseed"></td>
       </tr>
       <tr>
         <td class="formLabel">Password</td>
@@ -38,7 +38,7 @@ function login($email, $pass){
     die();
   }
 
-  $result = $conn->query("select * from members where Email = \"" . $email . "\" and Pass = \"" . $pass . "\";");
+  $result = $conn->query("select * from members where Username = \"" . $email . "\" and Pass = \"" . $pass . "\";");
   if($result->num_rows > 0){
     if(session_status()!==2){
       session_start();
