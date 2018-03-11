@@ -11,7 +11,7 @@
       if($conn->connect_error){
         die();
       }
-			$dataMain = $conn->query("select * from Scouting2018;");
+			$dataMain = $conn->query("select * from scouting;");
 
 			if($result->num_rows > 0){
         if(!session_id()) session_start();
@@ -35,7 +35,7 @@
 		</select>
 	</center>
 	<div style = "display: inline; margin-left: 500px; ">
-
+    
 	</div>
 	<div id="scout" style="column-count: 1;font-size:12px;padding: 40px;"></div>
 </body>
