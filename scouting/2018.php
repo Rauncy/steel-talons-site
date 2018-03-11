@@ -1,3 +1,4 @@
+<!--  back end needs to be done-->
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
 function submitScouting(){
