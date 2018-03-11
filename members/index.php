@@ -22,34 +22,6 @@
  </div>
 </div>
 
-<?php
-// function generateRandomString($length = 10) {
-//     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
-// }
-//
-// $servername = "localhost";
-// $username = "root";
-// $password = "admin";
-// $dbname = "robotics";
-//
-// // Create connection
-// $conn = new mysqli($servername, $username, $password, $dbname);
-// // Check connection
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
-//
-// $x =0;
-// while($x<=49){
-//   $sql = "INSERT INTO members (FirstName, LastName, Username) VALUES('".generateRandomString(6)."','".generateRandomString(12)."','".generateRandomString(18)."');";
-//   $result = $conn->query($sql);
-//   $x++;
-// }
-//
-//
-//
-// $conn->close();
-?>
 
 <?php
 $servername = "localhost";

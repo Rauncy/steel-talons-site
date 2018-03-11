@@ -131,10 +131,12 @@ if(isset($_POST["submit"])){
   //test if all post parameters are set
   submitScouting();
 }
+
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
   <h1 class = "title">Scouting 2018</h1>
+  <a href=<?php echo $dir . "/scouting/entries.php"?> id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
     <form action="2018" method="post">
       <span class = "formTitle">General Info</span>

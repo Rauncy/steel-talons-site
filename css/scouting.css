@@ -31,6 +31,7 @@
   border: 2px solid black;
   padding-bottom: 10px;
   margin-bottom: 50px;
+  margin-top: 30px;
 }
 .scoutingSubmit{
   border: none;
@@ -42,4 +43,14 @@
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
+}
+#entriesLink{
+  text-transform: uppercase;
+
+    color: navy;
+    padding: 1px;
+    font-style: italic;
+    /* border-bottom: 1px solid #000; */
+    padding-bottom: 20px;
+    text-decoration: underline;
 }
