@@ -29,7 +29,7 @@
 //
 // $servername = "localhost";
 // $username = "root";
-// $password = "root";
+// $password = "admin";
 // $dbname = "robotics";
 //
 // // Create connection
@@ -54,7 +54,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+\$password = "admin";
 $dbname = "robotics";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

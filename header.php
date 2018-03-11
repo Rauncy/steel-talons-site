@@ -39,10 +39,12 @@
             <li class ="horizm dropbtn" style="padding:0; padding-right:10px; padding-left:10px;">
               <a>'. $_SESSION["name"] .'</a>
             </li>
-            <div class ="dropdown horizm">
-              <a>Filler</a>
-              <a href = "/account/logout">Logout</a>
-            </div>
+            <center>
+              <div class ="dropdown horizm">
+                <a>Filler</a>
+                <a href = "/account/logout">Logout</a>
+              </div>
+            </center>
           </div>';
         }else{
           echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';

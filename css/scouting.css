@@ -6,12 +6,12 @@
   margin-right: 10px;
 	margin-bottom: 5px;
 }
-
-.formText{
+.formTable > tbody > tr{
 	font-family: 'Oswald', sans-serif;
 	text-align: center;
 	font-size: 18px;
 	margin: 3px;
+  text-align: right;
 }
 .formTitle{
 	font-family: 'Oswald', sans-serif;
@@ -19,4 +19,27 @@
 	font-size: 25px;
 	margin: 0px;
 	margin-top: 10px;
+}
+.formTable{
+  border: 2px solid black;
+  background-color: #DDD;
+  margin-bottom: 10px;
+}
+.formContainer{
+  background-color: #EEE;
+  width: 25em;
+  border: 2px solid black;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+}
+.scoutingSubmit{
+  border: none;
+  background-color: #bb2235;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
 }

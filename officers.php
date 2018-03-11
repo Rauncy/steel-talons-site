@@ -50,20 +50,20 @@
 
     </tr>
     <tr>
-      <th><img src="images/philip.jpg" alt="Philip's Picture"  class = "officerPic"></th>
-      <center><td>Philip</td>
-      <td>DuPont</td>
-      <td>Vice President</td>
-      <td>3 years</td>
-      <td>11th</td></center>
-    </tr>
-    <tr>
       <th><img src="/think.png" class = "officerPic" alt="Broken Robot" ></th>
   <center><td>Varsha</td>
       <td>Kumar</td>
       <td>President</td>
       <td>4 years</td>
       <td>12th</td><center>
+    </tr>
+    <tr>
+      <th><img src="images/philip.jpg" alt="Philip's Picture"  class = "officerPic"></th>
+      <center><td>Philip</td>
+      <td>DuPont</td>
+      <td>Vice President</td>
+      <td>3 years</td>
+      <td>11th</td></center>
     </tr>
     <tr>
       <th><img src="images/rahul.jpg" alt="Rahul's Picture"  class = "officerPic"></th>

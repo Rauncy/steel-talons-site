@@ -30,7 +30,7 @@ function login($email, $pass){
   //Use database for user validation and creation
   $servername = "localhost";
   $username = "root";
-  $password = "root";
+  $password = "admin";
 
   $conn = new mysqli($servername, $username, $password, "robotics");
 
@@ -65,7 +65,7 @@ if(isset($_POST["submit"])){
         //Use database for user validation and creation
         $servername = "localhost";
         $username = "root";
-        $password = "root";
+        $password = "admin";
 
         $conn = new mysqli($servername, $username, $password, "robotics");
 
