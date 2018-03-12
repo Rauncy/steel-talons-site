@@ -1,20 +1,21 @@
-function register(){
-
+function registerCheck(){
 
   var email = document.getElementById('registerEmail').value;
   var pass = document.getElementById('registerPassword').value;
   var confirmPass = document.getElementById('confirmPassword').value;
 
   if(pass != confirmPass){
-      alert("Your passwords did not match!");
-      location.reload();
+      alert("Your passwords do not match. Please try again.");
+      return false;
   }
   else if (pass.length < 6) {
-      alert("Please make your password at least 6 digits long!");
-      location.reload();
+      alert("Your password must be at least 6 characters long!");
+      return false;
   }
-  else if(!email.test(/.?@.?\./)){
+  else if(!email.test(/.+?@.+?\..+/)){
     alert("Please enter a valid email address!");
-    location.reload();
+    return false;
   }
+
+  return true;
 }

@@ -54,7 +54,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-\$password = "admin";
+$password = "admin";
 $dbname = "robotics";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -1,6 +1,6 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
-    if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
+    if(session_status()===2){
       //Use database for user validation and creation
       $servername = "localhost";
       $username = "root";
@@ -11,22 +11,25 @@
       if($conn->connect_error){
         die();
       }
-			$dataMain = $conn->query("select * from Scouting2018;");
-
-			if($result->num_rows > 0){
-        if(!session_id()) session_start();
+			$query = $conn->query("select * from Scouting2018;");
+      if(gettype($query)!="boolean"){
+        $data = "[";
+        for($i=0;$i<$query->num_rows;$i++){
+          $lDat = $query->fetch_assoc();
+          $gDat = $conn->query("select * from Scouting where ScoutingID = ".$lDat["ScoutingReport"])->fetch_assoc();
+          $data = $data.'{team:"'.$gDat["Team"].'", match:"'.$gDat["MatchNumber"].'", start:"'.$gDat["StartPos"].'", auto:"'.$gDat["AutoAbilities"].'", abil:"'.$gDat["Abilities"].'", style:"'.$gDat["Playstyle"].'",
+          penalties:"'.$gDat["Penalties"].'", notes:"'.$gDat["notes"].'", switch:"'.$lDat["Switch"].'", scale:"'.$lDat["Scale"].'", vault:"'.$lDat["Vault"].'", end:"'.$lDat["EndPos"].'", assts:"'.$lDat["ClimbAssists"].'"},';
+        }
+        $data = $data."]";
+      }else{
+        $data = "[]";
       }
     }
  ?>
 <body onload = "pageReload()">
-	<script type = "text/javascript">
-		var data[] = <?php echo $data ?>;
-
-
-	</script>
 	<link rel = "stylesheet" href = "/css/scouting.css">
 	<center>
-		<h1 style = "display: inline;">Scouting Database</h1>
+		<h1 class = "title">Scouting Entries</h1>
 		<br>
 		<span class = "formText">Sort by: </span><select>
 			<option value = "Switch Cubes">Switch Cubes</option>
@@ -34,8 +37,17 @@
 			<option value = "Power-Up Cubes">Power-Up Cubes</option>
 		</select>
 	</center>
-	<div style = "display: inline; margin-left: 500px; ">
-
+	<div id="results" style = "display: inline; margin-left: 500px;">
 	</div>
 	<div id="scout" style="column-count: 1;font-size:12px;padding: 40px;"></div>
+  <script type = "text/javascript" defer>
+		var data = JSON.parse("<?php echo $data?>");
+    var ret;
+    if(data.length>0){
+      ret = "<h1 class='title'>Sike Nigga</h1>"
+    }else{
+      ret = "<h1 class='title'>There are no entries yet.</h1>";
+    }
+    document.getElementById("results").innerHTML = ret;
+	</script>
 </body>
