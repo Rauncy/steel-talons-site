@@ -2,6 +2,7 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
 if(isset($_POST["submit"])){
+  submitScouting();
   switch($_POST["submit"]){
     case "Login":
       if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
@@ -13,37 +14,37 @@ if(isset($_POST["submit"])){
         if($conn->connect_error){
           die();
         }
-	$author = split(" ", $_SESSION["name"]);
-	$member_id = $conn->query("SELECT MemberID FROM Members WHERE FirstName=\"".$author[0]."\" AND LastName=\"".$author[1]."\";");
-	$date = date("h:i:sa");
-	$auto_abilities_bin = "";
-	if($_POST["abilitiesBL"]) {
-		$auto_abilities_bin . "1";
-	}
-	else {
-		$auto_abilities_bin . "0";
-	}
-	if($_POST["abilitiesSW"]) {
-		$auto_abilities_bin . "1";
-	}
-	else {
-		$auto_abilities_bin . "0";
-	}
-	if($_POST["abilitiesSC"]) {
-		$auto_abilities_bin . "1";
-	}
-	else {
-		$auto_abilities_bin . "0";
-	}
-	if($_POST["abilitiesPI"]) {
-		$auto_abilities_bin . "1";
-	}
-	else {
-		$auto_abilities_bin . "0";
-	}
-	$auto_abilities_dec = bindec($auto_abilities_bin);
-        $startPos = -1;
-        if($_POST['startPos'] == 'l') {
+		$author = split(" ", $_SESSION["name"]);
+		$member_id = $conn->query("SELECT MemberID FROM Members WHERE FirstName=\"".$author[0]."\" AND LastName=\"".$author[1]."\";");
+		$date = date("h:i:sa");
+		$auto_abilities_bin = "";
+		if($_POST["abilitiesBL"]) {
+			$auto_abilities_bin . "1";
+		}
+		else {
+			$auto_abilities_bin . "0";
+		}
+		if($_POST["abilitiesSW"]) {
+			$auto_abilities_bin . "1";
+		}	
+		else {
+			$auto_abilities_bin . "0";
+		}
+		if($_POST["abilitiesSC"]) {
+			$auto_abilities_bin . "1";
+		}
+		else {
+			$auto_abilities_bin . "0";
+		}
+		if($_POST["abilitiesPI"]) {
+			$auto_abilities_bin . "1";
+		}
+		else {
+			$auto_abilities_bin . "0";
+		}
+		$auto_abilities_dec = bindec($auto_abilities_bin);
+   	    $startPos = -1;
+   	    if($_POST['startPos'] == 'l') {
           $startPos = 0;
         } 
         else if($_POST['startPos'] == 'c') {
@@ -70,47 +71,48 @@ if(isset($_POST["submit"])){
           $endPos = 2;
         } 
         $penalties_bin = "";
-	if($_POST["PenaltiesFoul"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
-	if($_POST["PenaltiesTech"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
-	if($_POST["PenaltiesYellow"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
-        if($_POST["PenaltiesRed"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
-        if($_POST["PenaltiesDisabled"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
-	if($_POST["PenaltiesDisqualified"]) {
-		$penalties_bin . "1";
-	}
-	else {
-		$penalties_bin . "0";
-	}
+		if($_POST["PenaltiesFoul"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
+		if($_POST["PenaltiesTech"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
+		if($_POST["PenaltiesYellow"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
+    	    if($_POST["PenaltiesRed"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
+    	    if($_POST["PenaltiesDisabled"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
+		if($_POST["PenaltiesDisqualified"]) {
+			$penalties_bin . "1";
+		}
+		else {
+			$penalties_bin . "0";
+		}
         $penalties_dec = bindec($penalties_bin);
-	$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"StartPos\", \"AutoAbilities\",\"Abilities\", \"Playstyle\", \"Penalties\", \"Notes\" ) values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"]
-	. "\", \"" . $date . "\", \"" . $_POST["MatchNumber"] . "\", \"".  $startPos ."\", \"". $auto_abilities_dec."\", \"". $auto_abilities_dec."\", \"". $playstyle."\", \"". $penalties."\", \"". $_POST[notes] );
+		$result = $conn->query("insert into Scouting (\"Team\",\"Author\",\"Timestamp\",\"Competition\",\"MatchNumber\",\"StartPos\", \"AutoAbilities\", \"Playstyle\", \"Penalties\", \"Notes\" ) values (\"" . $_POST["TeamNumber"] . "\", \"" . $_SESSION["sqlid"]
+			. "\", \"" . $date . "\", \"" . $_POST["MatchNumber"] . "\", \"".  $startPos ."\", \"". $auto_abilities_dec."\", \"". $playstyle."\", \"". $penalties."\", \"". $_POST[notes] );
         $formNum = $conn->query("select ScoutingID from Scouting where Timestamp = \"". $date. "\"") ;
-        $result = $conn->query("insert into Scouting2018 (\"ScoutingReport\",\"Switch\",\"Scale\",\"Vault\",\"EndPos\",\"ClimbAssts\") values (\"" . $formNum . "\", \"" . $_POST["switch"] . "\", \"" . $_POST["scale"] ."\", \"". $_POST["vault"]. "\", \"". $endPos. "\", \"". $_POST["climbAsst"]. "\";");
+        $result = $conn->query("insert into Scouting2018 (\"ScoutingReport\",\"Switch\",\"Scale\",\"Vault\",\"EndPos\",\"ClimbAssts\") values (\"" . $formNum . "\", \"" . $_POST["switch"] . "\", \"" . $_POST["scale"] ."\", \"". $_POST["vault"]. "\", 
+			\"". $endPos. "\", \"". $_POST["climbAsst"]. "\";");
         if($result->num_rows > 0){
           if(!session_id()) session_start();
         }
@@ -181,11 +183,6 @@ function submitScouting(){
       </tr>
     </tbody>
   </table>";
-}
-
-if(isset($_POST["submit"])){
-  //test if all post parameters are set
-  submitScouting();
 }
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
