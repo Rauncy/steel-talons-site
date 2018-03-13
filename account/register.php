@@ -27,7 +27,7 @@ if(isset($_GET["err"])){
       <tr>
         <td class = "formLabel">Phone Number:</td>
         <td>
-          (<input type="text" name="phone-1" style = "width: 30px" maxlength="3">) <input type="text" style = "width: 30px" name="phone-2" maxlength="3"> - <input type="text" name="phone-3" style = "width: 40px" maxlength="4">
+          (<input type="text" name="phone-1" style = "width: 30px" maxlength="3" required>) <input type="text" style = "width: 30px" name="phone-2" maxlength="3" required> - <input type="text" name="phone-3" style = "width: 40px" maxlength="4" required>
         </td>
       </tr>
       <tr>

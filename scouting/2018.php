@@ -121,7 +121,7 @@ function submitScouting(){
   <?php
   if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
   ?>
-  <a href="/scouting/entries" id = "entriesLink">Scouting Form Entries</a>
+  <a href="/scouting/list" id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
     <form action="2018" method="post">
       <span class = "formTitle">General Info</span>

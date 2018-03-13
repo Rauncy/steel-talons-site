@@ -1,8 +1,98 @@
 
 <?php $dir = ".."; include($dir . "/header.php"); ?>
+<?php
+function login($user, $pass){
+  //Use database for user validation and creation
+  echo "log ";
+  $servername = "localhost";
+  $username = "root";
+  $password = "admin";
+
+  $conn = new mysqli($servername, $username, $password, "robotics");
+
+  if($conn->connect_error){
+    die();
+  }
+
+  $result = $conn->query("select * from members where Username = \"" . $user . "\" and Pass = \"" . $pass . "\";");
+  if($result->num_rows > 0){
+    echo "acc ";
+    if(session_status()!==2){
+      session_start();
+    }
+
+    $data = $result->fetch_assoc();
+    $_SESSION["dbid"] = $data["MemberID"];
+    $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
+    $_SESSION["perm"] = isset($data["Permission"]) ? $data["Permission"] : 100;
+    header("Location: /");
+    die();
+  }else{
+    echo "unacc ";
+    header("Location: /account/login?err=0");
+  }
+}
+
+if(isset($_POST["submit"])){
+  switch($_POST["submit"]){
+    case "Login":
+      echo "Log";
+      if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
+        login($_POST["loginEmail"], $_POST["loginPassword"]);
+      }
+      break;
+    case "Register":
+      echo "Reg";
+      if(isset($_POST["registerUsername"]) && isset($_POST["registerPassword"])){
+        //Use database for user validation and creation
+        echo "reg ";
+        $servername = "localhost";
+        $username = "root";
+        $password = "admin";
+
+        $conn = new mysqli($servername, $username, $password, "robotics");
+
+        if($conn->connect_error){
+          header("Location: /account/register?err=1");
+          die();
+        }
+        echo "nerr ";
+
+        $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
+        if($result->num_rows == 0){
+          echo "nsel ";
+          $conn->query("insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
+          "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
+          echo "insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
+          "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");";
+          login($_POST["registerUsername"], $_POST["registerPassword"]);
+          // echo "<script>alert('processed, result is: '".$quer.")</script>";
+        }else{
+            echo "sel ";
+            header("Location: /account/register?err=0");
+            die();
+        }
+      }
+      break;
+    default:
+      break;
+  }
+}
+?>
 <link rel = "stylesheet"  href = "/css/login.css">
 <h1 class = "title">Login</h1>
-<form class="infoForm" action="login.php" method="post">
+<?php if(isset($_GET["err"])){
+  echo "<h2 class='postNotif'><center>";
+  switch($_GET["err"]){
+    case 0:
+      echo "Your username or password is incorrect";
+      break;
+    default:
+      echo "An unknown error occured";
+  }
+  echo "</center></h2>";
+}?>
+<form class="infoForm" action="login" method="post">
   <center>
     <table>
       <tr>
@@ -21,70 +111,4 @@
     </p>
   </center>
 </form>
-<?php
-
-function login($user, $pass){
-  //Use database for user validation and creation
-  $servername = "localhost";
-  $username = "root";
-  $password = "admin";
-
-  $conn = new mysqli($servername, $username, $password, "robotics");
-
-  if($conn->connect_error){
-    die();
-  }
-
-  $result = $conn->query("select * from members where Username = \"" . $user . "\" and Pass = \"" . $pass . "\";");
-  if($result->num_rows > 0){
-    if(session_status()!==2){
-      session_start();
-    }
-
-    $data = $result->fetch_assoc();
-    $_SESSION["dbid"] = $data["MemberID"];
-    $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
-    $_SESSION["perm"] = isset($data["Permission"]) ? $data["Permission"] : 100;
-    header("Location: /");
-    die();
-  }
-}
-
-if(isset($_POST["submit"])){
-  switch($_POST["submit"]){
-    case "Login":
-      if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
-        login($_POST["loginEmail"], $_POST["loginPassword"]);
-      }
-      break;
-    case "Register":
-      if(isset($_POST["registerUsername"]) && isset($_POST["registerPassword"])){
-        //Use database for user validation and creation
-        $servername = "localhost";
-        $username = "root";
-        $password = "admin";
-
-        $conn = new mysqli($servername, $username, $password, "robotics");
-
-        if($conn->connect_error){
-          header("Location: /account/register?err=1");
-          die();
-        }
-
-        $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
-        if($result->num_rows == 0){
-          $quer = $conn->query("insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3']."\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
-          login($_POST["registerUsername"], $_POST["registerPassword"]);
-          // echo "<script>alert('processed, result is: '".$quer.")</script>";
-        }else{
-            header("Location: /account/register?err=0");
-            die();
-        }
-      }
-      break;
-    default:
-      break;
-  }
-}
- ?>
 <?php include($dir . "/footer.php") ?>

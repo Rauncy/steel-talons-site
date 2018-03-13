@@ -43,6 +43,8 @@
 		<option value = "Scale Cubes">Scale Cubes</option>
 		<option value = "Power-Up Cubes">Power-Up Cubes</option>
 	</select>
+</center>
+<center>
 	<div id="results" style = "display: inline; margin-left: 500px;"></div>
 </center>
 <script type = "text/javascript" defer>
@@ -74,7 +76,7 @@ function loadTable(){
     }
     ret+="</tbody></table>";
   }else{
-    ret = "<h1 class='title'>There are no entries yet.</h1>";
+    ret = "<h2 class='postNotif'>There are no entries yet.</h2>";
   }
   document.getElementById("results").innerHTML = ret;
 }
