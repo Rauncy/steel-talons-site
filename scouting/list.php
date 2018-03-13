@@ -43,11 +43,7 @@
 		<option value = "Scale Cubes">Scale Cubes</option>
 		<option value = "Power-Up Cubes">Power-Up Cubes</option>
 	</select>
-</center>
-<center>
-	<div id="results" style = "display: inline; margin-left: 500px;">
-	</div>
-	<div id="scout" style="column-count: 1;font-size:12px;padding: 40px;"></div>
+	<div id="results" style = "display: inline; margin-left: 500px;"></div>
 </center>
 <script type = "text/javascript" defer>
 const perm = <?php echo $_SESSION["perm"];?>;

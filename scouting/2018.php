@@ -121,6 +121,7 @@ function submitScouting(){
   <?php
   if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
   ?>
+  <a href="/scouting/entries" id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
     <form action="2018" method="post">
       <span class = "formTitle">General Info</span>
@@ -138,16 +139,16 @@ function submitScouting(){
       <table class = "formTable">
         <tr>
           <td>Starting Place:</td>
-          <td><input type="radio" name="startPos" value="l" required>Left</td>
-          <td><input type="radio" name="startPos" value="c" required>Center</td>
-          <td><input type="radio" name="startPos" value="r" required>Right</td>
+          <td><input type="radio" name="startPos" value="left" required>Left</td>
+          <td><input type="radio" name="startPos" value="center" required>Center</td>
+          <td><input type="radio" name="startPos" value="right" required>Right</td>
         </tr>
         <tr>
           <td>Abilities:</td>
-          <td><input type="checkbox" name="abilitiesBL" value="">Baseline</td>
-          <td><input type="checkbox" name="abilitiesSW" value="">Switch</td>
-          <td><input type="checkbox" name="abilitiesSC" value="">Scale</td>
-          <td><input type="checkbox" name="abilitiesPI" value="">Pickup</td>
+          <td><input type="checkbox" name="abilities[]" value="baseline">Baseline</td>
+          <td><input type="checkbox" name="abilities[]" value="switch">Switch</td>
+          <td><input type="checkbox" name="abilities[]" value="scale">Scale</td>
+          <td><input type="checkbox" name="abilities[]" value="pickup">Pickup</td>
         </tr>
       </table>
       <span class = "formTitle">Teleoperated</span>
@@ -174,7 +175,7 @@ function submitScouting(){
         <tr>
           <td>End Position:</td>
           <td><input type="radio" name="endPos" value="field" required>Field</td>
-          <td><input type="radio" name="endPos" value="plat" required>Platform</td>
+          <td><input type="radio" name="endPos" value="platform" required>Platform</td>
           <td><input type="radio" name="endPos" value="climb" required>Climb</td>
         </tr>
         <tr>
@@ -188,32 +189,33 @@ function submitScouting(){
       <table class = "formTable">
       	<tr>
       		<td>Foul:</td>
-      		<td><input type="checkbox" name = "PenaltiesFoul" value="Foul"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Foul"></td>
       	</tr>
       	<tr>
       		<td>Tech Foul:</td>
-      		<td><input type="checkbox" name = "PenaltiesTech" value="Tech Foul"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Tech Foul"></td>
       	</tr>
       	<tr>
       		<td>Yellow Card:</td>
-      		<td><input type="checkbox" name = "PenaltiesYellow" value="Yellow Card"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Yellow Card"></td>
       	</tr>
       	<tr>
       		<td>Red Card:</td>
-      		<td><input type="checkbox" name = "PenaltiesRed" value="Red Card"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Red Card"></td>
       	</tr>
       	<tr>
       		<td>Disabled:</td>
-      		<td><input type="checkbox" name = "PenaltiesDisabled" value="Disabled"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Disabled"></td>
       	</tr>
       	<tr>
       		<td>Disqualified:</td>
-      		<td><input type="checkbox" name = "PenaltiesDisqualified" value="Disqualified"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Disqualified"></td>
       	</tr>
       </table>
       <span class = "formTitle">Notes</span>
       <br>
-      <input type="text" name="notes"></input>
+      <textarea name="notes" style="resize: none; height: 15em; width: 20em;"></textarea>
+      <!-- <input type="text" name="notes"></input> -->
       <br><br>
       <input type="submit" name="submit" value="Log" class = "scoutingSubmit"></input>
     </form>

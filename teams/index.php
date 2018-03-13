@@ -29,7 +29,7 @@ function pageReload(event) {
 		<a style=<?php
 		$servername = "localhost";
 		$username = "root";
-		$password = "root";
+		$password = "admin";
 		$dbname = "robotics";
 
 		// Create connection
@@ -60,7 +60,7 @@ function pageReload(event) {
 	<?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "root";
+	$password = "admin";
 	$dbname = "robotics";
 
 	// Create connection
