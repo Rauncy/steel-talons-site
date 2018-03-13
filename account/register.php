@@ -3,10 +3,14 @@
 <script src = "/js/account.js"></script>
 <h1 class="title">Register</h1>
 <?php
-if(isset($_POST["return"])){
-  echo $_POST["return"];
-}else{
-  echo "NISSET";
+if(isset($_GET["err"])){
+  echo "<h2 class = 'postNotif'><center>";
+  switch(htmlspecialchars($_GET["err"])){
+    case 0: echo "An account with that username or email already exists."; break;
+    case 1: echo "Could not connect to authentication server. Please try again later."; break;
+    default: echo "An unknown error occured.";
+  }
+  echo "</center></h2>";
 }
 ?>
 <form class="infoForm" onsubmit="return registerCheck();" action="/account/login.php" method="post">
@@ -14,11 +18,11 @@ if(isset($_POST["return"])){
     <table>
       <tr>
         <td class = "formLabel">First Name:</td>
-        <td><input type="text" id="registerFirstName" name="registerFirstName" placeholder="Johnny"></td>
+        <td><input type="text" id="registerFirstName" name="registerFirstName" placeholder="Johnny" required></td>
       </tr>
       <tr>
         <td class = "formLabel">Last Name:</td>
-        <td><input type="text"  id="registerLastName" name="registerLastName" placeholder="Appleseed"></td>
+        <td><input type="text"  id="registerLastName" name="registerLastName" placeholder="Appleseed" required></td>
       </tr>
       <tr>
         <td class = "formLabel">Phone Number:</td>
@@ -30,10 +34,10 @@ if(isset($_POST["return"])){
         <td class = "formLabel">Grade:</td>
         <td>
           <!-- <input type="text" id="registerGrade" name="registerGrade" placeholder="9"> -->
-          <input type="radio" name="registerGrade" value="9">9
-          <input type="radio" name="registerGrade" value="10">10
-          <input type="radio" name="registerGrade" value="11">11
-          <input type="radio" name="registerGrade" value="12">12
+          <input type="radio" name="registerGrade" value="9" required>9
+          <input type="radio" name="registerGrade" value="10" required>10
+          <input type="radio" name="registerGrade" value="11" required>11
+          <input type="radio" name="registerGrade" value="12" required>12
         </td>
       </tr>
       <tr>
@@ -59,19 +63,19 @@ if(isset($_POST["return"])){
       </tr>
       <tr>
         <td class = "formLabel">Username:</td>
-        <td><input type = "text" id = "registerUsername" name = "registerUsername" placeholder="johnnyappleseed"></td>
+        <td><input type = "text" id = "registerUsername" name = "registerUsername" placeholder="johnnyappleseed" required></td>
       </tr>
       <tr>
         <td class = "formLabel">Email:</td>
-        <td><input type = "text" id = "registerEmail" name = "registerEmail" placeholder="johnnyappleseed@gmail.com"></td>
+        <td><input type = "text" id = "registerEmail" name = "registerEmail" placeholder="johnnyappleseed@gmail.com" required></td>
       </tr>
       <tr>
         <td class = "formLabel">Password:</td>
-        <td><input type="password" id= "registerPassword" name = "registerPassword" placeholder="******"></td>
+        <td><input type="password" id= "registerPassword" name = "registerPassword" placeholder="******" required></td>
       </tr>
       <tr>
         <td class = "formLabel">Confirm Password:</td>
-        <td><input type="password" id="confirmPassword" name="confirmPassword" placeholder="******"></td>
+        <td><input type="password" id="confirmPassword" name="confirmPassword" placeholder="******" required></td>
       </tr>
 
     </table>

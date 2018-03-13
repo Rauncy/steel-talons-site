@@ -6,65 +6,6 @@ if(isset($_POST["submit"])){
 }
 
 function submitScouting(){
-  // echo "<table style='position: absolute; top: 200px;'>
-  //   <thead>
-  //     <tr>
-  //       <th>Variable Name</th>
-  //       <th>Result</th>
-  //     </tr>
-  //   </thead>
-  //   <tbody>
-  //     <tr>
-  //       <td>Match</td>
-  //       <td>".$_POST["match"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Team</td>
-  //       <td>".$_POST["team"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Starting</td>
-  //       <td>".$_POST["startPos"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Abilities</td>
-  //       <td>".(isset($_POST["abilitiesBL"])?1:0)."|".(isset($_POST["abilitiesSW"])?1:0)."|".(isset($_POST["abilitiesSC"])?1:0)."|".(isset($_POST["abilitiesPI"])?1:0)."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Type</td>
-  //       <td>".(isset($_POST["type"])?$_POST["type"]:"non")."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Switch</td>
-  //       <td>".$_POST["switch"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Scale</td>
-  //       <td>".$_POST["scale"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Vault</td>
-  //       <td>".$_POST["vault"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>End Pos</td>
-  //       <td>".$_POST["endPos"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Climb Asst</td>
-  //       <td>".$_POST["climbAsst"]."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Penalties</td>
-  //       <td>".(isset($_POST["PenaltiesFoul"])?1:0)."|".(isset($_POST["PenaltiesTech"])?1:0)."|".(isset($_POST["PenaltiesYellow"])?1:0)."|".(isset($_POST["PenaltiesRed"])?1:0)."|".
-  //       (isset($_POST["PenaltiesDisabled"])?1:0)."|".(isset($_POST["PenaltiesDisqualified"])?1:0)."</td>
-  //     </tr>
-  //     <tr>
-  //       <td>Notes</td>
-  //       <td>".(isset($_POST["notes"])?$_POST["notes"]:"None")."</td>
-  //     </tr>
-  //   </tbody>
-  // </table>";
   if(session_status()===2){
     //Use database for user validation and creation
     $servername = "localhost";
@@ -72,10 +13,9 @@ function submitScouting(){
     $password = "admin";
     $conn = new mysqli($servername, $username, $password, "robotics");
     if($conn->connect_error){
-      echo "CONERR";
       die();
     }
-    $date = date("h:i:sa");
+    $date = date("Y-m-d H:i:s");
     $auto_abilities_bin = "";
     if(isset($_POST["abilitiesBL"])) {
       $auto_abilities_bin . "1";
@@ -167,22 +107,20 @@ function submitScouting(){
       $penalties_bin . "0";
     }
     $penalties_dec = bindec($penalties_bin);
-    echo "QUER<br>";
-    echo 'insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
-      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');';
-      echo "<br>".$auto_abilities_bin." ".$auto_abilities_dec;
     $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
       . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');');
         $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
         $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
       "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
-      echo "T: ".$formNum;
   }
 }
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
   <h1 class = "title">Scouting 2018</h1>
+  <?php
+  if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
+  ?>
   <div class="formContainer">
     <form action="2018" method="post">
       <span class = "formTitle">General Info</span>
@@ -282,4 +220,4 @@ function submitScouting(){
   </div>
 </center>
 
-<?php include($dir . "/footer.php") ?>
+<?php include($dir . "/footer.php"); ?>

@@ -23,7 +23,7 @@
 </form>
 <?php
 
-function login($email, $pass){
+function login($user, $pass){
   //Use database for user validation and creation
   $servername = "localhost";
   $username = "root";
@@ -35,7 +35,7 @@ function login($email, $pass){
     die();
   }
 
-  $result = $conn->query("select * from members where Username = \"" . $email . "\" and Pass = \"" . $pass . "\";");
+  $result = $conn->query("select * from members where Username = \"" . $user . "\" and Pass = \"" . $pass . "\";");
   if($result->num_rows > 0){
     if(session_status()!==2){
       session_start();
@@ -67,6 +67,7 @@ if(isset($_POST["submit"])){
         $conn = new mysqli($servername, $username, $password, "robotics");
 
         if($conn->connect_error){
+          header("Location: /account/register?err=1");
           die();
         }
 
@@ -74,11 +75,9 @@ if(isset($_POST["submit"])){
         if($result->num_rows == 0){
           $quer = $conn->query("insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3']."\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
           login($_POST["registerUsername"], $_POST["registerPassword"]);
-          header("Location: /");
           // echo "<script>alert('processed, result is: '".$quer.")</script>";
         }else{
-            $_POST["return"]="<h3><center>An account with that username or email already exists.<center></h3>";
-            header("Location: /account/register");
+            header("Location: /account/register?err=0");
             die();
         }
       }
