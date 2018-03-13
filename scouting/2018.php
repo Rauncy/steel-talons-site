@@ -1,6 +1,7 @@
 <!--  back end needs to be done-->
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
+<<<<<<< HEAD
 function submitScouting(){
 
 
@@ -127,11 +128,189 @@ function submitScouting(){
   $conn->close();
 }
 
+=======
+>>>>>>> 18234216e259eb8db6a5591edae70a8d18b19d0b
 if(isset($_POST["submit"])){
-  //test if all post parameters are set
   submitScouting();
 }
 
+<<<<<<< HEAD
+=======
+function submitScouting(){
+  // echo "<table style='position: absolute; top: 200px;'>
+  //   <thead>
+  //     <tr>
+  //       <th>Variable Name</th>
+  //       <th>Result</th>
+  //     </tr>
+  //   </thead>
+  //   <tbody>
+  //     <tr>
+  //       <td>Match</td>
+  //       <td>".$_POST["match"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Team</td>
+  //       <td>".$_POST["team"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Starting</td>
+  //       <td>".$_POST["startPos"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Abilities</td>
+  //       <td>".(isset($_POST["abilitiesBL"])?1:0)."|".(isset($_POST["abilitiesSW"])?1:0)."|".(isset($_POST["abilitiesSC"])?1:0)."|".(isset($_POST["abilitiesPI"])?1:0)."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Type</td>
+  //       <td>".(isset($_POST["type"])?$_POST["type"]:"non")."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Switch</td>
+  //       <td>".$_POST["switch"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Scale</td>
+  //       <td>".$_POST["scale"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Vault</td>
+  //       <td>".$_POST["vault"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>End Pos</td>
+  //       <td>".$_POST["endPos"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Climb Asst</td>
+  //       <td>".$_POST["climbAsst"]."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Penalties</td>
+  //       <td>".(isset($_POST["PenaltiesFoul"])?1:0)."|".(isset($_POST["PenaltiesTech"])?1:0)."|".(isset($_POST["PenaltiesYellow"])?1:0)."|".(isset($_POST["PenaltiesRed"])?1:0)."|".
+  //       (isset($_POST["PenaltiesDisabled"])?1:0)."|".(isset($_POST["PenaltiesDisqualified"])?1:0)."</td>
+  //     </tr>
+  //     <tr>
+  //       <td>Notes</td>
+  //       <td>".(isset($_POST["notes"])?$_POST["notes"]:"None")."</td>
+  //     </tr>
+  //   </tbody>
+  // </table>";
+  if(session_status()===2){
+    //Use database for user validation and creation
+    $servername = "localhost";
+    $username = "root";
+    $password = "admin";
+    $conn = new mysqli($servername, $username, $password, "robotics");
+    if($conn->connect_error){
+      echo "CONERR";
+      die();
+    }
+    $date = date("h:i:sa");
+    $auto_abilities_bin = "";
+    if(isset($_POST["abilitiesBL"])) {
+      $auto_abilities_bin . "1";
+    }
+    else {
+      $auto_abilities_bin . "0";
+    }
+    if(isset($_POST["abilitiesSW"])) {
+      $auto_abilities_bin . "1";
+    }
+    else {
+      $auto_abilities_bin . "0";
+    }
+    if(isset($_POST["abilitiesSC"])) {
+      $auto_abilities_bin . "1";
+    }
+    else {
+      $auto_abilities_bin . "0";
+    }
+    if(isset($_POST["abilitiesPI"])) {
+      $auto_abilities_bin . "1";
+    }
+    else {
+      $auto_abilities_bin . "0";
+    }
+    $auto_abilities_dec = bindec($auto_abilities_bin);
+    $startPos = -1;
+    if($_POST['startPos'] == 'l') {
+      $startPos = 0;
+    }
+    else if($_POST['startPos'] == 'c') {
+      $startPos = 1;
+    }
+    else if($_POST['startPos'] == 'r') {
+      $startPos = 2;
+    }
+    $playstyle = -1;
+    if($_POST['type'] == 'def') {
+      $playstyle = 0;
+      }
+    else if($_POST['type'] == 'off') {
+      $playstyle = 1;
+      }
+    $endPos = -1;
+    if($_POST['endPos'] == 'field') {
+      $endPos = 0;
+    }
+    else if($_POST['endPos'] == 'plat') {
+      $endPos = 1;
+    }
+    else if($_POST['endPos'] == 'climb') {
+      $endPos = 2;
+    }
+    $penalties_bin = "";
+    if(isset($_POST["PenaltiesFoul"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    if(isset($_POST["PenaltiesTech"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    if(isset($_POST["PenaltiesYellow"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    if(isset($_POST["PenaltiesRed"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    if(isset($_POST["PenaltiesDisabled"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    if(isset($_POST["PenaltiesDisqualified"])) {
+      $penalties_bin . "1";
+    }
+    else {
+      $penalties_bin . "0";
+    }
+    $penalties_dec = bindec($penalties_bin);
+    echo "QUER<br>";
+    echo 'insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
+      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');';
+      echo "<br>".$auto_abilities_bin." ".$auto_abilities_dec;
+    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
+      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');');
+        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
+        $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
+      "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
+      echo "T: ".$formNum;
+  }
+}
+>>>>>>> 18234216e259eb8db6a5591edae70a8d18b19d0b
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>

@@ -1,7 +1,7 @@
 
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <link rel = "stylesheet"  href = "/css/login.css">
-<h1 class = "header">Login</h1>
+<h1 class = "title">Login</h1>
 <form class="infoForm" action="login.php" method="post">
   <center>
     <table>
@@ -22,9 +22,6 @@
   </center>
 </form>
 <?php
-function register(){
-
-}
 
 function login($email, $pass){
   //Use database for user validation and creation
@@ -49,7 +46,7 @@ function login($email, $pass){
     $_SESSION["name"] = isset($data["FirstName"])&&isset($data["LastName"]) ? $data["FirstName"] . " " . $data["LastName"] : $data["Username"];
     $_SESSION["perm"] = isset($data["Permission"]) ? $data["Permission"] : 100;
     header("Location: /");
-    exit();
+    die();
   }
 }
 
@@ -61,7 +58,7 @@ if(isset($_POST["submit"])){
       }
       break;
     case "Register":
-      if(isset($_POST["registerUsername"]) && isset($_POST["registerEmail"])){
+      if(isset($_POST["registerUsername"]) && isset($_POST["registerPassword"])){
         //Use database for user validation and creation
         $servername = "localhost";
         $username = "root";
@@ -76,11 +73,13 @@ if(isset($_POST["submit"])){
         $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
         if($result->num_rows == 0){
           $quer = $conn->query("insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3']."\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
-          login($_POST["registerEmail"], $_POST["registerPassword"]);
+          login($_POST["registerUsername"], $_POST["registerPassword"]);
           header("Location: /");
           // echo "<script>alert('processed, result is: '".$quer.")</script>";
         }else{
-            echo "<h3><center>**YOUR INFORMATION IS ALREADY IN THE DATABSE**<center></h3>";
+            $_POST["return"]="<h3><center>An account with that username or email already exists.<center></h3>";
+            header("Location: /account/register");
+            die();
         }
       }
       break;
