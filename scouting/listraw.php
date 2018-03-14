@@ -12,7 +12,10 @@ $conn = new mysqli($servername, $username, $password, "robotics");
 if($conn->connect_error){
   die();
 }
-$query = $conn->query("select * from Scouting2018;");
+
+$currentComp = "Lone Star Central";
+
+$query = $conn->query("select * from Scouting2018 where competition = ".$currentComp.";");
 if(gettype($query)!="boolean"){
   $data = "[";
   for($i=0;$i<$query->num_rows;$i++){

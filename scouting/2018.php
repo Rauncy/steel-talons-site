@@ -15,103 +15,112 @@ function submitScouting(){
     if($conn->connect_error){
       die();
     }
-    $date = date("Y-m-d H:i:s");
-    $auto_abilities_bin = "";
-    if(isset($_POST["abilitiesBL"])) {
-      $auto_abilities_bin . "1";
-    }
-    else {
-      $auto_abilities_bin . "0";
-    }
-    if(isset($_POST["abilitiesSW"])) {
-      $auto_abilities_bin . "1";
-    }
-    else {
-      $auto_abilities_bin . "0";
-    }
-    if(isset($_POST["abilitiesSC"])) {
-      $auto_abilities_bin . "1";
-    }
-    else {
-      $auto_abilities_bin . "0";
-    }
-    if(isset($_POST["abilitiesPI"])) {
-      $auto_abilities_bin . "1";
-    }
-    else {
-      $auto_abilities_bin . "0";
-    }
-    $auto_abilities_dec = bindec($auto_abilities_bin);
-    $startPos = -1;
-    if($_POST['startPos'] == 'l') {
-      $startPos = 0;
-    }
-    else if($_POST['startPos'] == 'c') {
-      $startPos = 1;
-    }
-    else if($_POST['startPos'] == 'r') {
-      $startPos = 2;
-    }
-    $playstyle = -1;
-    if($_POST['type'] == 'def') {
-      $playstyle = 0;
+
+    $currentComp = "Lone Star Central";
+
+    $temp = $conn->query("select * from Scouting where team = ".$_POST['team']." and matchnumber = ".$_POST['match']." and competition = \"".$currentComp."\";");
+    if(gettype($temp)=="boolean"||$temp->num_rows>0){
+      $_POST['err'] = 0;
+    }else{
+      $date = date("Y-m-d H:i:s");
+      $auto_abilities_bin = "";
+      if(isset($_POST["abilitiesBL"])) {
+        $auto_abilities_bin . "1";
       }
-    else if($_POST['type'] == 'off') {
-      $playstyle = 1;
+      else {
+        $auto_abilities_bin . "0";
       }
-    $endPos = -1;
-    if($_POST['endPos'] == 'field') {
-      $endPos = 0;
+      if(isset($_POST["abilitiesSW"])) {
+        $auto_abilities_bin . "1";
+      }
+      else {
+        $auto_abilities_bin . "0";
+      }
+      if(isset($_POST["abilitiesSC"])) {
+        $auto_abilities_bin . "1";
+      }
+      else {
+        $auto_abilities_bin . "0";
+      }
+      if(isset($_POST["abilitiesPI"])) {
+        $auto_abilities_bin . "1";
+      }
+      else {
+        $auto_abilities_bin . "0";
+      }
+      $auto_abilities_dec = bindec($auto_abilities_bin);
+      $startPos = -1;
+      if($_POST['startPos'] == 'l') {
+        $startPos = 0;
+      }
+      else if($_POST['startPos'] == 'c') {
+        $startPos = 1;
+      }
+      else if($_POST['startPos'] == 'r') {
+        $startPos = 2;
+      }
+      $playstyle = -1;
+      if(!isset($_POST['type']));
+      else if($_POST['type'] == 'def') {
+        $playstyle = 0;
+        }
+      else if($_POST['type'] == 'off') {
+        $playstyle = 1;
+        }
+      $endPos = -1;
+      if($_POST['endPos'] == 'field') {
+        $endPos = 0;
+      }
+      else if($_POST['endPos'] == 'plat') {
+        $endPos = 1;
+      }
+      else if($_POST['endPos'] == 'climb') {
+        $endPos = 2;
+      }
+      $penalties_bin = "";
+      if(isset($_POST["PenaltiesFoul"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      if(isset($_POST["PenaltiesTech"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      if(isset($_POST["PenaltiesYellow"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      if(isset($_POST["PenaltiesRed"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      if(isset($_POST["PenaltiesDisabled"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      if(isset($_POST["PenaltiesDisqualified"])) {
+        $penalties_bin . "1";
+      }
+      else {
+        $penalties_bin . "0";
+      }
+      $penalties_dec = bindec($penalties_bin);
+      $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
+        . '\', \'' . $date . '\', \''.$currentComp.'\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');');
+          $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
+          $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
+        "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
     }
-    else if($_POST['endPos'] == 'plat') {
-      $endPos = 1;
-    }
-    else if($_POST['endPos'] == 'climb') {
-      $endPos = 2;
-    }
-    $penalties_bin = "";
-    if(isset($_POST["PenaltiesFoul"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    if(isset($_POST["PenaltiesTech"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    if(isset($_POST["PenaltiesYellow"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    if(isset($_POST["PenaltiesRed"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    if(isset($_POST["PenaltiesDisabled"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    if(isset($_POST["PenaltiesDisqualified"])) {
-      $penalties_bin . "1";
-    }
-    else {
-      $penalties_bin . "0";
-    }
-    $penalties_dec = bindec($penalties_bin);
-    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
-      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');');
-        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
-        $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
-      "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
   }
 }
 ?>
@@ -120,6 +129,13 @@ function submitScouting(){
   <h1 class = "title">Scouting 2018</h1>
   <?php
   if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
+  else if(isset($_POST["err"])){
+    echo "<h2 class = 'postNotif'>";
+    switch($_POST["err"]){
+      case 0: echo "A scouting report for team ".$_POST['team']." on match ".$_POST['match']." at ".$currentComp." has already been submitted.";
+    }
+    echo "</h2>";
+  }
   ?>
   <a href="/scouting/list" id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
