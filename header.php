@@ -16,7 +16,9 @@
     <link rel = "stylesheet"  href = <?php echo $dir . "/css/header-main.css"?>>
     <link rel="icon" type="image/png" sizes="16x16" href=<?php echo $dir . "/images/favicon-16x16.png"?>>
     <script src = <?php echo $dir . "/js/header-main.js"?> defer></script>
-    <title>Tompkins Robotics</title>
+    <title><?php if(isset($title)) echo $title; else echo "Tompkins Robotics";?></title>
+
+    <?php if(isset($headData))echo $headData;?>
   </head>
   <body>
     <header role = "banner">
