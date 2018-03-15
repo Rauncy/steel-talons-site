@@ -34,7 +34,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$searchParam = $_GET["search"];
+$searchParam = (isset($_GET["search"])?$_GET["search"]:"");
 if ( ! empty( $_COOKIE['type'] ) ){
   $type = $_COOKIE["type"];
 }
@@ -70,7 +70,6 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-<div id = "background"><img class = "stretch" src=<?php echo $dir . "/images/membersBackground.jpg"?> alt="image"></div>
 
 
 </body>

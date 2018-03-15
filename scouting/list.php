@@ -40,8 +40,9 @@ req.onload = function(){
     if(data.length>0){
       ret="<table class='listTable'><thead><tr style='border-bottom: 2px solid black'>"+(perm<=1?"<th>Author</th>":"")+"<th>Team</th><th>Match</th><th>Switch</th><th>Scale</th><th>Vault</th><th>Penalties (TODO FORMAT)</th><th>Notes</th><th>Start Pos</th><th>Auto Abilities (TODO FORMAT)</th><th>Playstyle</th><th>End Position</th><th>Climb Assists</th></tr></thead><tbody>";
       for(var i=0;i<data.length;i++){
-        ret+="<tr class='"+(i%2===0?"tableEven":"tableOdd")+"'>"+(perm<=1?"<td>"+data[i].author+"</td>":"")+"<td>"+data[i].team+"</td><td>"+data[i].match+"</td><td>"+data[i].switch+"</td><td>"+data[i].scale+"</td><td>"+data[i].vault+"</td><td>"+data[i].penalties+"</td><td>"+data[i].notes+"</td><td>"+(data[i].start==0?"Left":(data[i].start==1?"Center":"Right"))+"</td><td>"+
-        (!data[i].auto?"None":data[i].auto)+"</td><td>"+(data[i].style==0?"Defensive":"Offensive")+"</td><td>"+(data[i].end==0?"Field":(data[i].end==1?"Platform":"Climb"))+"</td><td>"+data[i].assts+"</td></tr>";
+        ret+="<tr class='"+(i%2===0?"tableEven":"tableOdd")+"'>"+(perm<=1?"<td>"+data[i].author+"</td>":"")+"<td>"+data[i].team+"</td><td>"+data[i].match+"</td><td>"+data[i].switch+"</td><td>"+data[i].scale+"</td><td>"+
+				data[i].vault+"</td><td>"+data[i].penalties+"</td><td>"+data[i].notes+"</td><td>"+(data[i].start==-1?"Left":(data[i].start==0?"Center":"Right"))+"</td><td>"+(!data[i].auto?"None":data[i].auto)+"</td><td>"+
+				(data[i].style==0?"Defensive":"Offensive")+"</td><td>"+(data[i].end==0?"Field":(data[i].end==1?"Platform":"Climb"))+"</td><td>"+data[i].assts+"</td></tr>";
       }
       ret+="</tbody></table>";
     }else{
@@ -54,7 +55,7 @@ req.onload = function(){
 function reloadData(){
   req.open("GET", "listraw.php", true);
   req.send();
-  setTimeout('reloadData()', 20000);
+  setTimeout('reloadData()', 2000);
 }
 reloadData();
 </script>

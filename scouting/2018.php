@@ -128,7 +128,8 @@ function submitScouting(){
 <center>
   <h1 class = "title">Scouting 2018</h1>
   <?php
-  if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
+  $currentComp = "Lone Star Central";
+  if(isset($_POST["submit"])&&!isset($_POST["err"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
   else if(isset($_POST["err"])){
     echo "<h2 class = 'postNotif'>";
     switch($_POST["err"]){

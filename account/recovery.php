@@ -53,6 +53,7 @@ if(isset($_POST["recoveryEmail"])){
   <form class="logIn" onsubmit="recover();" action="/account/recovery.php" method="post" style="padding:0px">
 	  <center>
 		  <h1 style = "color: #27292d;font-size:70px;padding-top:20px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">Account Recovery</h1>
+			<p>At the moment this does not work. Please ask a developer for your password or to change it.</p>
       <p class = "labelLog"; style="font-size:25px">Email: <input type = "text" id = "recoveryEmail" name = "recoveryEmail" placeholder="johnappleseed@gmail.com" style = "font-size:23px;padding-bottom:0px">
 		  <input type="submit" value = "Send Recovery Email" name="submit"></input></p>
       <!-- <button id = "submit">

@@ -14,13 +14,17 @@ if($conn->connect_error){
 }
 
 $currentComp = "Lone Star Central";
+$currentYear = "2018";
 
-$query = $conn->query("select * from Scouting2018 where competition = ".$currentComp.";");
+//SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='yourdatabasename' AND `TABLE_NAME`='yourtablename';
+//use in the future for automated JSON object creation and parsing
+
+$query = $conn->query("select * from Scouting where competition = \"".$currentComp."\" and year = ".$currentYear.";");
 if(gettype($query)!="boolean"){
   $data = "[";
   for($i=0;$i<$query->num_rows;$i++){
-    $lDat = $query->fetch_assoc();
-    $gDat = $conn->query("select * from Scouting where ScoutingID = ".$lDat["ScoutingReport"])->fetch_assoc();
+    $gDat = $query->fetch_assoc();
+    $lDat = $conn->query("select * from Scouting2018 where ScoutingReport = ".$gDat["ScoutingID"])->fetch_assoc();
     $name = "<i>HIDDEN</i>";
     if($_SESSION["perm"]<=1){
       $name = $conn->query("select FirstName, LastName from Members where MemberID = ".$gDat["Author"])->fetch_assoc();
