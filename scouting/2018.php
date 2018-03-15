@@ -16,32 +16,31 @@ function submitScouting(){
       die();
     }
     $date = date("Y-m-d H:i:s");
-    $auto_abilities_bin = "";
+    $auto_abilities_bin = "9";
     if(isset($_POST["abilitiesBL"])) {
-      $auto_abilities_bin . "1";
+      $auto_abilities_bin .= "1";
     }
     else {
-      $auto_abilities_bin . "0";
+      $auto_abilities_bin .= "0";
     }
     if(isset($_POST["abilitiesSW"])) {
-      $auto_abilities_bin . "1";
+      $auto_abilities_bin .= "1";
     }
     else {
-      $auto_abilities_bin . "0";
+      $auto_abilities_bin .= "0";
     }
     if(isset($_POST["abilitiesSC"])) {
-      $auto_abilities_bin . "1";
+      $auto_abilities_bin .= "1";
     }
     else {
-      $auto_abilities_bin . "0";
+      $auto_abilities_bin .= "0";
     }
     if(isset($_POST["abilitiesPI"])) {
-      $auto_abilities_bin . "1";
+      $auto_abilities_bin .= "1";
     }
     else {
-      $auto_abilities_bin . "0";
+      $auto_abilities_bin .= "0";
     }
-    $auto_abilities_dec = bindec($auto_abilities_bin);
     $startPos = -1;
     if($_POST['startPos'] == 'l') {
       $startPos = 0;
@@ -53,12 +52,16 @@ function submitScouting(){
       $startPos = 2;
     }
     $playstyle = -1;
-    if($_POST['type'] == 'def') {
+    if(isset($_POST['def']) && !isset($_POST['off'])) {
       $playstyle = 0;
       }
-    else if($_POST['type'] == 'off') {
+    else if(isset($_POST['off']) && !isset($_POST['def'])) {
       $playstyle = 1;
       }
+    else if(isset($_POST['def']) && isset($_POST['off']))
+    {
+      $playstyle = 2;
+    }
     $endPos = -1;
     if($_POST['endPos'] == 'field') {
       $endPos = 0;
@@ -69,46 +72,46 @@ function submitScouting(){
     else if($_POST['endPos'] == 'climb') {
       $endPos = 2;
     }
-    $penalties_bin = "";
+    $penalties_bin = "9";
     if(isset($_POST["PenaltiesFoul"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
     if(isset($_POST["PenaltiesTech"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
     if(isset($_POST["PenaltiesYellow"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
     if(isset($_POST["PenaltiesRed"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
     if(isset($_POST["PenaltiesDisabled"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
     if(isset($_POST["PenaltiesDisqualified"])) {
-      $penalties_bin . "1";
+      $penalties_bin .= "1";
     }
     else {
-      $penalties_bin . "0";
+      $penalties_bin .= "0";
     }
-    $penalties_dec = bindec($penalties_bin);
+    // $penalties_dec = bindec($penalties_bin);
     $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
-      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities_dec.'\', \''. $playstyle.'\', \''. $penalties_dec.'\', \''. $_POST["notes"].'\');');
+      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. (int)$auto_abilities_bin.'\', \''. $playstyle.'\', \''. (int)$penalties_bin.'\', \''. $_POST["notes"].'\');');
         $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
         $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
       "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
@@ -145,17 +148,17 @@ function submitScouting(){
         </tr>
         <tr>
           <td>Abilities:</td>
-          <td><input type="checkbox" name="abilities[]" value="baseline">Baseline</td>
-          <td><input type="checkbox" name="abilities[]" value="switch">Switch</td>
-          <td><input type="checkbox" name="abilities[]" value="scale">Scale</td>
-          <td><input type="checkbox" name="abilities[]" value="pickup">Pickup</td>
+          <td><input type="checkbox" name="abilitiesBL" value="baseline">Baseline</td>
+          <td><input type="checkbox" name="abilitiesSW" value="switch">Switch</td>
+          <td><input type="checkbox" name="abilitiesSC" value="scale">Scale</td>
+          <td><input type="checkbox" name="abilitiesPI" value="pickup">Pickup</td>
         </tr>
       </table>
       <span class = "formTitle">Teleoperated</span>
       <table class = "formTable">
         <tr>
           <td>Def/Off:</td>
-          <td style = "text-align: left;"><input type="radio" name="type" value="def">Defense<input type="radio" name="type" value="off">Offense</input></td>
+          <td style = "text-align: left;"><input type="checkbox" name="def" value="def">Defense<input type="checkbox" name="off" value="off">Offense</input></td>
         </tr>
         <tr>
           <td>Switch:</td>
@@ -189,27 +192,27 @@ function submitScouting(){
       <table class = "formTable">
       	<tr>
       		<td>Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesFoul" value="Foul"></td>
       	</tr>
       	<tr>
       		<td>Tech Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Tech Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesTech" value="Tech Foul"></td>
       	</tr>
       	<tr>
       		<td>Yellow Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Yellow Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesYellow" value="Yellow Card"></td>
       	</tr>
       	<tr>
       		<td>Red Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Red Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesRed" value="Red Card"></td>
       	</tr>
       	<tr>
       		<td>Disabled:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disabled"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisabled" value="Disabled"></td>
       	</tr>
       	<tr>
       		<td>Disqualified:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disqualified"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisqualified" value="Disqualified"></td>
       	</tr>
       </table>
       <span class = "formTitle">Notes</span>
