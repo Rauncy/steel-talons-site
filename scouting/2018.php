@@ -122,7 +122,15 @@ function submitScouting(){
 <center>
   <h1 class = "title">Scouting 2018</h1>
   <?php
-  if(isset($_POST["submit"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
+  $currentComp = "Lone Star Central";
+  if(isset($_POST["submit"])&&!isset($_POST["err"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
+  else if(isset($_POST["err"])){
+    echo "<h2 class = 'postNotif'>";
+    switch($_POST["err"]){
+      case 0: echo "A scouting report for team ".$_POST['team']." on match ".$_POST['match']." at ".$currentComp." has already been submitted.";
+    }
+    echo "</h2>";
+  }
   ?>
   <a href="/scouting/list" id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
