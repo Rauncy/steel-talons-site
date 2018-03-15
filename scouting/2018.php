@@ -18,6 +18,7 @@ function submitScouting(){
         $abilities .=$ability."|";
     }
   }
+
   //gets rid of the last '|'
   $abilities = substr($abilities,0,-1);
 

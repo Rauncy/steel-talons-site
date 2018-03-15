@@ -44,13 +44,25 @@
   font-size: 20px;
   cursor: pointer;
 }
+.listTable{
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  border: 2px solid black;
+}
+.tableEven{
+  background-color: #EEE;
+}
+.tableOdd{
+  background-color: #DDD;
+}
 #entriesLink{
   text-transform: uppercase;
 
-    color: navy;
-    padding: 1px;
-    font-style: italic;
-    /* border-bottom: 1px solid #000; */
-    padding-bottom: 20px;
-    text-decoration: underline;
+  color: navy;
+  padding: 1px;
+  font-family: 'Poppins', sans-serif;
+  font-style: bold;
+  /* border-bottom: 1px solid #000; */
+  padding-bottom: 20px;
+  text-decoration: none;
 }
