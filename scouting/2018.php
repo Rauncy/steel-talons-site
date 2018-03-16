@@ -1,10 +1,6 @@
 <!--  back end needs to be done-->
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
-if(isset($_POST["submit"])){
-  submitScouting();
-}
-
 function submitScouting(){
   if(session_status()===2){
     //Use database for user validation and creation
@@ -100,22 +96,17 @@ function submitScouting(){
     }
   }
 }
+
+if(isset($_POST["submit"])){
+  submitScouting();
+}
+
+
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
   <h1 class = "title">Scouting 2018</h1>
-  <?php
-  $currentComp = "Lone Star Central";
-  if(isset($_POST["submit"])&&!isset($_POST["err"])) echo "<h2 class = 'postNotif'>Your Scouting Report on team ".$_POST["team"]." for match ".$_POST["match"]." has been submitted successfully!</h2>";
-  else if(isset($_POST["err"])){
-    echo "<h2 class = 'postNotif'>";
-    switch($_POST["err"]){
-      case 0: echo "A scouting report for team ".$_POST['team']." on match ".$_POST['match']." at ".$currentComp." has already been submitted.";
-    }
-    echo "</h2>";
-  }
-  ?>
-  <a href="/scouting/list" id = "entriesLink">Scouting Form Entries</a>
+  <a href=<?php echo $dir . "/scouting/list.php"?> id = "entriesLink">Scouting Form Entries</a>
   <div class="formContainer">
     <form action="2018" method="post">
       <span class = "formTitle">General Info</span>
@@ -139,17 +130,17 @@ function submitScouting(){
         </tr>
         <tr>
           <td>Abilities:</td>
-          <td><input type="checkbox" name="abilitiesBL" value="baseline">Baseline</td>
-          <td><input type="checkbox" name="abilitiesSW" value="switch">Switch</td>
-          <td><input type="checkbox" name="abilitiesSC" value="scale">Scale</td>
-          <td><input type="checkbox" name="abilitiesPI" value="pickup">Pickup</td>
+          <td><input type="checkbox" name="abilities[]" value="baseline">Baseline</td>
+          <td><input type="checkbox" name="abilities[]" value="switch">Switch</td>
+          <td><input type="checkbox" name="abilities[]" value="scale">Scale</td>
+          <td><input type="checkbox" name="abilities[]" value="pickup">Pickup</td>
         </tr>
       </table>
       <span class = "formTitle">Teleoperated</span>
       <table class = "formTable">
         <tr>
           <td>Def/Off:</td>
-          <td style = "text-align: left;"><input type="checkbox" name="def" value="def">Defense<input type="checkbox" name="off" value="off">Offense</input></td>
+          <td style = "text-align: left;"><input type="radio" name="type" value="def">Defense<input type="radio" name="type" value="off">Offense</input></td>
         </tr>
         <tr>
           <td>Switch:</td>
@@ -183,27 +174,27 @@ function submitScouting(){
       <table class = "formTable">
       	<tr>
       		<td>Foul:</td>
-      		<td><input type="checkbox" name = "PenaltiesFoul" value="Foul"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Foul"></td>
       	</tr>
       	<tr>
       		<td>Tech Foul:</td>
-      		<td><input type="checkbox" name = "PenaltiesTech" value="Tech Foul"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Tech Foul"></td>
       	</tr>
       	<tr>
       		<td>Yellow Card:</td>
-      		<td><input type="checkbox" name = "PenaltiesYellow" value="Yellow Card"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Yellow Card"></td>
       	</tr>
       	<tr>
       		<td>Red Card:</td>
-      		<td><input type="checkbox" name = "PenaltiesRed" value="Red Card"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Red Card"></td>
       	</tr>
       	<tr>
       		<td>Disabled:</td>
-      		<td><input type="checkbox" name = "PenaltiesDisabled" value="Disabled"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Disabled"></td>
       	</tr>
       	<tr>
       		<td>Disqualified:</td>
-      		<td><input type="checkbox" name = "PenaltiesDisqualified" value="Disqualified"></td>
+      		<td><input type="checkbox" name = "penalties[]" value="Disqualified"></td>
       	</tr>
       </table>
       <span class = "formTitle">Notes</span>
@@ -216,4 +207,4 @@ function submitScouting(){
   </div>
 </center>
 
-<?php include($dir . "/footer.php"); ?>
+<?php include($dir . "/footer.php") ?>
