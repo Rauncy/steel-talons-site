@@ -140,3 +140,13 @@ main{
   font-size: 15px;
   color: #bb2235;
 }
+
+.formTable{
+  border: 2px solid black;
+}
+.tableDataLeft{
+  text-align: right;
+}
+.tableDataRight{
+  text-align: left;
+}

@@ -19,15 +19,15 @@ $currentYear = "2018";
 //SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='yourdatabasename' AND `TABLE_NAME`='yourtablename';
 //use in the future for automated JSON object creation and parsing
 
-$query = $conn->query("select * from Scouting where competition = \"".$currentComp."\" and year = ".$currentYear.";");
-if(gettype($query)!="boolean"){
+$query = $conn->query("select * from Scouting where Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
+if(gettype($query)!="boolean"&&isset($_SESSION["perm"])){
   $data = "[";
   for($i=0;$i<$query->num_rows;$i++){
     $gDat = $query->fetch_assoc();
-    $lDat = $conn->query("select * from Scouting2018 where ScoutingReport = ".$gDat["ScoutingID"])->fetch_assoc();
-    $name = "<i>HIDDEN</i>";
+    $lDat = $conn->query("select * from Scouting2018 where ScoutingReport = ".$gDat["ScoutingID"].";")->fetch_assoc();
+    $name = "HIDDEN";
     if($_SESSION["perm"]<=1){
-      $name = $conn->query("select FirstName, LastName from Members where MemberID = ".$gDat["Author"])->fetch_assoc();
+      $name = $conn->query("select FirstName, LastName from Members where MemberID = ".$gDat["Author"].";")->fetch_assoc();
       $name = $name["FirstName"]." ".$name["LastName"];
     }
     $data.='{"team":"'.$gDat["Team"].'", "match":'.$gDat["MatchNumber"].', "start":'.$gDat["StartPos"].', "auto":"'.$gDat["AutoAbilities"].'", "abil":"'.$gDat["Abilities"].'", "style":'.$gDat["Playstyle"].', "author":"'.
