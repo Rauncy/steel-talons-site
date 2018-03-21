@@ -8,7 +8,9 @@
 		<option value = "Switch Cubes">Switch Cubes</option>
 		<option value = "Scale Cubes">Scale Cubes</option>
 		<option value = "Power-Up Cubes">Power-Up Cubes</option>
+		<option value = "Aggregate">Aggregate</option>
 		<option value = "Team Number">Team Number</option>
+		<option value = "Match Number">Match Number</option>
 	</select>
 </center>
 <center>
@@ -37,6 +39,12 @@ req.onload = function(){
       break;
 			case "Team Number":
 				how = function(a,b){return a.team - b.team};
+				break;
+			case "Aggregate":
+				how = function(a,b){return (b.vault+b.scale+b.switch)-(a.vault+a.scale+a.switch)}
+				break;
+			case "Match Number":
+				how = function(a,b){return a.match-b.match};
 				break;
       default:
         how = function(a, b){return 0};

@@ -27,13 +27,13 @@ function submitScouting(){
     }
     $auto_abilities .= "|";
     $startPos = -1;
-    if($_POST['startPos'] == 'l') {
+    if($_POST['startPos'] == 'left') {
       $startPos = 0;
     }
-    else if($_POST['startPos'] == 'c') {
+    else if($_POST['startPos'] == 'center') {
       $startPos = 1;
     }
-    else if($_POST['startPos'] == 'r') {
+    else if($_POST['startPos'] == 'right') {
       $startPos = 2;
     }
     $playstyle = -1;
@@ -130,17 +130,17 @@ if(isset($_POST["submit"])){
         </tr>
         <tr>
           <td>Abilities:</td>
-          <td><input type="checkbox" name="abilities[]" value="baseline">Baseline</td>
-          <td><input type="checkbox" name="abilities[]" value="switch">Switch</td>
-          <td><input type="checkbox" name="abilities[]" value="scale">Scale</td>
-          <td><input type="checkbox" name="abilities[]" value="pickup">Pickup</td>
+          <td><input type="checkbox" name="abilitiesBL" value="baseline">Baseline</td>
+          <td><input type="checkbox" name="abilitiesSW" value="switch">Switch</td>
+          <td><input type="checkbox" name="abilitiesSC" value="scale">Scale</td>
+          <td><input type="checkbox" name="abilitiesPI" value="pickup">Pickup</td>
         </tr>
       </table>
       <span class = "formTitle">Teleoperated</span>
       <table class = "formTable">
         <tr>
           <td>Def/Off:</td>
-          <td style = "text-align: left;"><input type="radio" name="type" value="def">Defense<input type="radio" name="type" value="off">Offense</input></td>
+          <td style = "text-align: left;"><input type="checkbox" name="def" value="def">Defense<input type="checkbox" name="off" value="off">Offense</input></td>
         </tr>
         <tr>
           <td>Switch:</td>
@@ -174,27 +174,27 @@ if(isset($_POST["submit"])){
       <table class = "formTable">
       	<tr>
       		<td>Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesFoul" value="Foul"></td>
       	</tr>
       	<tr>
       		<td>Tech Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Tech Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesTech" value="Tech Foul"></td>
       	</tr>
       	<tr>
       		<td>Yellow Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Yellow Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesYellow" value="Yellow Card"></td>
       	</tr>
       	<tr>
       		<td>Red Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Red Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesRed" value="Red Card"></td>
       	</tr>
       	<tr>
       		<td>Disabled:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disabled"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisabled" value="Disabled"></td>
       	</tr>
       	<tr>
       		<td>Disqualified:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disqualified"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisqualified" value="Disqualified"></td>
       	</tr>
       </table>
       <span class = "formTitle">Notes</span>
