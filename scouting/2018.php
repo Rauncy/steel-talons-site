@@ -12,6 +12,16 @@ function submitScouting(){
       die();
     }
     $date = date("Y-m-d H:i:s");
+
+		if(isset($_POST["author"])) {
+			$author = $_POST["author"];
+		}
+		else {
+			$name = $conn->query("select FirstName, LastName from Members where MemberID = ".$_SESSION["dbid"].";")->fetch_assoc();
+      $name = $name["FirstName"]." ".$name["LastName"];
+			$author = $name;
+		}
+
     $auto_abilities = "";
     if(isset($_POST["abilitiesBL"])) {
       $auto_abilities .= "| Baseline ";
@@ -26,6 +36,7 @@ function submitScouting(){
       $auto_abilities .= "| Pickup ";
     }
     $auto_abilities .= "|";
+
     $startPos = -1;
     if($_POST['startPos'] == 'left') {
       $startPos = 0;
@@ -36,6 +47,7 @@ function submitScouting(){
     else if($_POST['startPos'] == 'right') {
       $startPos = 2;
     }
+
     $playstyle = -1;
     if(isset($_POST['def']) && !isset($_POST['off'])) {
       $playstyle = 0;
@@ -47,6 +59,7 @@ function submitScouting(){
     {
       $playstyle = 2;
     }
+
     $endPos = -1;
     if($_POST['endPos'] == 'field') {
       $endPos = 0;
@@ -57,6 +70,7 @@ function submitScouting(){
     else if($_POST['endPos'] == 'climb') {
       $endPos = 2;
     }
+
     $penalties = "";
     if(isset($_POST["PenaltiesFoul"])) {
       $penalties .= "| Foul ";
@@ -84,7 +98,7 @@ function submitScouting(){
     $formData = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";");
     if($formData->num_rows===0)
     {
-    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
+    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
       . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
       .'\', 2018);');
         $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
@@ -118,6 +132,10 @@ if(isset($_POST["submit"])){
         <tr>
           <td>Team Number:</td>
           <td><input type="number" name = "team" placeholder="Team" required></input></td>
+        </tr>
+				<tr>
+          <td>Author (Optional):</td>
+          <td><input type="text" name = "author" placeholder="Author"></input></td>
         </tr>
       </table>
       <span class = "formTitle">Autonomous</span>
