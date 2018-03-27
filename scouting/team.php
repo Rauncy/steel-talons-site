@@ -1,20 +1,14 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
+
 <center>
-	<h1 class = "title">Scouting Entries</h1>
-	<span class = "formText">Sort by: </span>
-  <select id="sortMethod" onchange = "reloadData()">
-		<option value = "Switch Cubes">Switch Cubes</option>
-		<option value = "Scale Cubes">Scale Cubes</option>
-		<option value = "Power-Up Cubes">Power-Up Cubes</option>
-		<option value = "Aggregate">Aggregate</option>
-		<option value = "Team Number">Team Number</option>
-		<option value = "Match Number">Match Number</option>
-	</select>
+	<h1 class = "title">Team <?php echo $_GET['id']; ?> Stats</h1>
+	<
 </center>
 <center>
 	<div id="results" style = "margin-top: 25px;"></div>
 </center>
+
 <script type = "text/javascript" defer>
 const perm = <?php echo (isset($_SESSION["perm"]) ? $_SESSION["perm"] : "100");?>;
 
@@ -36,9 +30,6 @@ req.onload = function(){
       case "Power-Up Cubes":
         how = function(a, b){return b.vault-a.vault};
       break;
-			case "Team Number":
-				how = function(a,b){return a.team - b.team};
-				break;
 			case "Aggregate":
 				how = function(a,b){return (b.vault+b.scale+b.switch)-(a.vault+a.scale+a.switch)}
 				break;

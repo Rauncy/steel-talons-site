@@ -12,6 +12,16 @@ function submitScouting(){
       die();
     }
     $date = date("Y-m-d H:i:s");
+
+		if(isset($_POST["author"])) {
+			$author = $_POST["author"];
+		}
+		else {
+			$name = $conn->query("select FirstName, LastName from Members where MemberID = ".$_SESSION["dbid"].";")->fetch_assoc();
+      $name = $name["FirstName"]." ".$name["LastName"];
+			$author = $name;
+		}
+
     $auto_abilities = "";
     if(isset($_POST["abilitiesBL"])) {
       $auto_abilities .= "| Baseline ";
@@ -26,16 +36,18 @@ function submitScouting(){
       $auto_abilities .= "| Pickup ";
     }
     $auto_abilities .= "|";
+
     $startPos = -1;
-    if($_POST['startPos'] == 'l') {
+    if($_POST['startPos'] == 'left') {
       $startPos = 0;
     }
-    else if($_POST['startPos'] == 'c') {
+    else if($_POST['startPos'] == 'center') {
       $startPos = 1;
     }
-    else if($_POST['startPos'] == 'r') {
+    else if($_POST['startPos'] == 'right') {
       $startPos = 2;
     }
+
     $playstyle = -1;
     if(isset($_POST['def']) && !isset($_POST['off'])) {
       $playstyle = 0;
@@ -47,6 +59,7 @@ function submitScouting(){
     {
       $playstyle = 2;
     }
+
     $endPos = -1;
     if($_POST['endPos'] == 'field') {
       $endPos = 0;
@@ -57,6 +70,7 @@ function submitScouting(){
     else if($_POST['endPos'] == 'climb') {
       $endPos = 2;
     }
+
     $penalties = "";
     if(isset($_POST["PenaltiesFoul"])) {
       $penalties .= "| Foul ";
@@ -84,7 +98,7 @@ function submitScouting(){
     $formData = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";");
     if(gettype($formData)!="boolean"&&$formData->num_rows===0)
     {
-    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $_SESSION["dbid"]
+    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
       . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
       .'\', 2018);');
         $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
@@ -119,6 +133,10 @@ if(isset($_POST["submit"])){
           <td>Team Number:</td>
           <td><input type="number" name = "team" placeholder="Team" required></input></td>
         </tr>
+				<tr>
+          <td>Author (Optional):</td>
+          <td><input type="text" name = "author" placeholder="Author"></input></td>
+        </tr>
       </table>
       <span class = "formTitle">Autonomous</span>
       <table class = "formTable">
@@ -130,17 +148,17 @@ if(isset($_POST["submit"])){
         </tr>
         <tr>
           <td>Abilities:</td>
-          <td><input type="checkbox" name="abilities[]" value="baseline">Baseline</td>
-          <td><input type="checkbox" name="abilities[]" value="switch">Switch</td>
-          <td><input type="checkbox" name="abilities[]" value="scale">Scale</td>
-          <td><input type="checkbox" name="abilities[]" value="pickup">Pickup</td>
+          <td><input type="checkbox" name="abilitiesBL" value="baseline">Baseline</td>
+          <td><input type="checkbox" name="abilitiesSW" value="switch">Switch</td>
+          <td><input type="checkbox" name="abilitiesSC" value="scale">Scale</td>
+          <td><input type="checkbox" name="abilitiesPI" value="pickup">Pickup</td>
         </tr>
       </table>
       <span class = "formTitle">Teleoperated</span>
       <table class = "formTable">
         <tr>
           <td>Def/Off:</td>
-          <td style = "text-align: left;"><input type="radio" name="type" value="def">Defense<input type="radio" name="type" value="off">Offense</input></td>
+          <td style = "text-align: left;"><input type="checkbox" name="def" value="def">Defense<input type="checkbox" name="off" value="off">Offense</input></td>
         </tr>
         <tr>
           <td>Switch:</td>
@@ -174,27 +192,27 @@ if(isset($_POST["submit"])){
       <table class = "formTable">
       	<tr>
       		<td>Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesFoul" value="Foul"></td>
       	</tr>
       	<tr>
       		<td>Tech Foul:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Tech Foul"></td>
+      		<td><input type="checkbox" name = "PenaltiesTech" value="Tech Foul"></td>
       	</tr>
       	<tr>
       		<td>Yellow Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Yellow Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesYellow" value="Yellow Card"></td>
       	</tr>
       	<tr>
       		<td>Red Card:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Red Card"></td>
+      		<td><input type="checkbox" name = "PenaltiesRed" value="Red Card"></td>
       	</tr>
       	<tr>
       		<td>Disabled:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disabled"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisabled" value="Disabled"></td>
       	</tr>
       	<tr>
       		<td>Disqualified:</td>
-      		<td><input type="checkbox" name = "penalties[]" value="Disqualified"></td>
+      		<td><input type="checkbox" name = "PenaltiesDisqualified" value="Disqualified"></td>
       	</tr>
       </table>
       <span class = "formTitle">Notes</span>
