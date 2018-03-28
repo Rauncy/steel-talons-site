@@ -55,6 +55,10 @@
 .tableOdd{
   background-color: #DDD;
 }
+.tableRow>td>a{
+	text-decoration: none;
+	color: inherit;
+}
 #entriesLink{
   text-transform: uppercase;
 
