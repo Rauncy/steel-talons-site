@@ -1,10 +1,33 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
+<?php
+function submitScouting(){
+  if(session_status()===2){
+    //Use database for user validation and creation
+    $servername = "localhost";
+    $username = "root";
+    $password = "admin";
+    $conn = new mysqli($servername, $username, $password, "robotics");
+    if($conn->connect_error){
+      die();
+    }
+    $formData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $_GET["id"] . ";");
 
+
+
+    if($formData->num_rows===0)
+    {
+        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
+    }
+    else {
+        $_POST["err"] = 0;
+    }
+  }
+}?>
 <center>
 	<h1 class = "title">Team <?php echo $_GET['id']; ?> Stats</h1>
-	<
 </center>
+
 <center>
 	<div id="results" style = "margin-top: 25px;"></div>
 </center>
@@ -30,6 +53,9 @@ req.onload = function(){
       case "Power-Up Cubes":
         how = function(a, b){return b.vault-a.vault};
       break;
+			case "Team Number":
+				how = function(a,b){return a.team - b.team};
+				break;
 			case "Aggregate":
 				how = function(a,b){return (b.vault+b.scale+b.switch)-(a.vault+a.scale+a.switch)}
 				break;
@@ -58,7 +84,7 @@ req.onload = function(){
 };
 
 function reloadData(){
-  req.open("GET", "listraw.php", true);
+  req.open("GET", "teamraw.php?team="+<?php echo $_GET['id']; ?>, true);
   req.send();
   setTimeout('reloadData()', 20000);
 }
