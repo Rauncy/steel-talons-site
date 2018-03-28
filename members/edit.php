@@ -12,6 +12,19 @@ if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["submit"]) && isset($_SESSION["p
     die();
   }
 
-  $conn->query("update members set ".""." where id = ".$_POST["id"]);
+  $qu = "update members set ";
+  for($i = 0; $i<count($_POST); $i++){
+
+  }
+  foreach($_POST as $key => $val){
+    switch($key){
+      case "submit":
+        break;
+      default:
+        $qu.=$key." = ".$val.", ";
+    }
+  }
+  $qu=substr($qu, 0, strlen($qu)-2);
+  $conn->query($qu." where id = ".$_POST["id"]);
 }else echo "false";
 ?>
