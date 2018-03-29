@@ -11,23 +11,67 @@ function submitScouting(){
     if($conn->connect_error){
       die();
     }
-    $formData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $_GET["id"] . ";");
 
+    $teamNum = $_GET["id"];
 
+    $teamBasicData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $teamNum . ";");
+    $driveTrain = $teamBasicData->fetch_assoc()["DriveTrain"];
+    $autoDesc = $teamBasicData->fetch_assoc()["AutoDesc"];
+    $abilities = $teamBasicData->fetch_assoc()["Abilities"];
 
-    if($formData->num_rows===0)
+    $avgCubes = 0;
+    $avgClimbs = 0;
+    $avgClimbAssts = 0;
+
+    $teamScoutData = $conn->query("select * from Scouting where Team = ".$teamNum.";");
+    if($teamScoutData->num_rows !== 0)
     {
-        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
+      $matchesPlayed = $teamScoutData->num_rows;
+      $totalCubes = 0;
+      $totalClimbs = 0;
+      $totalClimbAssts = 0;
+      foreach($teamScoutData as $data)
+      {
+        $scoutID = $teamScoutData->fetch_assoc()["ScoutingID"];
+        $teamPlayData = $conn-query("select * from Scouting2018 where ScoutingReport = ".$scoutID.";");
+        if($teamPlayData->num_rows !== 0)
+        {
+          $totalCubes += $teamPlayData->fetch_assoc()["Switch"] + $teamPlayData->fetch_assoc()["Scale"] + $teamPlayData->fetch_assoc()["Vault"];
+          if($teamPlayData->fetch_assoc()["EndPos"] == "Climb")
+          {
+            $totalClimbs++;
+          }
+          $totalClimbAssts += $teamPlayData->fetch_assoc()["ClimbAssts"];
+        }
+      }
+      $avgCubes = $totalCubes/$matchesPlayed;
+      $avgClimbs = $totalClimbs/$matchesPlayed;
+      $avgClimbAssts = $totalClimbAssts/$matchesPlayed;
     }
-    else {
-        $_POST["err"] = 0;
-    }
+
   }
 }?>
 <center>
-	<h1 class = "title">Team <?php echo $_GET['id']; ?> Stats</h1>
+	<h1 class = "title">Team <?php echo $teamNum; ?> Stats</h1>
 </center>
-
+<br>
+<table class = "statsTable">
+  <tr>
+    <td> DriveTrain: <?php echo $driveTrain; ?></td>
+    <td> Abilities: <?php echo $abilities; ?></td>
+  </tr>
+  <tr>
+    <td>Autonomous Description: <?php echo $autoDesc; ?></td>
+  </tr>
+  <tr>
+    <td>Cubes per Match: <?php echo $avgCubes; ?></td>
+    <td>Climbs per Match: <?php echo $avgClimbs; ?></td>
+    <td>Climb Assists per Match: <?php echo $avgClimbAssts; ?></td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
 <center>
 	<div id="results" style = "margin-top: 25px;"></div>
 </center>
@@ -84,7 +128,7 @@ req.onload = function(){
 };
 
 function reloadData(){
-  req.open("GET", "teamraw.php?team="+<?php echo $_GET['id']; ?>, true);
+  req.open("GET", "teamraw.php?team="+<?php echo $teamNum; ?>, true);
   req.send();
   setTimeout('reloadData()', 20000);
 }
