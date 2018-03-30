@@ -1,3 +1,4 @@
+drop database robotics;
 create database robotics;
 use robotics;
 create table Members (MemberID int auto_increment, FirstName tinytext, LastName tinytext, Grade tinyint, Year tinyint, Permission tinyint, Username tinytext, Pass tinytext, Email tinytext, Picture BLOB, Description text, Phone varchar(10), Roles text, PRIMARY KEY (MemberID));

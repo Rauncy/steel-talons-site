@@ -19,7 +19,7 @@ function pageReload(event) {
 	<h1 style = "display: inline;">The Blue Alliance Teams</h1>
 	<div style = "display: inline; margin-left: 500px; ">
 		<center>
-		<input style="display:block"type="text" id="srch" onkeyup="pageReload(event)" placeholder="Search.." value=<?php echo $_GET['search']; ?>>
+		<input style="display:block"type="text" id="srch" onkeyup="pageReload(event)" placeholder="Search.."<?php if(isset($_GET["search"])) echo  " value=\"".$_GET['search']."\""; ?>>
 
 		<a style=<?php if( $_GET['page']==1){ echo '"visibility: hidden;"';}else{echo "none";} ?>
 		href=<?php $num = $_GET['page']; if($num>1){echo "?search=".$_GET['search']."&page=".($num-1); }?>><button type="button" name="prev" >Previous</button></a>
