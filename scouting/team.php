@@ -19,45 +19,59 @@ if(session_status()===2){
     die();
   }
   $teamNum = $_GET["id"];
-  $teamBasicData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $teamNum . ";")->fetch_assoc();
-  $driveTrain = $teamBasicData["DriveTrain"];
-  $autoDesc = $teamBasicData["AutoDesc"];
-  $abilities = $teamBasicData["Abilities"];
-	$currentComp = "Lone Star Central";
-	$currentYear = "2018";
-  $teamScoutData = $conn->query("select * from Scouting where Team = ".$teamNum." and Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
-  if($teamScoutData->num_rows !== 0)
-  {
-
-    $matchesPlayed = $teamScoutData->num_rows;
-  	$totalCubes = 0;
-    $totalClimbs = 0;
-    $totalClimbAssts = 0;
-    foreach($teamScoutData as $data)
+  $teamBasicData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $teamNum . ";");
+  if(gettype($teamBasicData)!="boolean"&&$teamBasicData->num_rows>0){
+    $teamBasicData = $teamBasicData->fetch_assoc();
+    $driveTrain = $teamBasicData["DriveTrain"];
+    $autoDesc = $teamBasicData["AutoDesc"];
+    $abilities = $teamBasicData["Abilities"];
+  	$currentComp = "Lone Star Central";
+  	$currentYear = "2018";
+    $teamScoutData = $conn->query("select * from Scouting where Team = ".$teamNum." and Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
+    if($teamScoutData->num_rows !== 0)
     {
-      $scoutID = $data["ScoutingID"];
-      $teamPlayData = $conn->query("select * from Scouting2018 where ScoutingReport = ".$scoutID.";");
-      if($teamPlayData->num_rows !== 0)
+
+      $matchesPlayed = $teamScoutData->num_rows;
+    	$totalCubes = 0;
+      $totalClimbs = 0;
+      $totalClimbAssts = 0;
+      foreach($teamScoutData as $data)
       {
-				$currentData = $teamPlayData->fetch_assoc();
-        $totalCubes += $currentData["Switch"] + $currentData["Scale"] + $currentData["Vault"];
-        if($currentData["EndPos"] == "Climb")
+        $scoutID = $data["ScoutingID"];
+        $teamPlayData = $conn->query("select * from Scouting2018 where ScoutingReport = ".$scoutID.";");
+        if($teamPlayData->num_rows !== 0)
         {
-          $totalClimbs++;
+  				$currentData = $teamPlayData->fetch_assoc();
+          $totalCubes += $currentData["Switch"] + $currentData["Scale"] + $currentData["Vault"];
+          if($currentData["EndPos"] == "Climb")
+          {
+            $totalClimbs++;
+          }
+          $totalClimbAssts += $currentData["ClimbAssts"];
         }
-        $totalClimbAssts += $currentData["ClimbAssts"];
       }
+      $avgCubes = $totalCubes/$matchesPlayed;
+      $avgClimbs = $totalClimbs/$matchesPlayed;
+      $avgClimbAssts = $totalClimbAssts/$matchesPlayed;
     }
-    $avgCubes = $totalCubes/$matchesPlayed;
-    $avgClimbs = $totalClimbs/$matchesPlayed;
-    $avgClimbAssts = $totalClimbAssts/$matchesPlayed;
   }
+}
+else{
+  unset($teamBasicData);
+  die();
 }
 ?>
 <center>
 	<h1 class = "title">Team <?php echo $teamNum; ?> Stats</h1>
 </center>
 <br>
+<div class="formContainer">
+
+</div>
+<!--
+OLD CODE
+-->
+<?php if(isset($teamBasicData)){?>
 <table class = "statsTable">
   <tr>
     <td align = "center"> DriveTrain: <?php echo $driveTrain; ?></td>
@@ -135,3 +149,6 @@ function reloadData(){
 }
 reloadData();
 </script>
+<?php
+}else {
+}?>
