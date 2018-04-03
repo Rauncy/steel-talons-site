@@ -1,15 +1,18 @@
 <?php $dir = "../"; include($dir . "/header.php"); ?>
-
-<script src="index.js" charset="utf-8"></script>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="index.js" charset="utf-8"></script>
 
+<div class = "wrapper" style = "position: relative;width: 400px;height: 300px;">
+    <div style="position: absolute;top: 0;left: 0; ">
+      <h2 style="font-family: 'Oswald'; ">Team <?php echo $_GET['num']; ?> Stats</h2>
+      <div id="chartContainer" style="height: 300px; width: 400px;"></div>
+    </div>
 
-<div class = 'distribution_pie' style = "margin-left:2em;">
-    <h2><strong>Power Cube Distribution</strong></h2>
-    <canvas id="myCanvas" width="200" height="100" >
-    Your browser does not support the HTML5 canvas tag.</canvas>
-    <div id="myLegend"></div>
+  <div class = 'distribution_pie' style = "margin-left:40em; position: absolute;top: 0;left: 0;">
+      <h2 style="font-family: 'Oswald'; ">Power Cube Distribution</h2>
+      <canvas id="myCanvas" width="300" height="300" >Your browser does not support the HTML5 canvas.</canvas>
+      <div id="myLegend"></div>
+  </div>
 </div>
 
   <?php
@@ -29,7 +32,7 @@
     $scale =0;$switch =0;$vault =0;
 
 
-    $sql = "Select * from scouting where Team = '5427' ORDER BY MatchNumber DESC";
+    $sql = "Select * from scouting where Team = '".$_GET['num']."' ORDER BY MatchNumber DESC";
     $result = $conn->query($sql);
 
 
