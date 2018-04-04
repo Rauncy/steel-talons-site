@@ -60,14 +60,28 @@ if(session_status()===2){
 <br>
 <table class = "statsTable">
   <tr>
-    <td align = "center"> DriveTrain: <?php echo $driveTrain; ?></td>
-		<td align = "center"> Autonomous Description: <?php echo $autoDesc; ?></td>
-    <td align = "center"> Abilities: <?php echo $abilities; ?></td>
+    <td align = "right"> DriveTrain: </td>
+		<td align = "left"><?php echo $driveTrain; ?></td>
+	</tr>
+	<tr>
+		<td align = "right"> Autonomous Description: </td>
+		<td align = "left"><?php echo $autoDesc; ?></td>
+	</tr>
+	<tr>
+    <td align = "right"> Abilities: </td>
+		<td align = "left"><?php echo $abilities; ?></td>
   </tr>
   <tr>
-    <td align = "center">Cubes per Match: <?php echo $avgCubes; ?></td>
-    <td align = "center">Climbs per Match: <?php echo $avgClimbs; ?></td>
-    <td align = "center">Climb Assists per Match: <?php echo $avgClimbAssts; ?></td>
+    <td align = "right">Cubes per Match: </td>
+		<td align = "left"><?php echo $avgCubes; ?></td>
+	</tr>
+	<tr>
+    <td align = "right">Climbs per Match: </td>
+		<td align = "left">	<?php echo $avgClimbs; ?></td>
+	</tr>
+	<tr>
+    <td align = "right">Climb Assists per Match: </td>
+		<td align = "left"><?php echo $avgClimbAssts; ?></td>
   </tr>
 </table>
 <br>

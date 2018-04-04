@@ -11,7 +11,7 @@ function submitScouting(){
     if($conn->connect_error){
       die();
     }
-		$teamnNum = $_POST["team"];
+		$teamNum = $_POST["team"];
 		$drive = $_POST["drive"];
 		$abilities = trim(preg_replace('/\s+/',' ', $_POST["abilities"]));
     $auto = trim(preg_replace('/\s+/', ' ', $_POST["auto"]));
@@ -31,16 +31,22 @@ function submitScouting(){
 if(isset($_POST["submit"])){
   submitScouting();
 }
-
+if(isset($_POST["search"])){
+	echo("i want to die");
+	header("Location: /scouting/team?id=".$_POST["teamSearch"]);
+	die();
+}
 
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
   <h1 class = "title">Scouting 2018</h1>
-	<input type="number" name = "teamSearch" placeholder="Team Number" required></input>
-  <a href=<?php echo $dir . "/scouting/team?id=".$_POST["teamSearch"]?> id = "entriesLink">Scouting Form Entries</a>
+	<form action="teamScouting" method = "post">
+		<input type="number" name = "teamSearch" placeholder="Team Number" required></input>
+		<input type="submit" name="search" value="Search" class = "teamScoutingSubmit"></input>
+	</form>
   <div class="formContainer">
-    <form action="2018" method="post">
+    <form action="teamScouting" method="post">
       <span class = "formTitle">General Info</span>
       <table class = "formTable">
         <tr>
