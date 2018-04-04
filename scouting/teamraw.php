@@ -21,7 +21,7 @@ $team = $_GET['id'];
 //use in the future for automated JSON object creation and parsing
 
 $query = $conn->query("select * from Scouting where Competition = \"".$currentComp."\" and Year = ".$currentYear." and Team = ".$team.";");
-if(gettype($query)!="boolean"&&isset($_SESSION["perm"])){
+if(gettype($query)!="boolean"&&isset($_SESSION["perm"])&&$query->num_rows>0){
   $data = "[";
   for($i=0;$i<$query->num_rows;$i++){
     $gDat = $query->fetch_assoc();

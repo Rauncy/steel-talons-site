@@ -76,11 +76,12 @@ var Piechart = function(options){
                     labelX = this.canvas.width/2 + (offset + pieRadius / 2) * Math.cos(start_angle + slice_angle/2);
                     labelY = this.canvas.height/2 + (offset + pieRadius / 2) * Math.sin(start_angle + slice_angle/2);
                 }
-
-                var labelText = Math.round(100 * val / total_value);
-                this.ctx.fillStyle = "white";
-                this.ctx.font = "bold 20px Arial";
-                this.ctx.fillText(labelText+"% - ("+val+")", labelX-20,labelY+10);
+                if(val!=0){
+                  var labelText = Math.round(100 * val / total_value);
+                  this.ctx.fillStyle = "white";
+                  this.ctx.font = "bold 20px Arial";
+                  this.ctx.fillText(labelText+"% - ("+val+")", labelX-20,labelY);
+                }
                 start_angle += slice_angle;
           }
 
@@ -122,21 +123,21 @@ function lineDistribution(scaleArr, switchArr, vaultArr) {
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light1",
-	title:{
-		text: "Power Cube Distribution Per Match"
-	},
   axisX:{
-    title: "Match"
+    title: "Match",
+        valueFormatString: "##",
   },
 	axisY:{
     title: "Cubes",
-		includeZero: false
+		includeZero: true,
+    valueFormatString: "#",
 	},
   legend:{
 		cursor:"pointer",
 		verticalAlign: "bottom",
 		horizontalAlign: "left",
 		dockInsidePlotArea: true,
+    itemclick: toogleDataSeries
 	},
 	data: [{
 		type: "line",
@@ -162,5 +163,16 @@ var chart = new CanvasJS.Chart("chartContainer", {
 ]
 });
 chart.render();
+
+function toogleDataSeries(e){
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else{
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+// document.getElementById('chartContainer').style.height="390px";
 
 }
