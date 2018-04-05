@@ -1,5 +1,6 @@
 <?php
 header("ContentType: text/plain");
+include($dir = ".."; $dir . "/globals.php");
 if(isset($_COOKIE["PHPSESSID"])) session_start();
 if(session_status()!==2) die();
 
@@ -13,8 +14,6 @@ if($conn->connect_error){
   die();
 }
 
-$currentComp = "Lone Star Central";
-$currentYear = "2018";
 $team = $_GET['id'];
 
 //SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='yourdatabasename' AND `TABLE_NAME`='yourtablename';

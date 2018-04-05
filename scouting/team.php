@@ -1,4 +1,4 @@
-<?php $dir = ".."; include($dir . "/header.php"); ?>
+<?php $dir = ".."; include($dir . "/header.php"); include($dir . "/globals.php");?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <?php
 $teamNum = 0;
@@ -25,12 +25,8 @@ if(session_status()===2){
     $driveTrain = $teamBasicData["DriveTrain"];
     $autoDesc = $teamBasicData["AutoDesc"];
     $abilities = $teamBasicData["Abilities"];
-  	$currentComp = "Lone Star Central";
-  	$currentYear = "2018";
     $teamScoutData = $conn->query("select * from Scouting where Team = ".$teamNum." and Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
-    if($teamScoutData->num_rows !== 0)
-    {
-
+    if(gettype($teamScoutData)!="boolean"&&$teamScoutData->num_rows !== 0){
       $matchesPlayed = $teamScoutData->num_rows;
     	$totalCubes = 0;
       $totalClimbs = 0;
@@ -53,21 +49,30 @@ if(session_status()===2){
       $avgCubes = $totalCubes/$matchesPlayed;
       $avgClimbs = $totalClimbs/$matchesPlayed;
       $avgClimbAssts = $totalClimbAssts/$matchesPlayed;
+    }else{
+      unset($teamScoutData);
     }
+  }else{
+    unset($teamBasicData);
   }
-}
-else{
-  unset($teamBasicData);
-  die();
 }
 ?>
 <center>
 	<h1 class = "title">Team <?php echo $teamNum; ?> Stats</h1>
+  <div class="formContainer">
+    <?php if(isset($teamBasicData)): ?>
+      <span class="formTitle">Properties</span>
+      <table class="formTable">
+      </table>
+    <?php else: ?>
+      <span class="formTitle">Properties not submitted</span>
+    <?php endif;
+    if($teamScoutData)?>
+    <span class="formTitle">Previous Matches</span>
+    <table class="formTable">
+    </table>
+  </div>
 </center>
-<br>
-<div class="formContainer">
-
-</div>
 <!--
 OLD CODE
 -->
