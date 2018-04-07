@@ -26,5 +26,6 @@ if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["submit"]) && isset($_SESSION["p
   }
   $qu=substr($qu, 0, strlen($qu)-2);
   $conn->query($qu." where id = ".$_POST["id"]);
+  echo "true";
 }else echo "false";
 ?>

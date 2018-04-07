@@ -150,3 +150,9 @@ main{
 .tableDataRight{
   text-align: left;
 }
+.roboticsBlue{
+  color: #00F;
+}
+.roboticsRed{
+  color: #F00;
+}

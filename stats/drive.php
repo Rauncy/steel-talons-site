@@ -1,4 +1,4 @@
-<?php $dir = "../"; include($dir . "/header.php"); ?>
+<?php $dir = "../"; include($dir . "/header.php"); include($dir . "/globals.php");?>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="index.js" charset="utf-8"></script>
 
@@ -32,13 +32,13 @@
     $scale =0;$switch =0;$vault =0;
 
 
-    $sql = "Select * from scouting where Team = '".$_GET['num']."' ORDER BY MatchNumber DESC";
+    $sql = "Select * from scouting where Team = '".$_GET['num']."' and Competition = '".$currentComp."' and Year = ".$currentYear." ORDER BY MatchNumber DESC;";
     $result = $conn->query($sql);
 
 
     $scaleArr = '';  $switchArr = '';  $vaultArr = '';
     while($row = $result->fetch_assoc()){
-      $sql1 = "Select * from scouting2018 where ID = '".$row['ScoutingID']."'";
+      $sql1 = "Select * from scouting2018 where ID = ".$row['ScoutingID'].";";
 
       $row1 = $conn->query($sql1)->fetch_assoc();
 

@@ -47,7 +47,7 @@
             </li>
             <center>
               <div class ="dropdown horizm">
-                <a>Filler</a>
+                <a href = "/account/settings">Settings</a>
                 <a href = "/account/logout">Logout</a>
               </div>
             </center>

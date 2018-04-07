@@ -3,6 +3,9 @@ header("ContentType: text/plain");
 if(isset($_COOKIE["PHPSESSID"])) session_start();
 if(session_status()!==2) die();
 
+$dir = "..";
+include($dir . "/globals.php");
+
 $servername = "localhost";
 $username = "root";
 $password = "admin";
@@ -12,9 +15,6 @@ $conn = new mysqli($servername, $username, $password, "robotics");
 if($conn->connect_error){
   die();
 }
-
-$currentComp = "Lone Star Central";
-$currentYear = "2018";
 
 //SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='yourdatabasename' AND `TABLE_NAME`='yourtablename';
 //use in the future for automated JSON object creation and parsing
