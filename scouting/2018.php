@@ -3,7 +3,8 @@
 <?php
 function submitScouting(){
   if(session_status()===2){
-    //Use database for user validation and creation
+    //Use database for user validation and creatio
+
     $servername = "localhost";
     $username = "root";
     $password = "admin";
@@ -13,11 +14,11 @@ function submitScouting(){
     }
     $date = date("Y-m-d H:i:s");
 
-		if(isset($_POST["author"])) {
+		if($_POST["author"]!="") {
 			$author = $_POST["author"];
 		}
 		else {
-			$name = $conn->query("select FirstName, LastName from Members where MemberID = ".$_SESSION["dbid"].";")->fetch_assoc();
+			$name = $conn->query("select FirstName, LastName from Members where MemberID = '".$_SESSION["dbid"]."';")->fetch_assoc();
       $name = $name["FirstName"]." ".$name["LastName"];
 			$author = $name;
 		}
@@ -98,12 +99,15 @@ function submitScouting(){
     $formData = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";");
     if(gettype($formData)!="boolean"&&$formData->num_rows===0)
     {
-    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
+      $sql = 'insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
       . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
-      .'\', 2018);');
-        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";")->fetch_assoc()["ScoutingID"];
-        $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
-      "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
+      .'\', 2018);';
+      $result1 =  $conn->query($sql);
+      $sql2 = "select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";";
+        $formNum = $conn->query($sql2)->fetch_assoc()["ScoutingID"];
+        $sql1 = 'insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
+      "'. $endPos. '", "'. $_POST["climbAsst"]. '");';
+        $conn->query($sql1);
     }
     else {
         $_POST["err"] = 0;

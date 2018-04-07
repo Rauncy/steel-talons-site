@@ -124,8 +124,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light1",
   axisX:{
-    title: "Match",
-        valueFormatString: "##",
+    title: "Match"
   },
 	axisY:{
     title: "Cubes",
