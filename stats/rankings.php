@@ -69,10 +69,7 @@ if(isset($_GET["id"])){
       );
 
       foreach($data as $ind){
-        if($ind["switch"] > $sel["switch"]){
-          $ranks["switch"]++;
-          $tieCount["switch"] = 0;
-        }
+        if($ind["switch"] > $sel["switch"]) $ranks["switch"]++;
         else if($ind["switch"]==$sel["switch"]) $tieCount["switch"]++;
         if($ind["scale"] > $sel["scale"]) $ranks["scale"]++;
         else if($ind["scale"]==$sel["scale"]) $tieCount["scale"]++;
@@ -84,9 +81,12 @@ if(isset($_GET["id"])){
         else if($ind["climb"]==$sel["climb"]) $tieCount["climb"]++;
       }
 
-      echo '{"switch":'.$ranks["switch"].', "scale":'.()$ranks["scale"].', "vault"'.$ranks["vault"].', "assts":'.$ranks["assts"].', climb:'.$ranks["climb"].'}';
+      echo '{"switch":"'.($tieCount["switch"]>0?$tieCount["switch"]." way tie for ":"").$ranks["switch"].', "scale":"'.($tieCount["scale"]>0?$tieCount["scale"]." way tie for ":"").$ranks["scale"].'", "vault:"'.
+        ($tieCount["vault"]>0?$tieCount["vault"]." way tie for ":"").$ranks["vault"].'", "assts":"'.($tieCount["assts"]>0?$tieCount["assts"]." way tie for ":"").$ranks["assts"].'", climb:"'.
+        ($tieCount["climb"]>0?$tieCount["climb"]." way tie for ":"").$ranks["climb"].'", avg:"'.
+        ($tieCount["climb"]>0?$tieCount["climb"]." way tie for ":"").$ranks["climb"].'}';
     }else{
-      echo '{"switch":0, "scale":0, "vault":0, "assts":0, "climb":0}';
+      echo '{"switch":0, "scale":0, "vault":0, "abg":0, "climb":0}';
     }
   }
 }else{

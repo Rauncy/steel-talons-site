@@ -96,28 +96,56 @@ if(session_status()===2){
             <?php if(isset($teamScoutData)):?>
             <tr class = "tableOdd">
               <td align = "right">Switch:</td>
-          		<td align = "left"><?php echo sprintf("%.2f", $avgSwitch); ?></td>
+          		<td align = "left" id="switchstat"><?php echo sprintf("%.2f", $avgSwitch); ?></td>
           	</tr>
             <tr class = "tableEven">
               <td align = "right">Scale:</td>
-          		<td align = "left"><?php echo sprintf("%.2f", $avgScale); ?></td>
+          		<td align = "left"  id="scalestat"><?php echo sprintf("%.2f", $avgScale); ?></td>
           	</tr>
             <tr class = "tableOdd">
               <td align = "right">Vault:</td>
-          		<td align = "left"><?php echo sprintf("%.2f", $avgVault); ?></td>
+          		<td align = "left" id="vaultstat"><?php echo sprintf("%.2f", $avgVault); ?></td>
           	</tr>
-            <tr class = "tableEven">
+            <tr class = "tableEven" id="avgstat">
               <td align = "right">Cubes:</td>
-          		<td align = "left"><?php echo sprintf("%.2f", $avgCubes); ?></td>
+          		<td align = "left" id="avgstat"><?php echo sprintf("%.2f", $avgCubes); ?></td>
           	</tr>
           	<tr class = "tableOdd">
               <td align = "right">Climbs: </td>
-          		<td align = "left">	<?php echo sprintf("%.2f", $avgClimbs); ?></td>
+          		<td align = "left" id="climbstat">	<?php echo sprintf("%.2f", $avgClimbs); ?></td>
           	</tr>
           	<tr class = "tableEven">
               <td align = "right">Assists: </td>
-          		<td align = "left"><?php echo sprintf("%.2f", $avgClimbAssts); ?></td>
+          		<td align = "left" id="asststat"><?php echo sprintf("%.2f", $avgClimbAssts); ?></td>
             </tr>
+						<script type="text/javascript">
+
+						var reqrank = new XMLHttpRequest();
+						reqrank.onload = function(){
+							if(this.status == 200){
+								console.log(reqscout.responseText);
+								var data = JSON.parse(reqscout.responseText);
+
+								for(var i in reqrank){
+									if(i=="total"){
+										document.getElementById("stat".).innerHTML = data["stat"];
+									}else{
+										document.getElementById("avgstat").innerHTML = data[i+"stat"];
+									}
+								}
+
+							}
+						};
+
+						function reloadRanks(){
+							reqrank.open("GET", "/stats/rankings?id="+<?php echo $teamNum; ?>, true);
+							reqrank.send();
+							setTimeout(reloadRanks(), 20000);
+						}
+
+						reloadRanks();
+
+						</script>
           <?php endif;?>
         </table>
         <br>
@@ -128,7 +156,7 @@ if(session_status()===2){
       if(isset($teamScoutData)):?>
       <span class="formTitle">Previous Matches</span>
       <br>
-      <select id="sortMethod" onchange = "reloadData()">
+      <select id="sortMethod" onchange = "reloadScout()">
         <option value = "Match Number">Match Number</option>
         <option value = "Switch Cubes">Switch Cubes</option>
         <option value = "Scale Cubes">Scale Cubes</option>
@@ -137,6 +165,61 @@ if(session_status()===2){
       </select>
       <div id="results" style = "margin-top: 25px;"></div>
     </div>
+		<script type = "text/javascript" defer>
+		const perm = <?php echo (isset($_SESSION["perm"]) ? $_SESSION["perm"] : "100");?>;
+
+
+		var reqscout = new XMLHttpRequest();
+		reqscout.onload = function(){
+		  if(this.status == 200){
+				console.log(reqscout.responseText);
+		    var data = JSON.parse(reqscout.responseText);
+		    var how = document.getElementById("sortMethod");
+		    var selected = how.options[how.selectedIndex].value;
+		    switch(selected){
+		      case "Switch Cubes":
+		        how = function(a, b){return b.switch-a.switch};
+		      break;
+		      case "Scale Cubes":
+		        how = function(a, b){return b.scale-a.scale};
+		      break;
+		      case "Power-Up Cubes":
+		        how = function(a, b){return b.vault-a.vault};
+		      break;
+					case "Aggregate":
+						how = function(a,b){return (b.vault+b.scale+b.switch)-(a.vault+a.scale+a.switch)}
+						break;
+					case "Match Number":
+						how = function(a,b){return a.match-b.match};
+						break;
+		      default:
+		        how = function(a, b){return 0};
+		    }
+		    data.sort(how);
+		    var ret;
+		    if(data.length>0){
+		      ret="<table class='listTable'><thead><tr style='border-bottom: 2px solid black'>"+(perm<=1?"<th>Author</th>":"")+"<th>Match</th><th>Switch</th><th>Scale</th><th>Vault</th><th>Penalties</th><th>Notes</th><th>Start Pos</th><th>Auto Abilities</th><th>Playstyle</th><th>End Position</th><th>Climb Assists</th></tr></thead><tbody>";
+		      for(var i=0;i<data.length;i++){
+		        ret+="<tr class='tableRow "+(i%2===0?"tableEven":"tableOdd")+"'>"+(perm<=1?"<td>"+data[i].author+"</td>":"")+"<td>"+data[i].match+"</td><td>"+data[i].switch+"</td><td>"+data[i].scale+"</td><td>"
+						+data[i].vault+"</td><td>"+data[i].penalties+"</td><td>"+data[i].notes+"</td><td>"+(data[i].start==0?"Left":(data[i].start==1?"Center":"Right"))+"</td><td>"+
+		        (!data[i].auto?"None":data[i].auto)+"</td><td>"+(data[i].style==0?"Defensive":(data[i].style==1?"Offensive":"Both"))+"</td><td>"+(data[i].end==0?"Field":(data[i].end==1?"Platform":"Climb"))+"</td><td>"
+						+data[i].assts+"</td></tr>";
+		      }
+		      ret+="</tbody></table>";
+		    }else{
+		      ret = "<h2 class='postNotif'>There are no entries yet.</h2>";
+		    }
+		    document.getElementById("results").innerHTML = ret;
+		  }
+		};
+
+		function reloadScout(){
+		  reqscout.open("GET", "teamraw.php?id="+<?php echo $teamNum; ?>, true);
+		  reqscout.send();
+		  setTimeout('reloadScout()', 20000);
+		}
+		reloadScout();
+		</script>
     <?php else:?>
       <span class="formTitle">Previous matches not submitted</span>
     <?php endif;?>
@@ -144,60 +227,4 @@ if(session_status()===2){
     <h2 class="postNotif">This team has neither team scouting data nor match scouting data</h2>
   <?php endif;?>
 </center>
-
-<script type = "text/javascript" defer>
-const perm = <?php echo (isset($_SESSION["perm"]) ? $_SESSION["perm"] : "100");?>;
-
-
-var req = new XMLHttpRequest();
-req.onload = function(){
-  if(this.status == 200){
-		console.log(req.responseText);
-    var data = JSON.parse(req.responseText);
-    var how = document.getElementById("sortMethod");
-    var selected = how.options[how.selectedIndex].value;
-    switch(selected){
-      case "Switch Cubes":
-        how = function(a, b){return b.switch-a.switch};
-      break;
-      case "Scale Cubes":
-        how = function(a, b){return b.scale-a.scale};
-      break;
-      case "Power-Up Cubes":
-        how = function(a, b){return b.vault-a.vault};
-      break;
-			case "Aggregate":
-				how = function(a,b){return (b.vault+b.scale+b.switch)-(a.vault+a.scale+a.switch)}
-				break;
-			case "Match Number":
-				how = function(a,b){return a.match-b.match};
-				break;
-      default:
-        how = function(a, b){return 0};
-    }
-    data.sort(how);
-    var ret;
-    if(data.length>0){
-      ret="<table class='listTable'><thead><tr style='border-bottom: 2px solid black'>"+(perm<=1?"<th>Author</th>":"")+"<th>Match</th><th>Switch</th><th>Scale</th><th>Vault</th><th>Penalties</th><th>Notes</th><th>Start Pos</th><th>Auto Abilities</th><th>Playstyle</th><th>End Position</th><th>Climb Assists</th></tr></thead><tbody>";
-      for(var i=0;i<data.length;i++){
-        ret+="<tr class='tableRow "+(i%2===0?"tableEven":"tableOdd")+"'>"+(perm<=1?"<td>"+data[i].author+"</td>":"")+"<td>"+data[i].match+"</td><td>"+data[i].switch+"</td><td>"+data[i].scale+"</td><td>"
-				+data[i].vault+"</td><td>"+data[i].penalties+"</td><td>"+data[i].notes+"</td><td>"+(data[i].start==0?"Left":(data[i].start==1?"Center":"Right"))+"</td><td>"+
-        (!data[i].auto?"None":data[i].auto)+"</td><td>"+(data[i].style==0?"Defensive":(data[i].style==1?"Offensive":"Both"))+"</td><td>"+(data[i].end==0?"Field":(data[i].end==1?"Platform":"Climb"))+"</td><td>"
-				+data[i].assts+"</td></tr>";
-      }
-      ret+="</tbody></table>";
-    }else{
-      ret = "<h2 class='postNotif'>There are no entries yet.</h2>";
-    }
-    document.getElementById("results").innerHTML = ret;
-  }
-};
-
-function reloadData(){
-  req.open("GET", "teamraw.php?id="+<?php echo $teamNum; ?>, true);
-  req.send();
-  setTimeout('reloadData()', 20000);
-}
-reloadData();
-</script>
 <?php include($dir . "/footer.php") ?>
