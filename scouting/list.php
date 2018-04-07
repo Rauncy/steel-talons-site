@@ -4,12 +4,12 @@
 	<h1 class = "title">Scouting Entries</h1>
 	<span class = "formText">Sort by: </span>
   <select id="sortMethod" onchange = "reloadData()">
+		<option value = "Match Number">Match Number</option>
 		<option value = "Switch Cubes">Switch Cubes</option>
 		<option value = "Scale Cubes">Scale Cubes</option>
 		<option value = "Power-Up Cubes">Power-Up Cubes</option>
 		<option value = "Aggregate">Aggregate</option>
 		<option value = "Team Number">Team Number</option>
-		<option value = "Match Number">Match Number</option>
 	</select>
 </center>
 <center>
@@ -23,6 +23,8 @@ var req = new XMLHttpRequest();
 req.onload = function(){
   if(this.status == 200){
 		console.log(req.responseText);
+		var find = 1352;
+		if(find) console.log(req.responseText.substring(find-50).substring(0,80));
     var data = JSON.parse(req.responseText);
     var how = document.getElementById("sortMethod");
     var selected = how.options[how.selectedIndex].value;
@@ -73,3 +75,4 @@ function reloadData(){
 }
 reloadData();
 </script>
+<?php include($dir . "/footer.php") ?>

@@ -3,7 +3,8 @@ header("ContentType: text/plain");
 if(isset($_COOKIE["PHPSESSID"])) session_start();
 if(session_status()!==2) die();
 
-include($dir = ".."; $dir . "/globals.php");
+$dir = "..";
+include($dir . "/globals.php");
 
 $servername = "localhost";
 $username = "root";

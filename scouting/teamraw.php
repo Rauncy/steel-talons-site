@@ -1,6 +1,7 @@
 <?php
 header("ContentType: text/plain");
-include($dir = ".."; $dir . "/globals.php");
+$dir = "..";
+include($dir . "/globals.php");
 if(isset($_COOKIE["PHPSESSID"])) session_start();
 if(session_status()!==2) die();
 
@@ -25,7 +26,7 @@ if(gettype($query)!="boolean"&&isset($_SESSION["perm"])&&$query->num_rows>0){
   for($i=0;$i<$query->num_rows;$i++){
     $gDat = $query->fetch_assoc();
     $lDat = $conn->query("select * from Scouting2018 where ScoutingReport = ".$gDat["ScoutingID"].";")->fetch_assoc();
-    $data.='{"team":"'.$gDat["Team"].'", "match":'.$gDat["MatchNumber"].', "start":'.$gDat["StartPos"].', "auto":"'.$gDat["AutoAbilities"].'", "abil":"'.$gDat["Abilities"].'", "style":'.$gDat["Playstyle"].', "author":"'.
+    $data.='{"match":'.$gDat["MatchNumber"].', "start":'.$gDat["StartPos"].', "auto":"'.$gDat["AutoAbilities"].'", "abil":"'.$gDat["Abilities"].'", "style":'.$gDat["Playstyle"].', "author":"'.
       $gDat["Author"].'","penalties":"'.$gDat["Penalties"].'", "notes":"'.$gDat["Notes"].'", "switch":'.$lDat["Switch"].', "scale":'.$lDat["Scale"].', "vault":'.$lDat["Vault"].', "end":"'.$lDat["EndPos"].'", "assts":'
       .$lDat["ClimbAssts"].'}';
       if($i!==$query->num_rows-1) $data.=",";
