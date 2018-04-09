@@ -119,7 +119,6 @@ if(session_status()===2){
           		<td align = "left" id="asststat"><?php echo sprintf("%.2f", $avgClimbAssts); ?></td>
             </tr>
 						<script type="text/javascript">
-
 						var reqrank = new XMLHttpRequest();
 						reqrank.onload = function(){
 							if(this.status == 200){
@@ -127,10 +126,12 @@ if(session_status()===2){
 								var data = JSON.parse(reqscout.responseText);
 
 								for(var i in reqrank){
-									if(i=="total"){
-										document.getElementById("stat".).innerHTML = data["stat"];
+									if(i!=="total"){
+										console.log(i+"stat");
+										document.getElementById(i+"stat").innerHTML = data[i];
+										document.getElementById(i+"stat").innerHTML = "test";
 									}else{
-										document.getElementById("avgstat").innerHTML = data[i+"stat"];
+										document.getElementById("avgstat").innerHTML = data[""];
 									}
 								}
 
@@ -138,13 +139,13 @@ if(session_status()===2){
 						};
 
 						function reloadRanks(){
-							reqrank.open("GET", "/stats/rankings?id="+<?php echo $teamNum; ?>, true);
+							const team = <?php echo $teamNum; ?>;
+							reqrank.open("GET", "/stats/rankings?id="+team+".php", true);
 							reqrank.send();
 							setTimeout(reloadRanks(), 20000);
 						}
 
 						reloadRanks();
-
 						</script>
           <?php endif;?>
         </table>
