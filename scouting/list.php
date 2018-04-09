@@ -22,7 +22,6 @@ const perm = <?php echo (isset($_SESSION["perm"]) ? $_SESSION["perm"] : "100");?
 var req = new XMLHttpRequest();
 req.onload = function(){
   if(this.status == 200){
-		console.log(req.responseText);
 		var find = 1352;
 		if(find) console.log(req.responseText.substring(find-50).substring(0,80));
     var data = JSON.parse(req.responseText);
@@ -69,7 +68,7 @@ req.onload = function(){
 };
 
 function reloadData(){
-  req.open("GET", "listraw.php", true);
+  req.open("GET", "/scouting/listraw.php", true);
   req.send();
   setTimeout('reloadData()', 20000);
 }

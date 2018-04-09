@@ -85,7 +85,7 @@ if(isset($_GET["id"])){
         ($tieCount["vault"]>0?$tieCount["vault"]." way tie for ":"").$ranks["vault"].'", "assts":"'.($tieCount["assts"]>0?$tieCount["assts"]." way tie for ":"").$ranks["assts"].'", climb:"'.
         ($tieCount["climb"]>0?$tieCount["climb"]." way tie for ":"").$ranks["climb"].'}';
     }else{
-      echo '{"switch":0, "scale":0, "vault":0, "abg":0, "climb":0}';
+      echo '{"switch":0, "scale":0, "vault":0, "climb":0}';
     }
   }
 }else{
