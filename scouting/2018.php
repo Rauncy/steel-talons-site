@@ -2,14 +2,9 @@
 <?php
 function submitScouting(){
   if(session_status()===2){
-<<<<<<< HEAD
-    //Use database for user validation and creatio
-
-=======
     $dir = "..";
     include($dir . "/globals.php");
     //Use database for user validation and creation
->>>>>>> 5151909b9bddd57a483a24b59bc9cd4ec4abc58a
     $servername = "localhost";
     $username = "root";
     $password = "admin";
@@ -104,17 +99,6 @@ function submitScouting(){
     $formData = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"]." and Competition = '".$currentComp."' and Year = ".$currentYear.";");
     if(gettype($formData)!="boolean"&&$formData->num_rows===0)
     {
-<<<<<<< HEAD
-      $sql = 'insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
-      . '\', \'' . $date . '\', \'Lone Star Central\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
-      .'\', 2018);';
-      $result1 =  $conn->query($sql);
-      $sql2 = "select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"].";";
-        $formNum = $conn->query($sql2)->fetch_assoc()["ScoutingID"];
-        $sql1 = 'insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
-      "'. $endPos. '", "'. $_POST["climbAsst"]. '");';
-        $conn->query($sql1);
-=======
 
     $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
       . '\', \'' . $date . '\', \''.$currentComp.'\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
@@ -122,7 +106,6 @@ function submitScouting(){
         $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"]." and Competition = '".$currentComp."' and Year = ".$currentYear.";")->fetch_assoc()["ScoutingID"];
         $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
       "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
->>>>>>> 5151909b9bddd57a483a24b59bc9cd4ec4abc58a
     }
     else {
         $_POST["err"] = 0;
