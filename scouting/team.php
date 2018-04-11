@@ -50,7 +50,7 @@ if(session_status()===2){
         $totalSwitch += $currentData["Switch"];
         $totalScale += $currentData["Scale"];
         $totalVault += $currentData["Vault"];
-        if($currentData["EndPos"] == "Climb")
+        if($currentData["EndPos"] == "2")
         {
           $totalClimbs++;
         }
@@ -116,21 +116,20 @@ if(session_status()===2){
           	</tr>
           	<tr class = "tableEven">
               <td align = "right">Assists: </td>
-          		<td align = "left" id="asststat"><?php echo sprintf("%.2f", $avgClimbAssts); ?></td>
+          		<td align = "left" id="asstsstat"><?php echo sprintf("%.2f", $avgClimbAssts); ?></td>
             </tr>
 						<script type="text/javascript">
-
 						var reqrank = new XMLHttpRequest();
 						reqrank.onload = function(){
 							if(this.status == 200){
-								console.log(reqscout.responseText);
-								var data = JSON.parse(reqscout.responseText);
+								console.log(reqrank.responseText);
+								var data = JSON.parse(reqrank.responseText);
 
-								for(var i in reqrank){
-									if(i=="total"){
-										document.getElementById("stat".).innerHTML = data["stat"];
+								for(var i in data){
+									if(i!="total"){
+										document.getElementById(i+"stat").innerHTML += "&nbsp;&nbsp;"+data[i];
 									}else{
-										document.getElementById("avgstat").innerHTML = data[i+"stat"];
+										document.getElementById("avgstat").innerHTML = data[""];
 									}
 								}
 
@@ -138,13 +137,13 @@ if(session_status()===2){
 						};
 
 						function reloadRanks(){
-							reqrank.open("GET", "/stats/rankings?id="+<?php echo $teamNum; ?>, true);
+							const team = <?php echo $teamNum; ?>;
+							reqrank.open("GET", "rankings.php?id="+team, true);
 							reqrank.send();
-							setTimeout(reloadRanks(), 20000);
+							// setTimeout("reloadRanks()", 20000);
 						}
 
 						reloadRanks();
-
 						</script>
           <?php endif;?>
         </table>
