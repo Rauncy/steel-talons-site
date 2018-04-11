@@ -99,12 +99,11 @@ function submitScouting(){
     $formData = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"]." and Competition = '".$currentComp."' and Year = ".$currentYear.";");
     if(gettype($formData)!="boolean"&&$formData->num_rows===0)
     {
-
-    $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
+      $conn->query('insert into Scouting (Team, Author, Timestamp, Competition, MatchNumber, StartPos, AutoAbilities, Playstyle, Penalties, Notes, Year) values (\'' . $_POST["team"] . '\', \'' . $author
       . '\', \'' . $date . '\', \''.$currentComp.'\', \'' . $_POST["match"] . '\', \''.  $startPos .'\', \''. $auto_abilities.'\', \''. $playstyle.'\', \''. $penalties.'\', \''. $_POST["notes"]
       .'\', '.$currentYear.');');
-        $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"]." and Competition = '".$currentComp."' and Year = ".$currentYear.";")->fetch_assoc()["ScoutingID"];
-        $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
+      $formNum = $conn->query("select ScoutingID from Scouting where MatchNumber = ". $_POST["match"]. " and Team = ".$_POST["team"]." and Competition = '".$currentComp."' and Year = ".$currentYear.";")->fetch_assoc()["ScoutingID"];
+      $conn->query('insert into Scouting2018 (ScoutingReport, Switch, Scale, Vault, EndPos, ClimbAssts) values ("' . $formNum . '", "' . $_POST["switch"] . '", "' . $_POST["scale"] .'", "'. $_POST["vault"]. '",
       "'. $endPos. '", "'. $_POST["climbAsst"]. '");');
     }
     else {
