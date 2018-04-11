@@ -57,6 +57,10 @@
       <td>404</td>
       <td>Blake Romero</td>
     </tr>
+    <tr>
+      <td>Rankings</td>
+      <td>Chris Zeller, Andrew Li</td>
+    </tr>
   </table>
 </div>
 <?php include($dir . "/footer.php") ?>

@@ -50,45 +50,18 @@ if(isset($_GET["id"])){
       $ind["vault"] /= $ind["matches"];
       $ind["assts"] /= $ind["matches"];
       $ind["climb"] /= $ind["matches"];
+      if($ind["team"] == $_GET["id"]) var_dump($ind);
       $data[$ind["team"]]=$ind;
     }
 
     if(isset($data[$_GET["id"]])){
-      $sel = $data[$_GET["id"]];
-      $ranks = array(
-        "switch" => 1,
-        "scale" => 1,
-        "vault" => 1,
-        "assts" => 1,
-        "climb" => 1
-      );
 
-      $tieCount = array(
-        "switch" => 0,
-        "scale" => 0,
-        "vault" => 0,
-        "assts" => 0,
-        "climb" => 0
-      );
-
+      $res = array();
       foreach($data as $ind){
-        if($ind["team"]==$_GET["id"]) continue;
-
-        if($ind["switch"] > $sel["switch"]) $ranks["switch"]++;
-        else if($ind["switch"]==$sel["switch"]) $tieCount["switch"]++;
-        if($ind["scale"] > $sel["scale"]) $ranks["scale"]++;
-        else if($ind["scale"]==$sel["scale"]) $tieCount["scale"]++;
-        if($ind["vault"] > $sel["vault"]) $ranks["vault"]++;
-        else if($ind["vault"]==$sel["vault"]) $tieCount["vault"]++;
-        if($ind["assts"] > $sel["assts"]) $ranks["assts"]++;
-        else if($ind["assts"]==$sel["assts"]) $tieCount["assts"]++;
-        if($ind["climb"] > $sel["climb"]) $ranks["climb"]++;
-        else if($ind["climb"]==$sel["climb"]) $tieCount["climb"]++;
+        $res[$ind["team"]] = $ind["scale"];
       }
-
-      echo '{"switch":"'.($tieCount["switch"]>0?$tieCount["switch"]+1 ." way tie for ":"").$ranks["switch"].'", "scale":"'.($tieCount["scale"]>0?$tieCount["scale"]+1 ." way tie for ":"").$ranks["scale"].'", "vault":"'.
-        ($tieCount["vault"]>0?$tieCount["vault"]+1 ." way tie for ":"").$ranks["vault"].'", "assts":"'.($tieCount["assts"]>0?$tieCount["assts"]+1 ." way tie for ":"").$ranks["assts"].'", "climb":"'.
-        ($tieCount["climb"]>0?$tieCount["climb"]+1 ." way tie for ":"").$ranks["climb"].'"}';
+      arsort($res);
+      var_dump($res);
     }else{
       echo '{"switch":"No Data", "scale":"No Data", "vault":"No Data", "climb":"No Data", "assts":"No Data"}';
     }
