@@ -7,7 +7,7 @@
       <h2 style="font-family: 'Oswald'; ">Team <?php echo $_GET['num']; ?> Stats</h2>
       <div id="chartContainer" style="height: 300px; width: 400px;"></div>
     </div>
-
+ 
   <div class = 'distribution_pie' style = "margin-left:40em; position: absolute;top: 0;left: 0;">
       <h2 style="font-family: 'Oswald'; ">Power Cube Distribution</h2>
       <canvas id="myCanvas" width="300" height="300" >Your browser does not support the HTML5 canvas.</canvas>

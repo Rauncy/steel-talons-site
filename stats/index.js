@@ -7,7 +7,7 @@ function displayCanvas(num_switch,num_scale,num_vault){
   myCanvas.height = 300;
 
   var ctx = myCanvas.getContext("2d");
-  var myVinyls = {
+  var myCubes = {
       "Scale": num_switch,
       "Switch": num_scale,
       "Vault": num_vault
@@ -22,8 +22,8 @@ function displayCanvas(num_switch,num_scale,num_vault){
   var myPiechart = new Piechart(
       {
           canvas:myCanvas,
-          data:myVinyls,
-          colors:["#fde23e","#f16e23", "#57d9ff"],
+          data:myCubes,
+          colors:["blue","lightgreen", "red"],
            legend:myLegend
       }
   );
@@ -120,57 +120,57 @@ var Piechart = function(options){
 
 function lineDistribution(scaleArr, switchArr, vaultArr) {
 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	theme: "light1",
-  axisX:{
-    title: "Match"
-  },
-	axisY:{
-    title: "Cubes",
-		includeZero: true,
-    valueFormatString: "#",
-	},
-  legend:{
-		cursor:"pointer",
-		verticalAlign: "bottom",
-		horizontalAlign: "left",
-		dockInsidePlotArea: true,
-    itemclick: toogleDataSeries
-	},
-	data: [{
-		type: "line",
-    showInLegend: true,
-		name: "Scale",
-		markerType: "square",
-		dataPoints: scaleArr
-	},
-  {
-		type: "line",
-    showInLegend: true,
-		name: "Vault",
-		markerType: "triangle",
-		dataPoints: vaultArr
-	},
-  {
-		type: "line",
-    showInLegend: true,
-		name: "Switch",
-		markerType: "circle",
-		dataPoints: switchArr
-	}
-]
-});
-chart.render();
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	animationEnabled: true,
+  	theme: "light1",
+    axisX:{
+      title: "Match"
+    },
+  	axisY:{
+      title: "Cubes",
+  		includeZero: true,
+      valueFormatString: "#",
+  	},
+    legend:{
+  		cursor:"pointer",
+  		verticalAlign: "bottom",
+  		horizontalAlign: "left",
+  		dockInsidePlotArea: true,
+      itemclick: toogleDataSeries
+  	},
+  	data: [{
+  		type: "line",
+      showInLegend: true,
+  		name: "Scale",
+  		markerType: "square",
+  		dataPoints: scaleArr
+  	},
+    {
+  		type: "line",
+      showInLegend: true,
+  		name: "Vault",
+  		markerType: "triangle",
+  		dataPoints: vaultArr
+  	},
+    {
+  		type: "line",
+      showInLegend: true,
+  		name: "Switch",
+  		markerType: "circle",
+  		dataPoints: switchArr
+  	}
+  ]
+  });
+  chart.render();
 
-function toogleDataSeries(e){
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	} else{
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
+  function toogleDataSeries(e){
+  	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+  		e.dataSeries.visible = false;
+  	} else {
+  		e.dataSeries.visible = true;
+  	}
+  	chart.render();
+  }
 
 // document.getElementById('chartContainer').style.height="390px";
 
