@@ -1,0 +1,23 @@
+.teamButton {
+  font-family: 'Oswald', sans-serif;
+  display: block;
+  text-align: right;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.teamName {
+  font-family: 'Oswald', sans-serif;
+  display: block;
+  text-align: right;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.teamLabel {
+  font-family: 'Oswald', sans-serif;
+  display: block;
+  text-align: right;
+  font-size: 20px;
+  margin-right: 10px;
+}
