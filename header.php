@@ -34,6 +34,7 @@
         <?php
         if(session_status()===2){
           echo '<li class ="horizm"><a href = "/scouting/2018">Scouting</a></li>';
+					echo '<li class ="horizm"><a href = "/forum/index">Forums</a></li>';
           if($_SESSION["perm"]<2){
             echo '<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>';
             echo '<li class ="horizm"><a href = "/admin">Administration</a></li>';

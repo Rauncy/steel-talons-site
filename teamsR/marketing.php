@@ -1,7 +1,7 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <link rel = "stylesheet" href = "/css/teams.css">
 <center>
-  <h1 class = "teamName">Marketing Team</h1>
+  <h1 class = "title">Marketing Team</h1>
   <h2 class = "teamLabel">What do we do?</h2>
   We market robot.
   <br>
