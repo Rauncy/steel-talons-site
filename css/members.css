@@ -77,3 +77,27 @@ td{
     width:100%;
     /* height:100%; */
 }
+
+@keyframes openMemberTab {
+  0%  {display:absolute; right:100%;}
+  33%  {right:100%-100px;}
+  67%  {right:100%-150px;}
+  100%  {right:100%-175px;}
+}
+
+@keyframes closeMemberTab {
+  0%  {right:100%-175px;}
+  33%  {right:100%-150px;}
+  67%  {right:100%-100px;}
+  100%  {display:none; right:100%;}
+}
+
+#memberBox {
+  width:175px;
+  height:100%;
+  position:sticky;
+  top:100px;
+  background-color: #0000FF;
+  animation-name: openMemberTab;
+  animation-duration: .5s;
+}
