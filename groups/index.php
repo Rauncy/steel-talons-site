@@ -2,35 +2,28 @@
 <link rel = "stylesheet" href = "/css/teams.css">
 <center>
   <h1 class = "title">Select a Team</h1>
-  <a href = "/teamsR/build.php">
-    <div>
+  <a href = "/groups/build.php" class = "teamButton">
       Build
-    </div>
   </a>
-  <a href = "/teamsR/programming.php">
-    <div>
+	<br>
+  <a href = "/groups/programming.php" class = "teamButton">
       Programming
-    </div>
   </a>
-  <a href = "/teamsR/cad.php">
-    <div>
+	<br>
+  <a href = "/groups/cad.php" class = "teamButton">
       CAD
-    </div>
   </a>
-  <a href = "/teamsR/marketing.php">
-    <div>
+	<br>
+  <a href = "/groups/marketing.php" class = "teamButton">
       Marketing
-    </div>
   </a>
-  <a href = "/teamsR/safety.php">
-    <div>
+	<br>
+  <a href = "/groups/safety.php" class = "teamButton">
       Safety
-    </div>
   </a>
-  <a href = "/teamsR/scouting.php">
-    <div>
+	<br>
+  <a href = "/groups/scouting.php" class = "teamButton">
       Scouting
-    </div>
   </a>
 </center>
 <?php include($dir . "/footer.php") ?>

@@ -181,7 +181,7 @@ if(isset($_POST["submit"])){
           <tr>
             <td>End Position:</td>
             <td><input type="radio" name="endPos" value="field" required>Field</td>
-            <td><input type="radio" name="endPos" value="platform" required>Platform</td>
+            <td><input type="radio" name="endPos" value="plat" required>Platform</td>
             <td><input type="radio" name="endPos" value="climb" required>Climb</td>
           </tr>
           <tr>

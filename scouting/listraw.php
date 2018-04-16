@@ -20,7 +20,6 @@ if($conn->connect_error){
 //use in the future for automated JSON object creation and parsing
 
 $query = $conn->query("select * from Scouting where Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
-echo "select * from Scouting where Competition = \"".$currentComp."\" and Year = ".$currentYear.";<br>";
 if(gettype($query)!="boolean"&&isset($_SESSION["perm"])){
   $data = "[";
   for($i=0;$i<$query->num_rows;$i++){
