@@ -70,7 +70,8 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-
+<div id="memberBox">
+</div>
 
 </body>
 
