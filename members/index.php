@@ -21,8 +21,8 @@
    </form>
  </div>
 </div>
-
-
+<div id="memberBox">
+</div>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -70,8 +70,10 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-<div id="memberBox">
-</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h1>TEST</h1>
 
 </body>
 
