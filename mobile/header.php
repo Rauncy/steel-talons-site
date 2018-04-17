@@ -23,40 +23,39 @@
   <body>
     <header role = "banner">
       <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
-    </header>
-
-    <nav id = "tabs">
-      <ul id="list">
-      	<li class ="horizm"><a href = "/officers">Officers</a></li>
-      	<li class ="horizm"><a href = "/teams?search=&page=1">Teams</a></li>
-        <li class ="horizm"><a href = "/schedule">Schedule</a></li>
-      	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
-        <?php
+      <?php
+        echo 'div class = "mobile-dropdown">
+          <li class = "horizm dropbtn" style = "padding:0; padding-right:10px; padding-left:10px;">
+            <a>Tabs</a>
+          </li>
+          <center>
+            <div class = "dropdown horizm">
+              <a href = "/mobile/officers">Officers</a>
+              <a href = "/mobile/teams?search=&page=1">Teams</a>
+              <a href = "/mobile/schedule">Schedule</a>
+              <a href = "/mobile/sponsors">Sponsors</a>
+              ';
         if(session_status()===2){
-          echo '<li class ="horizm"><a href = "/scouting/2018">Scouting</a></li>';
-					echo '<li class ="horizm"><a href = "/forum/index">Forums</a></li>';
+          echo '<a href = "/mobile/scouting/2018">Scouting</a>
+                <a href = "/mobile/forum/index">Forums</a>
+                ';
           if($_SESSION["perm"]<2){
-            echo '<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>';
-            echo '<li class ="horizm"><a href = "/admin">Administration</a></li>';
+            echo '<a href = "/mobile/members/index.php?search=">Members</a>
+                  <a href = "/mobile/admin">Administration</a>
+                  ';
           }
           if($_SESSION["perm"]<1){
-            echo '<li class ="horizm"><a href = "/dev">Dev</a></li>';
+            echo '<a href = "/mobile/dev">Dev</a>
+                  ';
           }
-          echo '<div class ="account-dropdown">
-            <li class ="horizm dropbtn" style="padding:0; padding-right:10px; padding-left:10px;">
-              <a>'. $_SESSION["name"] .'</a>
-            </li>
-            <center>
-              <div class ="dropdown horizm">
-                <a href = "/account/settings">Settings</a>
-                <a href = "/account/logout">Logout</a>
-              </div>
-            </center>
-          </div>';
-        }else{
-          echo '<li class ="horizm" style="float:right; padding:0; margin-right:6px"><a href = "/account/login">Login</a></li>';
+          echo '<a href = "/mobile/account/settings">Settings</a>
+                <a href = "/mobile/account/logout">Logout</a>';
         }
-        ?>
-      </ul>
-    </nav>
-    <main>
+        else{
+          echo '<a href = "/mobile/account/login">Login</a>';
+        }
+        echo '</div>
+              </center>';
+      ?>
+    </header>
+  <main>
