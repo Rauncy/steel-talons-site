@@ -1,0 +1,6 @@
+{
+  "title"   : "Switch Stats",
+  "xLabel" : "Time",
+  "yLabel" : "Switch",
+  "data":[{"y":22, "x":1},{"y":31, "x":2}]
+}
