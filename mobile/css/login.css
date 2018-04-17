@@ -1,0 +1,18 @@
+.infoForm{
+  text-align: center;
+  padding: 2px;
+}
+
+.formLabel{
+  font-family: 'Oswald', sans-serif;
+  display: block;
+  text-align: right;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.flatLink{
+  color: crimson;
+  text-decoration: none;
+  font-family: 'Poppins'
+}

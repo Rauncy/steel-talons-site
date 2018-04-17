@@ -1,0 +1,103 @@
+.title{
+  font-family: "Roboto";
+  font-weight: 400;
+  font-style: normal;
+  padding: 25px;
+  line-height: 32px ;
+  word-wrap: break-word;
+  font-size: 1.75em;
+  margin: auto;
+  display: block;
+  text-align: center;
+  /* margin-left: 100px; */
+}
+.sponsor_list{
+  line-height: 48px;
+  border: 2px dashed #000080;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+
+}
+.sponsor{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.5em;
+    margin-left: 58px;
+    cursor: pointer;
+}
+.first{
+  margin-left: 0px;
+}
+
+/* The actual popup (appears on top) */
+.sponsor .popuptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 15%;
+    padding: 8px 0;
+    /* position: auto; */
+    position: absolute;
+    z-index: 1;
+    /* bottom: 4%; */
+    /* left: 47%; */
+}
+
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.sponsor .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    border-radius: 15%;
+}
+.name{
+  font-style: oblique;
+  font-size: 24px;
+  font-weight: 200;
+}
+.info {
+    color: #CCCCCC;
+    font: 18px Maison Neue Regular;
+    margin-bottom: -40px;
+}
+.name{
+  margin: -20px;
+}
+
+.card > a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+
+}
+
+button:hover, .card > a:hover {
+    opacity: 0.7;
+}
+.card img{
+   width:100%;
+   border-radius: 15%;
+}
