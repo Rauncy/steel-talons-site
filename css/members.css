@@ -79,26 +79,24 @@ td{
 }
 
 @keyframes openMemberTab {
-  0%  {display:absolute; right:100%;}
-  33%  {left:100px;}
-  67%  {left:150px;}
-  100%  {left:175px;}
+  0%  {width:0px; display:inline;}
+  100%  {width:200px;}
 }
 
 @keyframes closeMemberTab {
-  0%  {left:175px;}
-  33%  {left:150px;}
-  67%  {left:100px;}
-  100%  {display:none; right:100%;}
+  0% {width:200px;}
+  100%  {width:0px; display:none;}
 }
 
 #memberBox {
-  width:175px;
-  height:400px;
+  width:200px;
+  height:500px;
+  margin-top:100px;
   position:sticky;
-  top:100px;
+  top:58px;
   right:100%;
   background-color: #0000FF;
+  overflow: hidden;
   animation-name: openMemberTab;
-  animation-duration: .5s;
+  animation-duration: .2s;
 }
