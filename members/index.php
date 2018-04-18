@@ -1,16 +1,10 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
-<link rel = "stylesheet"  href = <?php echo $dir . "/css/members.css"?>>
-<script type="text/javascript">
-  function reload(type){
-    var searchTerm = document.getElementById("search").value;
-    var address = "members/index.php?search=" + searchTerm;
-    document.cookie ="type="+type;
-    window.location = address;
-  }
+<link rel = "stylesheet"  href = "<?php echo $dir . "/css/members.css"?>">
+<script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>
 
 <body>
-<div class="topnav">
+<!-- <div class="topnav">
   <div class="search-container">
    <form action="" method = "GET">
      <input type="text" id = "search" placeholder="Search.." name="search">
@@ -20,9 +14,10 @@
      <button type="submit" onclick="reload('last')"><h3>Last Name</h3></button>
    </form>
  </div>
-</div>
+</div> -->
 <div id="memberBox">
 </div>
+<button onclick="toggleMemberTab()">Henlo</button>
 <?php
 $servername = "localhost";
 $username = "root";
