@@ -59,4 +59,5 @@
         ?>
       </ul>
     </nav>
+    <?php if(isset($headerData))echo $headerData;?>
     <main>

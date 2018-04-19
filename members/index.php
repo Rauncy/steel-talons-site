@@ -1,4 +1,4 @@
-<?php $dir = ".."; include($dir . "/header.php"); ?>
+<?php $dir = ".."; $headerData = '<div id="memberBox"></div>'; include($dir . "/header.php"); ?>
 <link rel = "stylesheet"  href = "<?php echo $dir . "/css/members.css"?>">
 <script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>
@@ -15,8 +15,6 @@
    </form>
  </div>
 </div> -->
-<div id="memberBox">
-</div>
 <button onclick="toggleMemberTab()">Henlo</button>
 <?php
 $servername = "localhost";
