@@ -1,7 +1,6 @@
 <?php if(isset($_COOKIE["PHPSESSID"])) session_start() ?>
 <!DOCTYPE HTML>
 <html>
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -23,39 +22,32 @@
   <body>
     <header role = "banner">
       <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
-      <?php
-        echo 'div class = "mobile-dropdown">
-          <li class = "horizm dropbtn" style = "padding:0; padding-right:10px; padding-left:10px;">
-            <a>Tabs</a>
-          </li>
-          <center>
-            <div class = "dropdown horizm">
-              <a href = "/mobile/officers">Officers</a>
-              <a href = "/mobile/teams?search=&page=1">Teams</a>
-              <a href = "/mobile/schedule">Schedule</a>
-              <a href = "/mobile/sponsors">Sponsors</a>
-              ';
+			<?php
+        echo '<div class = "dropdown">
+			          <button class = "dropbtn">Tabs</button>
+		            <div class = "dropdown-content">
+		              <a href = "/officers">Officers</a>
+		              <a href = "/teams?search=&page=1">Teams</a>
+		              <a href = "/schedule">Schedule</a>
+		              <a href = "/sponsors">Sponsors</a>';
         if(session_status()===2){
-          echo '<a href = "/mobile/scouting/2018">Scouting</a>
-                <a href = "/mobile/forum/index">Forums</a>
-                ';
+          echo '<a href = "/scouting/2018">Scouting</a>
+                <a href = "/forum/index">Forums</a>';
           if($_SESSION["perm"]<2){
-            echo '<a href = "/mobile/members/index.php?search=">Members</a>
-                  <a href = "/mobile/admin">Administration</a>
-                  ';
+            echo '<a href = "/members/index.php?search=">Members</a>
+                  <a href = "/admin">Administration</a>';
           }
           if($_SESSION["perm"]<1){
-            echo '<a href = "/mobile/dev">Dev</a>
-                  ';
+            echo '<a href = "/dev">Dev</a>';
           }
-          echo '<a href = "/mobile/account/settings">Settings</a>
-                <a href = "/mobile/account/logout">Logout</a>';
+          echo '<a href = "/account/settings">Settings</a>
+                <a href = "/account/logout">Logout</a>';
         }
         else{
-          echo '<a href = "/mobile/account/login">Login</a>';
+          echo '<a href = "/account/login">Login</a>';
         }
         echo '</div>
-              </center>';
+							</div>';
       ?>
     </header>
   <main>
