@@ -58,6 +58,6 @@
         }
         ?>
       </ul>
+      <?php if(isset($headerData))echo $headerData;?>
     </nav>
-    <?php if(isset($headerData))echo $headerData;?>
     <main>

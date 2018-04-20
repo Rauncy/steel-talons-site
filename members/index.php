@@ -51,7 +51,7 @@ else {
 $result = $conn->query($sql);
 // echo $result;
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>Name</th><th>Grade</th><th>Roles</th><th>Username</th><th>Email</th><th>Phone Number</th></tr>";
+    echo "<table class><tr><th>Name</th><th>Grade</th><th>Roles</th><th>Username</th><th>Email</th><th>Phone Number</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]."</td><td>".$row["Email"].

@@ -91,9 +91,12 @@ td{
 #memberBox {
   width:200px;
   height:500px;
-  position:relative;
+  position:absolute;
+  display:none;
+  text-overflow: clip;
+  right:0%;
   top:58px;
-  float:right;
   background-color: #121c59;
   animation-duration: .3s;
+  z-index: 99;
 }
