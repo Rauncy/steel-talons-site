@@ -1,4 +1,11 @@
-<?php $dir = ".."; $headerData = '<div id="memberBox"></div>'; include($dir . "/header.php"); ?>
+<?php $dir = "..";
+$headerData = '<div id="memberBox">
+<input type="text" class="memberBoxField" placeholder="Name" id="memberBoxName">
+<input type="text" class="memberBoxField" placeholder="Roles" id="memberBoxRoles">
+<input type="text" class="memberBoxField" placeholder="Username" id="memberBoxUsername">
+<input type="text" class="memberBoxField" placeholder="Email" id="memberBoxEmail">
+</div>';
+include($dir . "/header.php"); ?>
 <link rel = "stylesheet"  href = "<?php echo $dir . "/css/members.css"?>">
 <script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>
@@ -63,6 +70,7 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
