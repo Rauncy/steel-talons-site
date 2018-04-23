@@ -1,20 +1,15 @@
-<?php $dir = ".."; $headerData = '<div id="memberBox"></div>'; include($dir . "/header.php"); ?>
-<link rel = "stylesheet"  href = "<?php echo $dir . "/css/members.css"?>">
+<?php $dir = ".."; $headerData = '<link rel = "stylesheet"  href = "'. $dir . '/css/members.css">
+<div id="memberBox">
+<input type="text" name="name" placeholder="Name" class="memberBoxField">
+<input type="text" name="grade" placeholder="Grade" class="memberBoxField">
+<input type="text" name="roles" placeholder="Roles" class="memberBoxField">
+<input type="text" name="username" placeholder="Username" class="memberBoxField">
+<input type="text" name="email" placeholder="E-Mail" class="memberBoxField">
+</div>'; include($dir . "/header.php"); ?>
 <script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>
 
 <body>
-<!-- <div class="topnav">
-  <div class="search-container">
-   <form action="" method = "GET">
-     <input type="text" id = "search" placeholder="Search.." name="search">
-     <br>
-     <button type="submit" onclick="reload('user')"><h3>Username</h3></button>
-     <button type="submit" onclick="reload('first')"><h3>First Name</h3></button>
-     <button type="submit" onclick="reload('last')"><h3>Last Name</h3></button>
-   </form>
- </div>
-</div> -->
 <button onclick="toggleMemberTab()">Henlo</button>
 <?php
 $servername = "localhost";
@@ -54,7 +49,7 @@ if ($result->num_rows > 0) {
     echo "<table class><tr><th>Name</th><th>Grade</th><th>Roles</th><th>Username</th><th>Email</th><th>Phone Number</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]."</td><td>".$row["Email"].
+        echo "<tr><td><a onclick".$row["FirstName"]." ".$row["LastName"]."</td><td>".$row["Grade"]."</td><td>".$row["Roles"]."</td><td>".$row["Username"]."</td><td>".$row["Email"].
         "</td><td>(".substr($row["Phone"],0,3).") ".substr($row["Phone"],3,3)." - ".substr($row["Phone"],6,4)."</td></tr>";
     }
     echo "</table>";

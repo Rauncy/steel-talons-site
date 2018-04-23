@@ -80,23 +80,30 @@ td{
 
 @keyframes openMemberTab {
   0%  {width:0px; display:inline;}
-  100%  {width:200px;}
+  100%  {width:250px;}
 }
 
 @keyframes closeMemberTab {
-  0% {width:200px;}
+  0% {width:250px;}
   100%  {width:0px; display:none;}
 }
 
 #memberBox {
-  width:200px;
+  width:250px;
   height:500px;
   position:absolute;
   display:none;
-  text-overflow: clip;
+  overflow: hidden;
   right:0%;
   top:58px;
   background-color: #121c59;
   animation-duration: .3s;
   z-index: 99;
+}
+
+.memberBoxField {
+  width: 200px;
+  margin: 10px;
+  margin-right: 25px;
+  margin-left: 25px;
 }
