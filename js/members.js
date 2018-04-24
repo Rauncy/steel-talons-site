@@ -25,14 +25,17 @@ function openMemberTab(){
 function loadMemberTab(user){
   var req = new XMLHttpRequest();
   req.onload = function(){
+    console.log(req.responseText);
     var data = JSON.parse(req.responseText);
     var all = document.getElementsByClassName("memberBoxField");
-    all.forEach((data) => {
-      if(data[all.name]) all.innerHTML = data[all.name];
-      //TODO
-    });
+    console.log(all);
+    for(k in data){
+      console.log(all[k]);
+      if(all[k]) all[k].value = data[k];
+    }
+    openMemberTab();
   }
-  req.open("GET", "/members/get.php?user=""+", true);
+  req.open("GET", "/members/get.php?user="+user, true);
   req.send();
 }
 
