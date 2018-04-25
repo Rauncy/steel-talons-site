@@ -92,17 +92,18 @@ td{
   width:250px;
   height:500px;
   position:absolute;
-  display:inline;
-  top:58px;
+  display:none;
+  overflow: hidden;
   right:0%;
+  top:58px;
   background-color: #121c59;
   animation-duration: .3s;
-  overflow:hidden;
+  z-index: 99;
 }
 
-.memberBoxField{
-  width:200px;
-  margin:25px;
-  margin-top:10px;
-  margin-bottom:10px;
+.memberBoxField {
+  width: 200px;
+  margin: 10px;
+  margin-right: 25px;
+  margin-left: 25px;
 }
