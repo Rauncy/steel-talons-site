@@ -1,6 +1,7 @@
 <?php
 header("ContentType: text/plain");
-if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["submit"]) && isset($_SESSION["perm"])){
+echo (isset($_COOKIE["PHPSESSID"])?"t":"f")." ".(isset($_POST["user"])?"t":"f")." ".(isset($_SESSION["perm"])?"t":"f");
+if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["user"]) && isset($_SESSION["perm"])){
   //edit
   $servername = "localhost";
   $username = "root";
@@ -13,19 +14,19 @@ if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["submit"]) && isset($_SESSION["p
   }
 
   $qu = "update members set ";
-  for($i = 0; $i<count($_POST); $i++){
-
-  }
   foreach($_POST as $key => $val){
     switch($key){
       case "submit":
+      case "user":
         break;
       default:
         $qu.=$key." = ".$val.", ";
     }
   }
   $qu=substr($qu, 0, strlen($qu)-2);
-  $conn->query($qu." where id = ".$_POST["id"]);
+  $qu.=" where MemberID = ".$_POST["user"];
+  echo $qu."<br>";
+  $conn->query($qu);
   echo "true";
 }else echo "false";
 ?>

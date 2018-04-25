@@ -107,3 +107,8 @@ td{
   margin-right: 25px;
   margin-left: 25px;
 }
+
+.tabSubmit {
+  width: 200px;
+  margin:25px;
+}

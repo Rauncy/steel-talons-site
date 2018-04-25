@@ -5,6 +5,7 @@
 <input type="text" name="roles" placeholder="Roles" class="memberBoxField">
 <input type="text" name="username" placeholder="Username" class="memberBoxField">
 <input type="text" name="email" placeholder="E-Mail" class="memberBoxField">
+<button class="tabSubmit" onclick="saveMemberTab()">Submit Changes</button>
 </div>'; include($dir . "/header.php"); ?>
 <script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>

@@ -1,4 +1,5 @@
 var memberTabIsOpen = false;
+var currentUser = null;
 
 function closeMemberTab(){
   var target = document.getElementById("memberBox");
@@ -9,7 +10,17 @@ function closeMemberTab(){
   memberTabIsOpen = false;
 }
 
-function saveMemberTab(user){
+function saveMemberTab(){
+  if(!currentUser) return;
+  var req = new XMLHttpRequest();
+  req.onload = function(){
+    console.log(req.responseText);
+    currentUser = null;
+    closeMemberTab();
+  }
+  console.log("/members/edit.php?user="+currentUser);
+  req.open("POST", "/members/edit.php", true);
+  req.send("user="+currentUser);
 }
 
 function openMemberTab(){
@@ -33,6 +44,7 @@ function loadMemberTab(user){
       console.log(all[k]);
       if(all[k]) all[k].value = data[k];
     }
+    currentUser = user;
     openMemberTab();
   }
   req.open("GET", "/members/get.php?user="+user, true);
