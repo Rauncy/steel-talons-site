@@ -85,6 +85,7 @@ td{
 
 @keyframes closeMemberTab {
   0% {width:250px;}
+  75%  {width:0px; display:none;}
   100%  {width:0px; display:none;}
 }
 

@@ -1,7 +1,8 @@
 <?php $dir = ".."; $headerData = '<link rel = "stylesheet"  href = "'. $dir . '/css/members.css">
 <div id="memberBox">
-<input type="text" name="name" placeholder="Name" class="memberBoxField">
-<input type="text" name="grade" placeholder="Grade" class="memberBoxField">
+<input type="text" name="firstname" placeholder="First Name" class="memberBoxField">
+<input type="text" name="lastname" placeholder="Last Name" class="memberBoxField">
+<input type="number" name="grade" placeholder="Grade" class="memberBoxField">
 <input type="text" name="roles" placeholder="Roles" class="memberBoxField">
 <input type="text" name="username" placeholder="Username" class="memberBoxField">
 <input type="text" name="email" placeholder="E-Mail" class="memberBoxField">
@@ -11,7 +12,6 @@
 </script>
 
 <body>
-<button onclick="toggleMemberTab()">Henlo</button>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -59,11 +59,6 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h1>TEST</h1>
 
 </body>
 

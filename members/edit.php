@@ -1,7 +1,9 @@
 <?php
 header("ContentType: text/plain");
-echo (isset($_COOKIE["PHPSESSID"])?"t":"f")." ".(isset($_POST["user"])?"t":"f")." ".(isset($_SESSION["perm"])?"t":"f");
-if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["user"]) && isset($_SESSION["perm"])){
+echo (isset($_COOKIE["PHPSESSID"])?"t":"f") . " " . (isset($_POST["user"])?"t":"f") . " ";
+if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["user"])){
+  session_start();
+  if(!isset($_SESSION["perm"])) break;
   //edit
   $servername = "localhost";
   $username = "root";
@@ -19,14 +21,20 @@ if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["user"]) && isset($_SESSION["per
       case "submit":
       case "user":
         break;
+      case "name":
+        $temp = explode(" ", $_POST["name"]);
+        if(isset($temp[0])) $qu.="firstname = ".urldecode($temp[0]).", ";
+        if(isset($temp[1])) $qu.="lastname = ".urldecode($temp[1]).", ";
       default:
-        $qu.=$key." = ".$val.", ";
+        $qu.=$key." = ".urldecode($val).", ";
     }
   }
   $qu=substr($qu, 0, strlen($qu)-2);
-  $qu.=" where MemberID = ".$_POST["user"];
-  echo $qu."<br>";
+  $qu.=" where MemberID = ".$_POST["user"].";";
+  echo $qu;
   $conn->query($qu);
   echo "true";
-}else echo "false";
+  die();
+}
+echo "false";
 ?>

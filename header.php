@@ -12,11 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- linking in external files-->
-    <link href="https://fonts.googleapis.com/css?family=Anton|Josefin+Sans|Open+Sans|Oswald|Poppins|Princess+Sofia|Titillium+Web" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Josefin+Sans|Open+Sans|Oswald|Poppins|Titillium+Web" rel="stylesheet">
     <link rel = "stylesheet"  href = <?php echo $dir . "/css/header-main.css"?>>
     <link rel="icon" type="image/png" sizes="16x16" href=<?php echo $dir . "/images/favicon-16x16.png"?>>
     <script src = <?php echo $dir . "/js/header-main.js"?> defer></script>
-    <title><?php if(isset($title)) echo $title; else echo "Tompkins Robotics";?></title>
+    <title><?php if(isset($title)) echo $title + " - "; echo "Tompkins Robotics";?></title>
 
     <?php if(isset($headData))echo $headData;?>
   </head>
@@ -25,7 +25,7 @@
       <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
     </header>
 
-    <nav id = "tabs">
+    <nav id="tabs">
       <ul id="list">
       	<li class ="horizm"><a href = "/officers">Officers</a></li>
       	<li class ="horizm"><a href = "/teams?search=&page=1">Teams</a></li>

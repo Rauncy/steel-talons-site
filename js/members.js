@@ -6,7 +6,7 @@ function closeMemberTab(){
   target.style.animationName = "closeMemberTab";
   setTimeout(()=>{
     target.style.display = "none";
-  }, 300);
+  }, 250);
   memberTabIsOpen = false;
 }
 
@@ -14,13 +14,21 @@ function saveMemberTab(){
   if(!currentUser) return;
   var req = new XMLHttpRequest();
   req.onload = function(){
-    console.log(req.responseText);
+    console.log("resp " + req.responseText);
     currentUser = null;
     closeMemberTab();
   }
-  console.log("/members/edit.php?user="+currentUser);
   req.open("POST", "/members/edit.php", true);
-  req.send("user="+currentUser);
+  req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var sendData = "user="+currentUser;
+  var fields = document.getElementsByClassName("memberBoxField");
+  for(var i=0;i<fields.length;i++){
+    console.log(parseInt(fields[i].value)+" "+fields[i].value);
+    var isNumber = parseInt(fields[i].value) == fields[i].value;
+    sendData+="&"+fields[i].name+"="+encodeURIComponent((isNumber?"":"'")+fields[i].value+(isNumber?"":"'"));
+  }
+  console.log("sdat " + sendData);
+  req.send(sendData);
 }
 
 function openMemberTab(){
