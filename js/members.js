@@ -17,6 +17,7 @@ function saveMemberTab(){
     console.log("resp " + req.responseText);
     currentUser = null;
     closeMemberTab();
+    setTimeout(() => {location.reload()}, 300);
   }
   req.open("POST", "/members/edit.php", true);
   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -29,6 +30,7 @@ function saveMemberTab(){
   }
   console.log("sdat " + sendData);
   req.send(sendData);
+  return false;
 }
 
 function openMemberTab(){
