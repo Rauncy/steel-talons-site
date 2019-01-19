@@ -1,5 +1,6 @@
 <?php $dir = ".."; $headerData = '<link rel = "stylesheet"  href = "'. $dir . '/css/members.css">
 <div id="memberBox">
+<form onsubmit="return saveMemberTab()">
 <input type="text" name="firstname" placeholder="First Name" class="memberBoxField">
 <input type="text" name="lastname" placeholder="Last Name" class="memberBoxField">
 <input type="number" name="grade" placeholder="Grade" class="memberBoxField">
@@ -7,6 +8,7 @@
 <input type="text" name="username" placeholder="Username" class="memberBoxField">
 <input type="text" name="email" placeholder="E-Mail" class="memberBoxField">
 <button class="tabSubmit" onclick="saveMemberTab()">Submit Changes</button>
+</form>
 </div>'; include($dir . "/header.php"); ?>
 <script type="text/javascript" src="<?php echo $dir . "/js/members.js"?>">
 </script>

@@ -1,4 +1,3 @@
-
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
 function login($user, $pass){
