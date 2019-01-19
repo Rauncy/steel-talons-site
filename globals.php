@@ -1,4 +1,4 @@
 <?php
-$currentComp = "Lone Star South";
+$currentComp = "Lone Star Central";
 $currentYear = date("Y");
 ?>

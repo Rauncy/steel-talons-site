@@ -49,6 +49,7 @@
             <center>
               <div class ="dropdown horizm">
                 <a href = "/account/settings">Settings</a>
+                <a href = "/members/profile">Profile</a>
                 <a href = "/account/logout">Logout</a>
               </div>
             </center>

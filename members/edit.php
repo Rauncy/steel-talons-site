@@ -3,7 +3,7 @@ header("ContentType: text/plain");
 echo (isset($_COOKIE["PHPSESSID"])?"t":"f") . " " . (isset($_POST["user"])?"t":"f") . " ";
 if(isset($_COOKIE["PHPSESSID"]) && isset($_POST["user"])){
   session_start();
-  if(!isset($_SESSION["perm"])) break;
+  if(!isset($_SESSION["perm"]) && $_SESSION["perm"]<=1) break;
   //edit
   $servername = "localhost";
   $username = "root";
