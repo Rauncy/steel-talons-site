@@ -17,7 +17,7 @@ function submitScouting(){
     $date = date("Y-m-d H:i:s");
 
     //Apply author name
-		if($_POST["author"]!=""&&$_SESSION["perm"]<=1) {
+		if(isset($_POST["author"])&&$_POST["author"]!=""&&$_SESSION["perm"]<=1) {
 			$author = $_POST["author"];
 		}else {
       $param = $conn->prepare("select FirstName, LastName from Members where MemberID = ?;");
