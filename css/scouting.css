@@ -76,7 +76,7 @@
 	text-decoration: none;
 	color: inherit;
 }
-#entriesLink{
+.dirLink{
   text-transform: uppercase;
   color: navy;
   padding: 1px;

@@ -1,4 +1,5 @@
 <?php
-$currentComp = "Lone Star Central";
+$currentComp = "FIT Channelview";
 $currentYear = date("Y");
+$passSalt = "FRCTeam5427";
 ?>

@@ -59,10 +59,6 @@ header{
   width: inherit;
 }
 
-.account-dropdown:hover{
-  background: linear-gradient(#333 0%, #333 44px, #bb2235 100%);
-}
-
 .dropdown{
   display: none;
   /* position: absolute; */
@@ -123,6 +119,15 @@ body{
   text-align: center;
 }
 
+.subtitle{
+  font-size: 20px;
+  color: black;
+  margin-top: -30px;
+  margin-bottom: 50px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
 .tab, .horizm{
   font-family: 'Anton', sans-serif;
   color: white;
@@ -138,6 +143,11 @@ main{
 .postNotif{
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
+  color: #bb2235;
+}
+
+.error{
+  font-family: 'Poppins', sans-serif;
   color: #bb2235;
 }
 

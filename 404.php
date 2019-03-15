@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title><big>404</big></title>
+		<title>404</title>
 	</head>
   		<body style =" background-color: #5882c4;">
 		<center>

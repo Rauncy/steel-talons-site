@@ -1,5 +1,6 @@
 <?php $dir = ".."; include($dir . "/header.php"); ?>
 <?php
+/*
 function submitScouting(){
   if(session_status()===2){
     $dir = "..";
@@ -12,87 +13,23 @@ function submitScouting(){
     if($conn->connect_error){
       die();
     }
+
+    //Set timestamp for submission
     $date = date("Y-m-d H:i:s");
 
-		if($_POST["author"]!="") {
+    //Apply author name
+		if($_POST["author"]!=""&&$_SESSION["perm"]<=1) {
 			$author = $_POST["author"];
+		}else {
+      $param = $conn->prepare("select FirstName, LastName from Members where MemberID = ?;");
+      $param->bind_param("i", $_SESSION["dbid"]);
+      $param->execute();
+      $author = $param->get_result()->fetch_assoc();
+      $param->close();
+      $author = $author["FirstName"]." ".$author["LastName"];
 		}
-		else {
-			$name = $conn->query("select FirstName, LastName from Members where MemberID = '".$_SESSION["dbid"]."';")->fetch_assoc();
-      $name = $name["FirstName"]." ".$name["LastName"];
-			$author = $name;
-		}
 
-    $auto_abilities = "";
-    if(isset($_POST["abilitiesBL"])) {
-      $auto_abilities .= "| Baseline ";
-    }
-    if(isset($_POST["abilitiesSW"])) {
-      $auto_abilities .= "| Switch ";
-    }
-    if(isset($_POST["abilitiesSC"])) {
-      $auto_abilities .= "| Scale ";
-    }
-    if(isset($_POST["abilitiesPI"])) {
-      $auto_abilities .= "| Pickup ";
-    }
-    $auto_abilities .= "|";
-
-    $startPos = -1;
-    if($_POST['startPos'] == 'left') {
-      $startPos = 0;
-    }
-    else if($_POST['startPos'] == 'center') {
-      $startPos = 1;
-    }
-    else if($_POST['startPos'] == 'right') {
-      $startPos = 2;
-    }
-
-    $playstyle = -1;
-    if(isset($_POST['def']) && !isset($_POST['off'])) {
-      $playstyle = 0;
-      }
-    else if(isset($_POST['off']) && !isset($_POST['def'])) {
-      $playstyle = 1;
-      }
-    else if(isset($_POST['def']) && isset($_POST['off']))
-    {
-      $playstyle = 2;
-    }
-
-    $endPos = -1;
-    if($_POST['endPos'] == 'field') {
-      $endPos = 0;
-    }
-    else if($_POST['endPos'] == 'plat') {
-      $endPos = 1;
-    }
-    else if($_POST['endPos'] == 'climb') {
-      $endPos = 2;
-    }
-
-    $penalties = "";
-    if(isset($_POST["PenaltiesFoul"])) {
-      $penalties .= "| Foul ";
-    }
-    if(isset($_POST["PenaltiesTech"])) {
-      $penalties .= "| Tech Foul ";
-    }
-    if(isset($_POST["PenaltiesYellow"])) {
-      $penalties .= "| Yellow Card ";
-    }
-    if(isset($_POST["PenaltiesRed"])) {
-      $penalties .= "| Red Card ";
-    }
-    if(isset($_POST["PenaltiesDisabled"])) {
-      $penalties .= "| Disabled ";
-    }
-    if(isset($_POST["PenaltiesDisqualified"])) {
-      $penalties .= "| Disqualified ";
-    }
-    $penalties .= "|";
-
+    //Remove double or more consecutive spaces
     $_POST["notes"] = trim(preg_replace('/\s+/', ' ', $_POST["notes"]));
 
     // $penalties_dec = bindec($penalties_bin);
@@ -115,15 +52,14 @@ function submitScouting(){
 if(isset($_POST["submit"])){
   submitScouting();
 }
+*/
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
   <h1 class="title">Scouting 2018</h1>
+  <h1 class="subtitle">Power Up</h1>
+  <h5 class="postNotif">Due to a database structure change, the scouting submission for 2018 is disabled temporarily</h5>
   <?php if(session_status()==2):?>
-    <a href="/scouting/list.php" id = "entriesLink">Scouting Form Entries</a>
-    <br><br>
-    <a href = "/scouting/teamScouting.php" id = "entriesLink">Team Scouting</a>
-    <br>
     <div class="formContainer">
       <form action="2018" method="post">
         <span class = "formTitle">General Info</span>
@@ -180,9 +116,9 @@ if(isset($_POST["submit"])){
         <table class = "formTable">
           <tr>
             <td>End Position:</td>
-            <td><input type="radio" name="endPos" value="field" required>Field</td>
-            <td><input type="radio" name="endPos" value="plat" required>Platform</td>
-            <td><input type="radio" name="endPos" value="climb" required>Climb</td>
+            <td><input type="radio" name="endPos" value="Field" required>Field</td>
+            <td><input type="radio" name="endPos" value="Platform" required>Platform</td>
+            <td><input type="radio" name="endPos" value="Climb" required>Climb</td>
           </tr>
           <tr>
             <td>Climb Assists:</td>

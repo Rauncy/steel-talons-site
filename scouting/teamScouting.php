@@ -1,5 +1,5 @@
 <!--  back end needs to be done-->
-<?php $dir = ".."; include($dir . "/header.php"); ?>
+<?php $dir = ".."; include($dir . "/header.php"); include($dir . "/globals.php");?>
 <?php
 if(isset($_POST["search"])){
 	header("Location: /scouting/team?id=".$_POST["teamSearch"]);
@@ -42,7 +42,7 @@ if(isset($_POST["submit"])){
 ?>
 <link rel = "stylesheet" href = "/css/scouting.css">
 <center>
-  <h1 class = "title">Team Scouting 2018</h1>
+  <h1 class = "title">Team Scouting <?php echo $currentYear;?></h1>
   <?php if(session_status()==2):?>
   	<form action="teamScouting" method = "post">
   		<input type="number" name = "teamSearch" placeholder="Team Number" required></input>

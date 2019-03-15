@@ -16,13 +16,13 @@
     <link rel = "stylesheet"  href = <?php echo $dir . "/css/header-main.css"?>>
     <link rel="icon" type="image/png" sizes="16x16" href=<?php echo $dir . "/images/favicon-16x16.png"?>>
     <script src = <?php echo $dir . "/js/header-main.js"?> defer></script>
-    <title><?php if(isset($title)) echo $title + " - "; echo "Tompkins Robotics";?></title>
+    <title><?php if(isset($title)) echo $title + " - "; echo "Steel Talons";?></title>
 
     <?php if(isset($headData))echo $headData;?>
   </head>
   <body>
     <header role = "banner">
-      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Tompkins&nbsp;Robotics</a>
+      <a id="header-title" class ="horizm" style="float:left; padding-top:5px; padding-left:10px; font-size: 3em;" href="/">Steel&nbsp;Talons</a>
     </header>
 
     <nav id="tabs">
@@ -33,7 +33,7 @@
       	<li class ="horizm"><a href = "/sponsors">Sponsors</a></li>
         <?php
         if(session_status()===2){
-          echo '<li class ="horizm"><a href = "/scouting/2018">Scouting</a></li>';
+          echo '<li class ="horizm"><a href = "/scouting">Scouting</a></li>';
 					echo '<li class ="horizm"><a href = "/forum/index">Forums</a></li>';
           if($_SESSION["perm"]<2){
             echo '<li class ="horizm"><a href = "/members/index.php?search=">Members</a></li>';

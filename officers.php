@@ -78,10 +78,10 @@
         </center>
       </tr>
       <tr>
-        <th><img src="think.png" alt="Hannah Nguyen"  class = "officerPic"></th>
+        <th><img src="think.png" alt="Colin Weil"  class = "officerPic"></th>
         <center>
-          <td>Hannah</td>
-          <td>Nguyen</td>
+          <td>Colin</td>
+          <td>Weil</td>
           <td>Vice-President of Marketing</td>
           <td>3 years</td>
           <td>12th</td>

@@ -1,8 +1,9 @@
-<?php $dir = ".."; include($dir . "/header.php"); ?>
+<?php $dir = ".."; include($dir . "/header.php");?>
 <?php
+$GLOBALS["salt"] = "FRCTeam5427";
 function login($user, $pass){
   //Use database for user validation and creation
-  echo "log ";
+  // echo "log ";
   $servername = "localhost";
   $username = "root";
   $password = "admin";
@@ -13,9 +14,10 @@ function login($user, $pass){
     die();
   }
 
-  $result = $conn->query("select * from members where Username = \"" . $user . "\" and Pass = \"" . $pass . "\";");
+  // echo("select * from members where Username = \"" . $user . "\" and Pass = \"" . sha1($pass.$GLOBALS["salt"]) . "\";" . " \"" . $pass . "\" \"" . $salt . "\" \"" . sha1($pass.$GLOBALS["salt"]) . "\"");
+  $result = $conn->query("select * from members where Username = \"" . $user . "\" and Pass = \"" . sha1($pass.$GLOBALS["salt"]) . "\";");
   if($result->num_rows > 0){
-    echo "acc ";
+    // echo "acc ";
     if(session_status()!==2){
       session_start();
     }
@@ -27,7 +29,7 @@ function login($user, $pass){
     header("Location: /");
     die();
   }else{
-    echo "unacc ";
+    // echo "unacc ";
     header("Location: /account/login?err=0");
   }
 }
@@ -35,16 +37,16 @@ function login($user, $pass){
 if(isset($_POST["submit"])){
   switch($_POST["submit"]){
     case "Login":
-      echo "Log";
+      // echo "Log";
       if(isset($_POST["loginPassword"])&&isset($_POST["loginEmail"])){
         login($_POST["loginEmail"], $_POST["loginPassword"]);
       }
       break;
     case "Register":
-      echo "Reg";
+      // echo "Reg";
       if(isset($_POST["registerUsername"]) && isset($_POST["registerPassword"])){
         //Use database for user validation and creation
-        echo "reg ";
+        // echo "reg ";
         $servername = "localhost";
         $username = "root";
         $password = "admin";
@@ -55,19 +57,20 @@ if(isset($_POST["submit"])){
           header("Location: /account/register?err=1");
           die();
         }
-        echo "nerr ";
+        // echo "nerr ";
 
         $result = $conn->query("select * from members where Username = \"" . $_POST["registerUsername"] . "\" or Email = \"" . $_POST["registerEmail"] . "\";");
         if($result->num_rows == 0){
-          echo "nsel ";
-          $conn->query("insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
-          "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");");
-          echo "insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
-          "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . $_POST['registerPassword'] . "\");";
+          // echo "nsel ";
+          // echo "\"" . $_POST['registerPassword'] . "\" \"" . $salt . "\" \"" . sha1($_POST['registerPassword'].$salt . "\"");
+          $conn->query("insert into members (Permission, FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (100, \"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
+          "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . sha1($_POST['registerPassword'].$GLOBALS["salt"]) . "\");");
+          // echo "insert into members (FirstName, LastName, Grade, Roles, Phone, Username, Email, Pass) values (\"".$_POST['registerFirstName']."\", \"".$_POST['registerLastName']."\", \"".$_POST['registerGrade']."\", \"".$_POST['registerRole']."\", \"".$_POST['phone-1'].$_POST['phone-2'].$_POST['phone-3'].
+          // "\", \"".$_POST['registerUsername'] . "\", \"" . $_POST['registerEmail'] . "\", \"" . sha1($_POST['registerPassword'].$GLOBALS["salt"]) . "\");";
           login($_POST["registerUsername"], $_POST["registerPassword"]);
           // echo "<script>alert('processed, result is: '".$quer.")</script>";
         }else{
-            echo "sel ";
+            // echo "sel ";
             header("Location: /account/register?err=0");
             die();
         }

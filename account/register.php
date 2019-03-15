@@ -41,7 +41,7 @@ if(isset($_GET["err"])){
         </td>
       </tr>
       <tr>
-        <td class = "formLabel">Role: </td>
+        <td class = "formLabel">Primary Role: </td>
         <td>
 
           <select id="registerRole" name="registerRole" style= "height:35px; margin-bottom: 2em;">
@@ -54,7 +54,6 @@ if(isset($_GET["err"])){
               <option value="Programming">Programming</option>
               <option value="Build">Build</option>
               <option value="Marketing">Marketing</option>
-              <option value="CAD">CAD</option>
               <option value="Scouting">Scouting</option>
             </optgroup>
           </select>

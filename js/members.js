@@ -11,18 +11,21 @@ function closeMemberTab(){
 }
 
 function saveMemberTab(){
+  console.log("save");
   if(!currentUser) return;
   var req = new XMLHttpRequest();
   req.onload = function(){
     console.log("resp " + req.responseText);
     currentUser = null;
     closeMemberTab();
-    setTimeout(() => {location.reload()}, 300);
+    setTimeout(() => {
+      //Reload data
+    }, 300);
   }
   req.open("POST", "/members/edit.php", true);
   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   var sendData = "user="+currentUser;
-  var fields = document.getElementsByClassName("memberBoxField");
+  var fields = document.getElementsByTagName("input");
   for(var i=0;i<fields.length;i++){
     console.log(parseInt(fields[i].value)+" "+fields[i].value);
     var isNumber = parseInt(fields[i].value) == fields[i].value;
@@ -48,9 +51,10 @@ function loadMemberTab(user){
   req.onload = function(){
     console.log(req.responseText);
     var data = JSON.parse(req.responseText);
-    var all = document.getElementsByClassName("memberBoxField");
+    var all = document.getElementsByTagName("input");
     console.log(all);
     for(k in data){
+      console.log(k);
       console.log(all[k]);
       if(all[k]) all[k].value = data[k];
     }
