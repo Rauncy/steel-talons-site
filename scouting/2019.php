@@ -64,7 +64,7 @@ function submitScouting(){
     $param->close();
 
     $param = $conn->prepare("insert into Scouting2019 (ScoutingReport, HatchesRocket, HatchesCargo, CargoRocket, CargoCargo, HatchLevels, CargoLevels) values (?, ?, ?, ?, ?, ?, ?);");
-    $param->bind_param("iiiiiii", $scoutID, $_POST["hatchesRocket"], $_POST["hatchesCargoShip"], $_POST["cargoRocket"], $_POST["cargoCargoShip"], $_POST["hatchLvl"], $_POST["cargoLvl"]);
+    $param->bind_param("iiiiiii", $scoutID, (isset($_POST["hatchesRocket"])?$_POST["hatchesRocket"]:0), (isset($_POST["hatchesCargoShip"])?$_POST["hatchesCargoShip"]:0), (isset($_POST["cargoRocket"])?$_POST["cargoRocket"]:0),(isset($_POST["cargoCargoShip"])?$_POST["cargoCargoShip"]:0), (isset($_POST["hatchLvl"])?$_POST["hatchLvl"]:0), (isset($_POST["cargoLvl"])?$_POST["cargoLvl"]:0));
     $param->execute();
     $param->close();
 
