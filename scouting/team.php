@@ -23,7 +23,7 @@ if(session_status()===2){
     die();
   }
   $teamNum = $_GET["id"];
-  $teamBasicData = $conn->query("select * from ScoutingTeams where TeamNumber = ". $teamNum . ";");
+  $teamBasicData = $conn->query("select * from ScoutingTeams where Team = ".$teamNum." and Competition = \"".$currentComp."\" and Year = ".$currentYear.";");
   if(gettype($teamBasicData)!="boolean"&&$teamBasicData->num_rows>0){
     $teamBasicData = $teamBasicData->fetch_assoc();
     $drivetrain = $teamBasicData["Drivetrain"];

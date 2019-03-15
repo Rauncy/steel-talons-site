@@ -1,11 +1,9 @@
 <!--  back end needs to be done-->
-<?php $dir = ".."; include($dir . "/header.php"); include($dir . "/globals.php");?>
-<?php
+<?php $dir = ".."; include($dir . "/header.php"); include($dir . "/globals.php");
 if(isset($_POST["search"])){
 	header("Location: /scouting/team?id=".$_POST["teamSearch"]);
 	die();
-}
-function submitScouting(){
+}else if(isset($_POST["submit"])){
   if(session_status()===2){
     //Use database for user validation and creation
     $servername = "localhost";
@@ -20,11 +18,11 @@ function submitScouting(){
 		$abilities = trim(preg_replace('/\s+/',' ', $_POST["abilities"]));
     $auto = trim(preg_replace('/\s+/', ' ', $_POST["auto"]));
 
-    // $penalties_dec = bindec($penalties_bin);
-    $formData = $conn->query("select TeamID from ScoutingTeams where TeamNumber = ". $teamNum . ";");
+		echo "insert into ScoutingTeams (Team, Competition, Year, Abilities, DriveTrain, AutoDesc) values (".$teamNum.", \"".$currentComp."\", ".$currentYear.", \"".$abilities."\", \"".$drive."\", \"".$auto."\");";
+    $formData = $conn->query("select * from ScoutingTeams where Team = " . $teamNum . " and Competition = \"" . $currentComp . "\" and Year = " . $currentYear . ";");
     if(gettype($formData)!="boolean"&&$formData->num_rows===0)
     {
-			$conn->query("insert into ScoutingTeams (TeamNumber, Abilities, DriveTrain, AutoDesc) values (".$teamNum.", \"".$abilities."\", \"".$drive."\", \"".$auto."\");");
+			$conn->query("insert into ScoutingTeams (Team, Competition, Year, Abilities, DriveTrain, AutoDesc) values (".$teamNum.", \"".$currentComp."\", ".$currentYear.", \"".$abilities."\", \"".$drive."\", \"".$auto."\");");
     }
     else {
         $_POST["err"] = 0;
@@ -33,10 +31,6 @@ function submitScouting(){
   else {
     $_POST["err"] = 1;
   }
-}
-
-if(isset($_POST["submit"])){
-  submitScouting();
 }
 
 ?>
